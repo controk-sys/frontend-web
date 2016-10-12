@@ -1,0 +1,16 @@
+{
+  "name": "controk-frontend-web",
+  "version": "0.0.1",
+  "author": "Jourdan Rodrigues <thiagojourdan@gmail.com>",
+  "contributors": [
+    {
+      "name": "Joseph Rodrigues",
+      "email": "joseph.netrc@gmail.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jourdanrodrigues/controk-frontend-web"
+  },
+  "dependencies": {}
+}
