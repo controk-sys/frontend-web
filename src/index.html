@@ -4,11 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Controk</title>
+
+        <!-- build:css app.css -->
         <link rel="stylesheet" href="../node_modules/milligram/dist/milligram.min.css">
         <link rel="stylesheet" href="../node_modules/sweetalert/dist/sweetalert.css">
         <link rel="stylesheet" href="css/milligram.main.min.css">
         <link rel="stylesheet" href="css/main.css">
-    </head><!-- Head -->
+        <!-- endbuild -->
+
+    </head>
     <body style="background:#E7E7E7">
         <nav class="navigation">
             <section class="container">
@@ -39,11 +43,13 @@
         </nav>
         <div style="margin-top: 10rem" ui-view></div>
 
+        <!-- build:js app.js -->
         <script src="../node_modules/sweetalert/dist/sweetalert.min.js"></script>
         <script src="../node_modules/angular/angular.min.js"></script>
         <script src="index.js"></script>
         <script src="../node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
         <script src="js/controllers.js"></script>
         <script src="js/services.js"></script>
+        <!-- endbuild -->
     </body>
 </html>
