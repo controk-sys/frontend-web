@@ -12,5 +12,8 @@
     "type": "git",
     "url": "https://github.com/jourdanrodrigues/controk-frontend-web"
   },
-  "dependencies": {}
+  "dependencies": {
+    "milligram": "^1.1.0",
+    "sweetalert": "^1.1.3"
+  }
 }
