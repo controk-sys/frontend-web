@@ -1,0 +1,22 @@
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Cargo</th>
+            <th>E-mail</th>
+            <th>CPF</th>
+            <th>Observação</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="employee in employees">
+        <td>{{ employee.id }}</td>
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.role }}</td>
+        <td>{{ employee.email }}</td>
+        <td>{{ employee.cpf }}</td>
+        <td>{{ employee.observation }}</td>
+    </tr>
+    </tbody>
+</table>

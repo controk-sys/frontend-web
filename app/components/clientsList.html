@@ -1,0 +1,20 @@
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>E-mail</th>
+        <th>CPF</th>
+        <th>Observação</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="client in clients">
+        <td>{{ client.id }}</td>
+        <td>{{ client.name }}</td>
+        <td>{{ client.email }}</td>
+        <td>{{ client.cpf }}</td>
+        <td>{{ client.observation }}</td>
+    </tr>
+    </tbody>
+</table>
