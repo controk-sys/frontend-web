@@ -1,6 +1,6 @@
 var app = angular.module("controk", ["ui.router"]);
 
-var apiHost = "http://localhost:8000/api/v1/";
+var apiHost = "***apiHost***";
 app.constant("apiHost", apiHost);
 
 // Get the endpoint urls
