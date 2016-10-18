@@ -7,13 +7,13 @@ var gulp = require("gulp"),
 
 gulp.task("build", function() {
     gulp
-        .src("src/templates/*.html")
+        .src("templates/*.html")
         .pipe(gulp.dest("dist/templates"));
     gulp
-        .src("src/images/*.*")
+        .src("images/*.*")
         .pipe(gulp.dest("dist/images"));
     gulp
-        .src("src/index.html")
+        .src("index.html")
         .pipe(useref())
         .pipe(gulp.dest("dist"));
     gulp
@@ -31,7 +31,7 @@ gulp.task("connect", function() {
 });
 
 gulp.task("watch", function() {
-    gulp.watch("src/**", ["build"], function() {
+    gulp.watch(["css/*.css", "js/*.js", ".env", "index.src.*", "templates/*.html"], ["build"], function() {
         connect.reload();
     });
 });
