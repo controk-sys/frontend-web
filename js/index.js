@@ -1,6 +1,6 @@
 var app = angular.module("controk", ["ui.router"]);
 
-var apiHost = "***apiHost***";
+var apiHost = "http://localhost:8000/api/v1/";
 app.constant("apiHost", apiHost);
 
 // Get the endpoint urls
@@ -21,12 +21,12 @@ app.config(["$stateProvider", "$urlRouterProvider",
             .state("home", {url: "/"})
             .state("clients", {
                 url: "/clients",
-                templateUrl: "../templates/clientsList.html",
+                templateUrl: "templates/clientsList.html",
                 controller: "ClientCtrl"
             })
             .state("employees", {
                 url: "/employees",
-                templateUrl: "../templates/employeesList.html",
+                templateUrl: "templates/employeesList.html",
                 controller: "EmployeeCtrl"
             });
         $urlRouterProvider.otherwise('/');
