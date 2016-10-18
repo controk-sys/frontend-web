@@ -4,7 +4,6 @@ app
             Client.list().then(function(response) {
                 $scope.clients = response.data;
             });
-            $scope.getClient = Client.retrieve;
         }
     ])
     .controller("EmployeeCtrl", ["$scope", "Employee",
@@ -12,6 +11,5 @@ app
             Employee.list().then(function(response) {
                 $scope.employees = response.data;
             });
-            $scope.getEmployee = Employee.retrieve;
         }
     ]);
