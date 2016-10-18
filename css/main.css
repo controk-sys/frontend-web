@@ -1,3 +1,13 @@
+body {
+    background: #E7E7E7;
+}
 .click {
     cursor: pointer;
+}
+.logo{
+    height: 5rem;
+}
+.ui-view {
+    width: 80%;
+    margin: 10rem auto auto;
 }
