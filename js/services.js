@@ -1,25 +1,23 @@
 app
-    .service("Clients", ["$http", "urls",
+    .service("Client", ["$http", "urls",
         function($http, urls) {
-            return {
-                list: function() {
-                    return $http.get(urls.clients);
-                },
-                retrieve: function(clientId) {
-                    return $http.get(urls.clients + clientId + "/");
-                }
+            this.list = function() {
+                return $http.get(urls.clients);
+            };
+
+            this.retrieve = function(clientId) {
+                return $http.get(urls.clients + clientId + "/");
             };
         }
     ])
-    .service("Employees", ["$http", "urls",
+    .service("Employee", ["$http", "urls",
         function($http, urls) {
-            return {
-                list: function() {
-                    return $http.get(urls.employees);
-                },
-                retrieve: function(employeeId) {
-                    return $http.get(urls.employees + employeeId + "/");
-                }
+            this.list = function() {
+                return $http.get(urls.employees);
+            };
+
+            this.retrieve = function(employeeId) {
+                return $http.get(urls.employees + employeeId + "/");
             };
         }
     ]);
