@@ -7,7 +7,10 @@ app.constant("apiHost", apiHost);
 var xmlHttp = new XMLHttpRequest();
 /** data = {
  *      clients: "clients url",
- *      employees: "employees url"
+ *      employees: "employees url",
+ *      products: "products url",
+ *      shipments: "shipments url",
+ *      suppliers: "suppliers url"
  *  }
  */
 xmlHttp.open("GET", apiHost, false); // false for synchronous (guarantee that the app will have this values)
@@ -28,6 +31,21 @@ app.config(["$stateProvider", "$urlRouterProvider",
                 url: "/employees",
                 templateUrl: "templates/employeesList.html",
                 controller: "EmployeeCtrl"
+            })
+            .state("products", {
+                url: "/products",
+                templateUrl: "templates/productsList.html",
+                controller: "ProductCtrl"
+            })
+            .state("shipments", {
+                url: "/shipments",
+                templateUrl: "templates/shipmentsList.html",
+                controller: "ShipmentCtrl"
+            })
+            .state("suppliers", {
+                url: "/suppliers",
+                templateUrl: "templates/suppliersList.html",
+                controller: "SupplierCtrl"
             });
         $urlRouterProvider.otherwise('/');
     }

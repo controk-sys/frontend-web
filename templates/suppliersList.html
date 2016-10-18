@@ -1,0 +1,18 @@
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nome Fantasia</th>
+        <th>E-mail</th>
+        <th>CNPJ</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="supplier in suppliers">
+        <td>{{ supplier.id }}</td>
+        <td>{{ supplier.trading_name }}</td>
+        <td>{{ supplier.email }}</td>
+        <td>{{ supplier.cnpj }}</td>
+    </tr>
+    </tbody>
+</table>
