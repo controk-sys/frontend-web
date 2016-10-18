@@ -5,8 +5,7 @@ var gulp = require("gulp"),
     useref = require("gulp-useref"),
     uglify = require("gulp-uglify"),
     cleanCss = require("gulp-clean-css"),
-    gulpIf = require("gulp-if"),
-    pump = require("pump");
+    gulpIf = require("gulp-if");
 
 var debug = process.env.DEBUG == "1";
 

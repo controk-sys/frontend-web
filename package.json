@@ -1,6 +1,6 @@
 {
   "name": "controk-frontend-web",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": {
     "name": "Jourdan Rodrigues",
     "email": "thiagojourdan@gmail.com"
@@ -26,7 +26,6 @@
     "gulp-uglify": "^2.0.0",
     "gulp-useref": "^3.1.2",
     "milligram": "^1.1.0",
-    "pump": "^1.0.1",
     "sweetalert": "^1.1.3"
   }
 }
