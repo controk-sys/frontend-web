@@ -1,33 +1,24 @@
 app
-    .factory("mainService", ["$http", "apiHost",
-        function($http, apiHost) {
-            return {
-                getEndpoints: function() {
-                    return $http.get(apiHost)
-                }
-            }
-        }
-    ])
-    .factory("clientsService", ["$http", "urls",
+    .service("Clients", ["$http", "urls",
         function($http, urls) {
             return {
                 list: function() {
                     return $http.get(urls.clients);
                 },
-                retrieve: function(id) {
-                    return $http.get(urls.clients + id + "/");
+                retrieve: function(clientId) {
+                    return $http.get(urls.clients + clientId + "/");
                 }
             };
         }
     ])
-    .factory("employeesService", ["$http", "urls",
+    .service("Employees", ["$http", "urls",
         function($http, urls) {
             return {
                 list: function() {
                     return $http.get(urls.employees);
                 },
-                retrieve: function(id) {
-                    return $http.get(urls.employees + id + "/");
+                retrieve: function(employeeId) {
+                    return $http.get(urls.employees + employeeId + "/");
                 }
             };
         }

@@ -22,12 +22,12 @@ app.config(["$stateProvider", "$urlRouterProvider",
             .state("clients", {
                 url: "/clients",
                 templateUrl: "../templates/clientsList.html",
-                controller: "clientsController"
+                controller: "ClientsCtrl"
             })
             .state("employees", {
                 url: "/employees",
                 templateUrl: "../templates/employeesList.html",
-                controller: "employeesController"
+                controller: "EmployeesCtrl"
             });
         $urlRouterProvider.otherwise('/');
     }
