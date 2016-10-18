@@ -1,3 +1,8 @@
+# Files
+npm-debug.log
+.env
+
+# Directories
 .idea/
 node_modules/
 dist/
