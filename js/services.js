@@ -3,7 +3,7 @@ app
         function($http, apiHost) {
             return {
                 getEndpoints: function() {
-                    return $http.get(apiHost + "api/v1/")
+                    return $http.get(apiHost)
                 }
             }
         }
