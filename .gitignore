@@ -2,7 +2,10 @@
 npm-debug.log
 .env
 
+# Generated files
+js/index.js
+dist/
+
 # Directories
 .idea/
 node_modules/
-dist/
