@@ -4,11 +4,13 @@ var gulp = require("gulp"),
     connect = require("gulp-connect"),
     useref = require("gulp-useref"),
     uglify = require("gulp-uglify"),
+    cleanCss = require("gulp-clean-css"),
+    gulpIf = require("gulp-if"),
     pump = require("pump");
 
 var debug = process.env.DEBUG == "1";
 
-gulp.task("build", function(callback) {
+gulp.task("build", function() {
     if (debug) console.log("Build skipped...");
     else {
         gulp
@@ -20,12 +22,9 @@ gulp.task("build", function(callback) {
         gulp
             .src("index.html")
             .pipe(useref())
+            .pipe(gulpIf('*.js', uglify()))
+            .pipe(gulpIf('*.css', cleanCss()))
             .pipe(gulp.dest("dist"));
-        pump([
-            gulp.src("dist/app.js"),
-            uglify(),
-            gulp.dest("dist")
-        ], callback);
     }
 });
 
