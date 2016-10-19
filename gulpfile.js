@@ -8,7 +8,8 @@ var gulp = require("gulp"),
     replace = require("gulp-replace"),
     sass = require("gulp-sass"),
     cleanCss = require("gulp-clean-css"),
-    gulpIf = require("gulp-if");
+    gulpIf = require("gulp-if"),
+    runSequence = require("run-sequence");
 
 var debug = process.env.DEBUG == "1";
 
@@ -65,6 +66,11 @@ gulp.task("watch", function() {
             connect.reload();
         }
     );
+
+    gulp.watch([".env"], function() {
+        connect.serverClose();
+        runSequence("default");
+    });
 });
 
 gulp.task("default", [fileHandlerTask, "connect", "watch"]);
