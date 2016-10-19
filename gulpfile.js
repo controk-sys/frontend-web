@@ -8,8 +8,7 @@ var gulp = require("gulp"),
     replace = require("gulp-replace"),
     sass = require("gulp-sass"),
     cleanCss = require("gulp-clean-css"),
-    gulpIf = require("gulp-if"),
-    runSequence = require("run-sequence");
+    gulpIf = require("gulp-if");
 
 var debug = process.env.DEBUG == "1";
 
@@ -44,7 +43,7 @@ gulp.task("build", ["compile"], function() {
         .src("index.html")
         .pipe(useref())
         .pipe(gulpIf('*.js', uglify()))
-        .pipe(gulpIf('*.css', cleanCss()))
+        .pipe(gulpIf('*.css', cleanCss({keepSpecialComments: 0})))
         .pipe(gulp.dest("dist"));
 });
 
@@ -66,11 +65,6 @@ gulp.task("watch", function() {
             connect.reload();
         }
     );
-
-    gulp.watch([".env"], function() {
-        connect.serverClose();
-        runSequence("default");
-    });
 });
 
 gulp.task("default", [fileHandlerTask, "connect", "watch"]);
