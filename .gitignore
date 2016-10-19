@@ -4,8 +4,9 @@ npm-debug.log
 
 # Generated files
 css/main.css
-js/index.js
 dist/
+index.html
+js/index.js
 
 # Directories
 .idea/

@@ -1,7 +1,7 @@
 var app = angular.module("controk", ["ui.router"]);
 
-var apiHost = "***apiHost***";
-app.constant("apiHost", apiHost);
+var apiURL = "***apiURL***";
+app.constant("apiURL", apiURL);
 
 // Get the endpoint urls
 var xmlHttp = new XMLHttpRequest();
@@ -13,9 +13,9 @@ var xmlHttp = new XMLHttpRequest();
  *      suppliers: "suppliers url"
  *  }
  */
-xmlHttp.open("GET", apiHost, false); // false for synchronous (guarantee that the app will have this values)
+xmlHttp.open("GET", apiURL, false); // false for synchronous (guarantee that the app will have this values)
 xmlHttp.send();
-apiHost = undefined; // delete the variable
+apiURL = undefined; // delete the variable
 app.constant("urls", JSON.parse(xmlHttp.responseText));
 
 app.config(["$stateProvider", "$urlRouterProvider",
