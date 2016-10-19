@@ -6,6 +6,7 @@ var gulp = require("gulp"),
     uglify = require("gulp-uglify"),
     rename = require("gulp-rename"),
     replace = require("gulp-replace"),
+    sass = require("gulp-sass"),
     cleanCss = require("gulp-clean-css"),
     gulpIf = require("gulp-if");
 
@@ -13,12 +14,20 @@ var debug = process.env.DEBUG == "1";
 
 gulp.task("compile", function() {
     return gulp
-        .src("js/**/*.src.js")
+        .src(["js/**/*.src.js", "css/**/*.scss"])
+        // Define path (and name if JS)
         .pipe(rename(function(path) {
-            path.dirname += "/js";
-            path.basename = path.basename.replace(".src", "");
+            var ext = path.extname.toString();
+
+            if (/\.js/.test(ext)) {
+                path.dirname += "/js";
+                path.basename = path.basename.replace(".src", "");
+            }
+            else if (/\.scss/.test(ext)) path.dirname += "/css";
         }))
-        .pipe(replace("***apiHost***", process.env.API_HOST))
+        // Performs the operations for each file
+        .pipe(gulpIf("*.js", replace("***apiHost***", process.env.API_HOST)))
+        .pipe(gulpIf("*.scss", sass.sync().on("error", sass.logError)))
         .pipe(gulp.dest(""));
 });
 
@@ -50,7 +59,7 @@ var fileHandlerTask = (debug ? "compile" : "build");
 
 gulp.task("watch", function() {
     gulp.watch(
-        ["css/*.css", "js/*.js", "!js/index.js", "index.html", "templates/*.html", ".env"],
+        ["css/*.scss", "js/*.js", "!js/index.js", "index.html", "templates/*.html"],
         [fileHandlerTask],
         function() {
             connect.reload();

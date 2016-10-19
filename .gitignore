@@ -3,6 +3,7 @@ npm-debug.log
 .env
 
 # Generated files
+css/main.css
 js/index.js
 dist/
 
