@@ -26,6 +26,7 @@ gulp.task("compile", function() {
         }))
         // Performs the operations for each file
         .pipe(gulpIf("*.js", replace("***apiURL***", process.env.API_URL)))
+        .pipe(gulpIf("*.js", replace("***socketURL***", process.env.SOCKET_URL)))
         .pipe(gulpIf("index.html", replace("***socketURL***", process.env.SOCKET_URL)))
         .pipe(gulpIf("*.scss", sass.sync().on("error", sass.logError)))
         .pipe(gulp.dest(""));

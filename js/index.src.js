@@ -1,5 +1,7 @@
 var app = angular.module("controk", ["ui.router"]);
 
+var socket = io.connect("***socketURL***"); // "io" from the imported socket
+
 var apiURL = "***apiURL***";
 app.constant("apiURL", apiURL);
 
