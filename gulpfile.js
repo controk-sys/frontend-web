@@ -1,4 +1,5 @@
-require("dotenv").config();
+// Synchronously check if ".env" exists before import
+if (require("fs").existsSync(".env")) require("dotenv").config();
 
 var gulp = require("gulp"),
     connect = require("gulp-connect"),
@@ -10,7 +11,9 @@ var gulp = require("gulp"),
     cleanCss = require("gulp-clean-css"),
     gulpIf = require("gulp-if");
 
-var debug = process.env.DEBUG == "1";
+var debug = process.env.DEBUG == "1",
+    apiURL = process.env.API_URL || "",
+    socketURL = process.env.SOCKET_URL || "";
 
 gulp.task("compile", function() {
     return gulp
@@ -25,9 +28,9 @@ gulp.task("compile", function() {
             else if (/\.scss/.test(ext)) path.dirname += "/css";
         }))
         // Performs the operations for each file
-        .pipe(gulpIf("*.js", replace("***apiURL***", process.env.API_URL)))
-        .pipe(gulpIf("*.js", replace("***socketURL***", process.env.SOCKET_URL)))
-        .pipe(gulpIf("index.html", replace("***socketURL***", process.env.SOCKET_URL)))
+        .pipe(gulpIf("*.js", replace("***apiURL***", apiURL)))
+        .pipe(gulpIf("*.js", replace("***socketURL***", socketURL)))
+        .pipe(gulpIf("index.html", replace("***socketURL***", socketURL)))
         .pipe(gulpIf("*.scss", sass.sync().on("error", sass.logError)))
         .pipe(gulp.dest(""));
 });
