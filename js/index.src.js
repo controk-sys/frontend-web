@@ -2,7 +2,7 @@ var app = angular.module("controk", ["ui.router"]);
 
 var apiURL = "***apiURL***";
 app.constant("apiURL", apiURL);
-app.constant("socketURL", io.connect("***socketURL***")); // "io" from the imported socket
+app.constant("socket", io.connect("***socketURL***")); // "io" from the imported socket
 
 // Get the endpoint urls
 var xmlHttp = new XMLHttpRequest();
