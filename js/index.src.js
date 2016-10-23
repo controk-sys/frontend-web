@@ -1,23 +1,17 @@
 var app = angular.module("controk", ["ui.router"]);
 
-var apiURL = "***apiURL***";
-app.constant("apiURL", apiURL);
+// App constants
 app.constant("socket", io.connect("***socketURL***")); // "io" from the imported socket
 
-// Get the endpoint urls
+// Get the API urls
 var xmlHttp = new XMLHttpRequest();
-/** data = {
- *      clients: "clients url",
- *      employees: "employees url",
- *      products: "products url",
- *      shipments: "shipments url",
- *      suppliers: "suppliers url"
- *  }
- */
-xmlHttp.open("GET", apiURL, false); // false for synchronous (guarantee that the app will have this values)
+xmlHttp.open("GET", "***apiURL***", false); // false for synchronous (guarantee that the app will have this values)
 xmlHttp.send();
-apiURL = undefined; // delete the variable
-app.constant("urls", JSON.parse(xmlHttp.responseText));
+/**
+ * @type {{clients, employees, products, shipments, suppliers}}
+ */
+var urls = JSON.parse(xmlHttp.responseText);
+app.constant("urls", urls);
 
 app.config(["$stateProvider", "$urlRouterProvider",
     function($stateProvider, $urlRouterProvider) {
