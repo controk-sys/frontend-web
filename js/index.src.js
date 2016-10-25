@@ -20,7 +20,18 @@ app.config(["$stateProvider", "$urlRouterProvider",
             .state("clients", {
                 url: "/clients",
                 templateUrl: "templates/clientsList.html",
-                controller: "ClientCtrl"
+                controller: "ClientsListCtrl"
+            })
+            .state("clientDetail", {
+                url: "/clients/:id",
+                params: { // This data won't come from webservice but it is already available here
+                    name: null,
+                    email: null,
+                    cpf: null,
+                    observation: null
+                },
+                templateUrl: "templates/clientDetail.html",
+                controller: "ClientDetailCtrl"
             })
             .state("employees", {
                 url: "/employees",

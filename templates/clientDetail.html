@@ -1,0 +1,97 @@
+<div class="container">
+    <!-- Main info -->
+    <div>
+        <div class="row">
+            <div class="column"><h4>Informações (cliente {{ client.id }})</h4></div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="name">Nome</label>
+                <input id="name" type="text" ng-model="client.name" />
+            </div>
+            <div class="column">
+                <label for="cpf">CPF</label>
+                <input id="cpf" type="text" ng-model="client.cpf" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="obs">Observação</label>
+                <input id="obs" type="text" ng-model="client.observation" />
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact -->
+    <div>
+        <div class="row">
+            <div class="column"><h4>Contato</h4></div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="mobile">Telefone Celular</label>
+                <input id="mobile" type="text" ng-model="client.mobile" />
+            </div>
+            <div class="column">
+                <label for="phone">Telefone Fixo</label>
+                <input id="phone" type="text" ng-model="client.phone" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="email">E-mail</label>
+                <input id="email" type="text" ng-model="client.email" />
+            </div>
+        </div>
+    </div>
+
+    <!-- Address -->
+    <div>
+        <div class="row">
+            <div class="column"><h4>Endereço</h4></div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="place">Logradouro</label>
+                <select id="place"
+                        ng-options="item.name for item in client.place_options track by item.id"
+                        data-ng-model="client.address.place">
+                </select>
+            </div>
+            <div class="column">
+                <label for="placeName">Nome do Logradouro</label>
+                <input id="placeName" type="text" ng-model="client.address.place_name" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="number">Número</label>
+                <input id="number" type="number" ng-model="client.address.number" />
+            </div>
+            <div class="column">
+                <label for="complement">Complemento</label>
+                <input id="complement" type="text" ng-model="client.address.complement" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="neighborhood">Bairro</label>
+                <input id="neighborhood" type="text" ng-model="client.address.neighborhood" />
+            </div>
+            <div class="column">
+                <label for="city">Cidade</label>
+                <input id="city" type="text" ng-model="client.address.city" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="state">Estado</label>
+                <input id="state" type="text" ng-model="client.address.state" />
+            </div>
+            <div class="column">
+                <label for="cep">CEP</label>
+                <input id="cep" type="text" ng-model="client.address.cep" />
+            </div>
+        </div>
+    </div>
+</div>
