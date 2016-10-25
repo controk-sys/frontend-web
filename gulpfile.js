@@ -13,7 +13,7 @@ var gulp = require("gulp"),
 
 var debug = process.env.DEBUG == "1",
     apiURL = process.env.API_URL || "",
-    socketURL = process.env.SOCKET_URL || "";
+    socketHost = process.env.SOCKET_HOST || "";
 
 gulp.task("compile", function() {
     return gulp
@@ -29,8 +29,8 @@ gulp.task("compile", function() {
         }))
         // Performs the operations for each file
         .pipe(gulpIf("*.js", replace("***apiURL***", apiURL)))
-        .pipe(gulpIf("*.js", replace("***socketURL***", socketURL)))
-        .pipe(gulpIf("index.html", replace("***socketURL***", socketURL)))
+        .pipe(gulpIf("*.js", replace("***socketHost***", socketHost)))
+        .pipe(gulpIf("index.html", replace("***socketHost***", socketHost)))
         .pipe(gulpIf("*.scss", sass.sync().on("error", sass.logError)))
         .pipe(gulp.dest(""));
 });
