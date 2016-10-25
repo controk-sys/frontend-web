@@ -6,7 +6,7 @@
         <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
         <title>Controk</title>
 
-        <!-- build:css app.css -->
+        <!-- build:css app.min.css -->
         <link rel="stylesheet" href="node_modules/milligram/dist/milligram.min.css">
         <link rel="stylesheet" href="node_modules/sweetalert/dist/sweetalert.css">
         <link rel="stylesheet" href="css/milligram.main.min.css">
@@ -23,22 +23,29 @@
                     </a>
                     <ul class="navigation-list float-right">
                         <li class="navigation-item">
-                            <a ui-sref="employees" class="navigation-link click">Funcionário</a>
-                        </li>
-                        <li class="navigation-item">
-                            <a ui-sref="suppliers" class="navigation-link click">Fornecedor</a>
-                        </li>
-                        <li class="navigation-item">
-                            <a ui-sref="clients" class="navigation-link click">Cliente</a>
-                        </li>
-                        <li class="navigation-item">
-                            <a ui-sref="shipments" class="navigation-link click">Remessa</a>
-                        </li>
-                        <li class="navigation-item">
-                            <a ui-sref="products" class="navigation-link click">Produto</a>
-                        </li>
-                        <li class="navigation-item">
-                            <a class="navigation-link click">Estoque</a>
+                            <a class="navigation-link" href="#popover-grid" data-popover>Menu</a>
+                            <div class="popover" id="popover-grid">
+                                <ul class="popover-list">
+                                    <li class="popover-item">
+                                        <a ui-sref="employees" class="popover-link click">Funcionário</a>
+                                    </li>
+                                    <li class="popover-item">
+                                        <a ui-sref="suppliers" class="popover-link click">Fornecedor</a>
+                                    </li>
+                                    <li class="popover-item">
+                                        <a ui-sref="clients" class="popover-link click">Cliente</a>
+                                    </li>
+                                    <li class="popover-item">
+                                        <a ui-sref="shipments" class="popover-link click">Remessa</a>
+                                    </li>
+                                    <li class="popover-item">
+                                        <a ui-sref="products" class="popover-link click">Produto</a>
+                                    </li>
+                                    <li class="popover-item">
+                                        <a class="popover-link click">Estoque</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                     </ul>
                 </section>
@@ -47,11 +54,12 @@
         </div>
 
         <script src="***socketHost***socket.io/socket.io.js"></script>
-        <!-- build:js app.js -->
+        <!-- build:js app.min.js -->
         <script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
         <script src="node_modules/angular/angular.min.js"></script>
         <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
-        <script src="js/index.js"></script>
+        <script src="js/milligram.main.min.js"></script>
+        <script src="js/main.js"></script>
         <script src="js/services.js"></script>
         <script src="js/controllers.js"></script>
         <!-- endbuild -->

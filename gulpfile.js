@@ -43,7 +43,8 @@ gulp.task("build", ["compile"], function() {
     gulp
         .src("images/*.*")
         .pipe(gulp.dest("dist/images"));
-    gulp
+
+    return gulp
         .src("index.html")
         .pipe(useref())
         .pipe(gulpIf('*.js', uglify()))
