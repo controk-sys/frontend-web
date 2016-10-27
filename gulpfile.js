@@ -9,7 +9,8 @@ var gulp = require("gulp"),
     replace = require("gulp-replace"),
     sass = require("gulp-sass"),
     cleanCss = require("gulp-clean-css"),
-    gulpIf = require("gulp-if");
+    gulpIf = require("gulp-if"),
+    gulpProtractorAngular = require("gulp-angular-protractor");
 
 var debug = process.env.DEBUG == "1",
     apiURL = process.env.API_URL || "",
@@ -70,6 +71,24 @@ gulp.task("watch", function() {
             connect.reload();
         }
     );
+});
+
+// Setting up the test task
+gulp.task("test", [fileHandlerTask, "connect"], function(callback) {
+    gulp
+        .src(["tests/*-spec.js"])
+        .pipe(gulpProtractorAngular({
+            configFile: "tests/conf.js",
+            debug: false,
+            autoStartStopServer: true
+        }))
+        .on("error", function() {
+            process.exit(1);
+        })
+        .on("end", function() {
+            callback();
+            process.exit();
+        });
 });
 
 gulp.task("default", [fileHandlerTask, "connect", "watch"]);

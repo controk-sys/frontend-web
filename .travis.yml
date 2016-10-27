@@ -1,0 +1,19 @@
+sudo: required
+dist: trusty
+
+language: node_js
+node_js:
+  - "6.5"
+
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
+
+install:
+  - npm install
+  - npm install -g gulp
+
+script: npm test
