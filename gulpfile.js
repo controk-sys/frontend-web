@@ -1,6 +1,9 @@
 // Synchronously check if ".env" exists before import
-if (require("fs").existsSync(".env")) require("dotenv").config();
+if (require("fs").existsSync(".env")) {
+    require("dotenv").config();
+}
 
+// Imports
 var gulp = require("gulp"),
     connect = require("gulp-connect"),
     useref = require("gulp-useref"),
@@ -9,11 +12,13 @@ var gulp = require("gulp"),
     replace = require("gulp-replace"),
     sass = require("gulp-sass"),
     cleanCss = require("gulp-clean-css"),
-    gulpIf = require("gulp-if");
+    gulpIf = require("gulp-if"),
+    gulpProtractorAngular = require("gulp-angular-protractor");
 
+// Environment Variables
 var debug = process.env.DEBUG == "1",
     apiURL = process.env.API_URL || "",
-    socketURL = process.env.SOCKET_URL || "";
+    socketHost = process.env.SOCKET_HOST || "";
 
 gulp.task("compile", function() {
     return gulp
@@ -29,8 +34,8 @@ gulp.task("compile", function() {
         }))
         // Performs the operations for each file
         .pipe(gulpIf("*.js", replace("***apiURL***", apiURL)))
-        .pipe(gulpIf("*.js", replace("***socketURL***", socketURL)))
-        .pipe(gulpIf("index.html", replace("***socketURL***", socketURL)))
+        .pipe(gulpIf("*.js", replace("***socketHost***", socketHost)))
+        .pipe(gulpIf("index.html", replace("***socketHost***", socketHost)))
         .pipe(gulpIf("*.scss", sass.sync().on("error", sass.logError)))
         .pipe(gulp.dest(""));
 });
@@ -43,7 +48,8 @@ gulp.task("build", ["compile"], function() {
     gulp
         .src("images/*.*")
         .pipe(gulp.dest("dist/images"));
-    gulp
+
+    return gulp
         .src("index.html")
         .pipe(useref())
         .pipe(gulpIf('*.js', uglify()))
@@ -63,12 +69,30 @@ var fileHandlerTask = (debug ? "compile" : "build");
 
 gulp.task("watch", function() {
     gulp.watch(
-        ["css/*.scss", "js/*.js", "!js/index.js", "index.src.html", "templates/*.html"],
+        ["css/*.scss", "js/*.js", "!js/main.js", "index.src.html", "templates/*.html"],
         [fileHandlerTask],
         function() {
             connect.reload();
         }
     );
+});
+
+// Setting up the test task
+gulp.task("test", [fileHandlerTask, "connect"], function(callback) {
+    return gulp
+        .src(["tests/*-spec.js"])
+        .pipe(gulpProtractorAngular({
+            configFile: "protractor.conf.js",
+            debug: debug,
+            autoStartStopServer: true
+        }))
+        .on("error", function(error) {
+            throw error;
+        })
+        .on("end", function() {
+            callback();
+            process.exit();
+        });
 });
 
 gulp.task("default", [fileHandlerTask, "connect", "watch"]);

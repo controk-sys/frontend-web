@@ -9,7 +9,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="client in clients">
+        <tr class="click" ng-repeat="client in clients" ui-sref="clientDetail(client)">
             <td>{{ client.id }}</td>
             <td>{{ client.name }}</td>
             <td>{{ client.email }}</td>

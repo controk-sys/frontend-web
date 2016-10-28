@@ -1,0 +1,11 @@
+# Files
+.env*
+css/main.css
+index.html
+js/index.js
+
+# Directories
+.git/
+.idea/
+dist/
+node_modules/
