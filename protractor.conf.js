@@ -5,5 +5,5 @@ exports.config = {
     baseUrl: "http://localhost:" + PORT + "/",
     rootElement: ".controk", // http://stackoverflow.com/a/22518925
     directConnect: true,
-    specs: ["*-spec.js"]
+    specs: ["tests/*-spec.js"]
 };

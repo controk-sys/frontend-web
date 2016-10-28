@@ -1,6 +1,9 @@
 // Synchronously check if ".env" exists before import
-if (require("fs").existsSync(".env")) require("dotenv").config();
+if (require("fs").existsSync(".env")) {
+    require("dotenv").config();
+}
 
+// Imports
 var gulp = require("gulp"),
     connect = require("gulp-connect"),
     useref = require("gulp-useref"),
@@ -12,6 +15,7 @@ var gulp = require("gulp"),
     gulpIf = require("gulp-if"),
     gulpProtractorAngular = require("gulp-angular-protractor");
 
+// Environment Variables
 var debug = process.env.DEBUG == "1",
     apiURL = process.env.API_URL || "",
     socketHost = process.env.SOCKET_HOST || "";
@@ -65,7 +69,7 @@ var fileHandlerTask = (debug ? "compile" : "build");
 
 gulp.task("watch", function() {
     gulp.watch(
-        ["css/*.scss", "js/*.js", "!js/index.js", "index.src.html", "templates/*.html"],
+        ["css/*.scss", "js/*.js", "!js/main.js", "index.src.html", "templates/*.html"],
         [fileHandlerTask],
         function() {
             connect.reload();
@@ -75,15 +79,15 @@ gulp.task("watch", function() {
 
 // Setting up the test task
 gulp.task("test", [fileHandlerTask, "connect"], function(callback) {
-    gulp
+    return gulp
         .src(["tests/*-spec.js"])
         .pipe(gulpProtractorAngular({
-            configFile: "tests/conf.js",
-            debug: false,
+            configFile: "protractor.conf.js",
+            debug: debug,
             autoStartStopServer: true
         }))
-        .on("error", function() {
-            process.exit(1);
+        .on("error", function(error) {
+            throw error;
         })
         .on("end", function() {
             callback();
