@@ -1,20 +1,20 @@
 describe("The user", function() {
-    it("should be able to open the list of clients", function() {
+    it("should be able to open the list of suppliers", function() {
         browser.get("");
 
         element(by.css(".navigation-link")).click(); // Open the modal
-        element(by.css("a[ui-sref=clients]")).click(); // Click on the "clients" option
+        element(by.css("a[ui-sref=suppliers]")).click(); // Click on the "suppliers" option
         expect(element.all(by.css("table")).count()).toBe(1); // Check if the table exists
-        // Must exist five fields per client
+        // Must exist five fields per supplier
         expect(element.all(by.css("table tbody tr td.ng-binding")).then(function (elements) {
-            return elements.length % 5;
+            return elements.length % 4;
         })).toBe(0);
     });
-    it("should be able to open the details of a client", function() {
+    it("should be able to open the details of a supplier", function() {
         browser.get("");
 
         element(by.css(".navigation-link")).click();
-        element(by.css("a[ui-sref=clients]")).click();
+        element(by.css("a[ui-sref=suppliers]")).click();
         element.all(by.css("table tbody tr td.ng-binding")).first().click();
         expect(element.all(by.css("table")).count()).toBe(0); // Check if the table is gone
         expect(element.all(by.css(".ui-view [ng-controller]")).count()).toBe(1); // Check if the view was injected
