@@ -1,4 +1,4 @@
-app
+angular.module("controk")
     .controller("ClientsListCtrl", ["$scope", "Client",
         function($scope, Client) {
             Client.list().then(function(response) {

@@ -1,4 +1,4 @@
-app
+angular.module("controk")
     .service("Client", ["$http", "urls",
         function($http, urls) {
             this.list = function() {
