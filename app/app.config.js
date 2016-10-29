@@ -43,6 +43,15 @@ angular.module("controk")
                 .state("suppliers", {
                     url: "/suppliers",
                     templateUrl: "app/suppliers/list.html"
+                })
+                .state("supplierDetail", {
+                    url: "/suppliers/:id",
+                    params: { // This data won't come from webservice but it is already available here
+                        trading_name: null,
+                        email: null,
+                        cnpj: null
+                    },
+                    templateUrl: "app/suppliers/detail.html"
                 });
             $urlRouterProvider.otherwise("/");
         }
