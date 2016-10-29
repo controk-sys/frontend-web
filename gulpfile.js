@@ -74,7 +74,7 @@ var fileHandlerTask = (debug ? "compile" : "build");
 
 gulp.task("watch", function() {
     gulp.watch(
-        ["css/*.scss", "js/*.js", "!js/main.js", "index.src.html", "templates/*.html"],
+        ["css/*.scss", "app/**/*.js", "!app/app.module.js", "index.src.html", "app/**/*.html"],
         [fileHandlerTask],
         function() {
             connect.reload();

@@ -21,6 +21,17 @@ angular.module("controk")
                     url: "/employees",
                     templateUrl: "app/employees/list.html"
                 })
+                .state("employeeDetail", {
+                    url: "/employees/:id",
+                    params: { // This data won't come from webservice but it is already available here
+                        name: null,
+                        email: null,
+                        cpf: null,
+                        role: null,
+                        observation: null
+                    },
+                    templateUrl: "app/employees/detail.html"
+                })
                 .state("products", {
                     url: "/products",
                     templateUrl: "app/products/list.html"

@@ -1,0 +1,101 @@
+1<div ng-controller="EmployeeDetailCtrl" class="container">
+    <!-- Main info -->
+    <div>
+        <div class="row">
+            <div class="column"><h4>Informações (funcionário {{ employee.id }})</h4></div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="name">Nome</label>
+                <input id="name" type="text" ng-model="employee.name" />
+            </div>
+            <div class="column">
+                <label for="cpf">CPF</label>
+                <input id="cpf" type="text" ng-model="employee.cpf" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="obs">Observação</label>
+                <input id="obs" type="text" ng-model="employee.observation" />
+            </div>
+            <div class="column">
+                <label for="role">Cargo</label>
+                <input id="role" type="text" ng-model="employee.role" />
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact -->
+    <div>
+        <div class="row">
+            <div class="column"><h4>Contato</h4></div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="mobile">Telefone Celular</label>
+                <input id="mobile" type="text" ng-model="employee.mobile" />
+            </div>
+            <div class="column">
+                <label for="phone">Telefone Fixo</label>
+                <input id="phone" type="text" ng-model="employee.phone" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="email">E-mail</label>
+                <input id="email" type="text" ng-model="employee.email" />
+            </div>
+        </div>
+    </div>
+
+    <!-- Address -->
+    <div>
+        <div class="row">
+            <div class="column"><h4>Endereço</h4></div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="place">Logradouro</label>
+                <select id="place"
+                        ng-options="item.name for item in employee.place_options track by item.id"
+                        data-ng-model="employee.address.place">
+                </select>
+            </div>
+            <div class="column">
+                <label for="placeName">Nome do Logradouro</label>
+                <input id="placeName" type="text" ng-model="employee.address.place_name" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="number">Número</label>
+                <input id="number" type="number" ng-model="employee.address.number" />
+            </div>
+            <div class="column">
+                <label for="complement">Complemento</label>
+                <input id="complement" type="text" ng-model="employee.address.complement" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="neighborhood">Bairro</label>
+                <input id="neighborhood" type="text" ng-model="employee.address.neighborhood" />
+            </div>
+            <div class="column">
+                <label for="city">Cidade</label>
+                <input id="city" type="text" ng-model="employee.address.city" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="state">Estado</label>
+                <input id="state" type="text" ng-model="employee.address.state" />
+            </div>
+            <div class="column">
+                <label for="cep">CEP</label>
+                <input id="cep" type="text" ng-model="employee.address.cep" />
+            </div>
+        </div>
+    </div>
+</div>
