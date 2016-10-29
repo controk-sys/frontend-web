@@ -6,12 +6,6 @@ if (require("fs").existsSync(".env")) {
 // Imports
 var gulp = require("gulp"),
     connect = require("gulp-connect"),
-    useref = require("gulp-useref"),
-    uglify = require("gulp-uglify"),
-    rename = require("gulp-rename"),
-    replace = require("gulp-replace"),
-    sass = require("gulp-sass"),
-    cleanCss = require("gulp-clean-css"),
     gulpIf = require("gulp-if"),
     gulpProtractorAngular = require("gulp-angular-protractor");
 
@@ -21,6 +15,10 @@ var debug = process.env.DEBUG == "1",
     socketHost = process.env.SOCKET_HOST || "";
 
 gulp.task("compile", function() {
+    var rename = require("gulp-rename"),
+        replace = require("gulp-replace"),
+        sass = require("gulp-sass");
+
     return gulp
         .src(["app/**/*.src.js", "css/**/*.scss", "index.src.html"])
         // Define path (and name if ".src")
@@ -42,8 +40,14 @@ gulp.task("compile", function() {
 
 // Last task before connection
 gulp.task("build", ["compile"], function() {
+    var useref = require("gulp-useref"),
+        uglify = require("gulp-uglify"),
+        cleanCss = require("gulp-clean-css"),
+        htmlMin = require("gulp-htmlmin");
+
     gulp
         .src("app/**/*.html")
+        .pipe(htmlMin({collapseWhitespace: true}))
         .pipe(gulp.dest("dist/app"));
     gulp
         .src("images/*.*")
@@ -53,7 +57,8 @@ gulp.task("build", ["compile"], function() {
         .src("index.html")
         .pipe(useref())
         .pipe(gulpIf("*.js", uglify()))
-        .pipe(gulpIf("*.css", cleanCss({keepSpecialComments: 0})))
+        .pipe(gulpIf("*.css", cleanCss({removeComments: true})))
+        .pipe(gulpIf("*.html", htmlMin({collapseWhitespace: true})))
         .pipe(gulp.dest("dist"));
 });
 

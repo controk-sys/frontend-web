@@ -27,6 +27,7 @@
     "gulp-angular-protractor": "^0.2.0",
     "gulp-clean-css": "^2.0.13",
     "gulp-connect": "^5.0.0",
+    "gulp-htmlmin": "^3.0.0",
     "gulp-if": "^2.0.1",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.5.4",
