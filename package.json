@@ -5,12 +5,7 @@
     "name": "Jourdan Rodrigues",
     "email": "thiagojourdan@gmail.com"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/jourdanrodrigues/controk-frontend-web/blob/master/LICENSE"
-    }
-  ],
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/jourdanrodrigues/controk-frontend-web"
@@ -29,11 +24,13 @@
     "gulp-connect": "^5.0.0",
     "gulp-htmlmin": "^3.0.0",
     "gulp-if": "^2.0.1",
+    "gulp-json-srv": "^1.0.1",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.5.4",
     "gulp-sass": "^2.3.2",
     "gulp-uglify": "^2.0.0",
-    "gulp-useref": "^3.1.2"
+    "gulp-useref": "^3.1.2",
+    "lodash": "^4.16.4"
   },
   "scripts": {
     "start": "gulp",

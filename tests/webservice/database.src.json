@@ -1,0 +1,62 @@
+{
+  "endpoints": {
+    "clients": "***apiURL***clients/",
+    "employees": "***apiURL***employees/",
+    "suppliers": "***apiURL***suppliers/"
+  },
+  "clients": [
+    {
+      "id": 1,
+      "name": "Client Name",
+      "email": "client@email.com",
+      "cpf": "12345678912",
+      "observation": "No obs."
+    }
+  ],
+  "employees": [
+    {
+      "id": 1,
+      "role": "Employee role",
+      "name": "Employee Name",
+      "email": "employee@email.com",
+      "cpf": "98765432187",
+      "observation": "No obs."
+    }
+  ],
+  "suppliers": [
+    {
+      "id": 1,
+      "email": "supplier@email.com",
+      "cnpj": "1234567894562",
+      "trading_name": "Supplier Trading Name"
+    }
+  ],
+  "info": {
+    "phone": "8530412354",
+    "mobile": "85994126714",
+    "address": {
+      "place": 1,
+      "place_name": "Julio Gonzaga",
+      "number": 34,
+      "complement": "A",
+      "neighborhood": "Leiloeiro",
+      "city": "Jumineira",
+      "state": "Paraná",
+      "cep": "62200000"
+    },
+    "place_options": [
+      {
+        "id": 1,
+        "name": "Rua"
+      },
+      {
+        "id": 2,
+        "name": "Avenida"
+      },
+      {
+        "id": 3,
+        "name": "Travessa"
+      }
+    ]
+  }
+}
