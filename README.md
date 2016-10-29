@@ -8,10 +8,12 @@
 
 [![docker]]()
 
-#### [Angular naming conventions](https://github.com/mgechev/angularjs-style-guide)
+#### [Angular 1 Style Guide][angular-style-guide]
 
-#### [Idiomatic.js](https://github.com/rwaldron/idiomatic.js)
+#### [Idiomatic.js][idiomatic-js]
 
+[idiomatic-js]: https://github.com/rwaldron/idiomatic.js
+[angular-style-guide]: https://github.com/johnpapa/angular-styleguide
 [travis-badge]: https://travis-ci.org/jourdanrodrigues/controk-frontend-web.svg?branch=master
 [travis]: https://travis-ci.org/jourdanrodrigues/controk-frontend-web?branch=master
 [license-badge]: https://img.shields.io/github/license/jourdanrodrigues/controk-frontend-web.svg

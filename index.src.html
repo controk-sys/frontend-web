@@ -59,9 +59,22 @@
         <script src="node_modules/angular/angular.min.js"></script>
         <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
         <script src="js/milligram.main.min.js"></script>
-        <script src="js/main.js"></script>
-        <script src="js/services.js"></script>
-        <script src="js/controllers.js"></script>
+        <!-- Main -->
+        <script src="app/app.module.js"></script>
+        <script src="app/app.config.js"></script>
+        <!-- Services -->
+        <script src="app/services/shipment.service.js"></script>
+        <script src="app/services/supplier.service.js"></script>
+        <script src="app/services/client.service.js"></script>
+        <script src="app/services/employee.service.js"></script>
+        <script src="app/services/product.service.js"></script>
+        <!-- Controllers -->
+        <script src="app/clients/list.controller.js"></script>
+        <script src="app/clients/detail.controller.js"></script>
+        <script src="app/suppliers/list.controller.js"></script>
+        <script src="app/employees/list.controller.js"></script>
+        <script src="app/products/list.controller.js"></script>
+        <script src="app/shipments/list.controller.js"></script>
         <!-- endbuild -->
     </body>
 </html>

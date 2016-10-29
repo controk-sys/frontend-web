@@ -22,14 +22,14 @@ var debug = process.env.DEBUG == "1",
 
 gulp.task("compile", function() {
     return gulp
-        .src(["js/**/*.src.js", "css/**/*.scss", "index.src.html"])
-        // Define path (and name if JS)
+        .src(["app/**/*.src.js", "css/**/*.scss", "index.src.html"])
+        // Define path (and name if ".src")
         .pipe(rename(function(path) {
             var ext = path.extname.toString();
 
             if (/\.(js|html)/.test(ext)) path.basename = path.basename.replace(".src", "");
 
-            if (/\.js/.test(ext)) path.dirname += "/js";
+            if (/\.js/.test(ext)) path.dirname += "/app";
             else if (/\.scss/.test(ext)) path.dirname += "/css";
         }))
         // Performs the operations for each file
@@ -43,8 +43,8 @@ gulp.task("compile", function() {
 // Last task before connection
 gulp.task("build", ["compile"], function() {
     gulp
-        .src("templates/*.html")
-        .pipe(gulp.dest("dist/templates"));
+        .src("app/**/*.html")
+        .pipe(gulp.dest("dist/app"));
     gulp
         .src("images/*.*")
         .pipe(gulp.dest("dist/images"));
@@ -52,8 +52,8 @@ gulp.task("build", ["compile"], function() {
     return gulp
         .src("index.html")
         .pipe(useref())
-        .pipe(gulpIf('*.js', uglify()))
-        .pipe(gulpIf('*.css', cleanCss({keepSpecialComments: 0})))
+        .pipe(gulpIf("*.js", uglify()))
+        .pipe(gulpIf("*.css", cleanCss({keepSpecialComments: 0})))
         .pipe(gulp.dest("dist"));
 });
 

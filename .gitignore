@@ -6,7 +6,7 @@ npm-debug.log
 css/main.css
 dist/
 index.html
-js/main.js
+app/app.module.js
 
 # Directories
 .idea/
