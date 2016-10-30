@@ -53,8 +53,8 @@
             <div class="ui-view"></div>
         </div>
 
-        <script src="***socketHost***socket.io/socket.io.js"></script>
         <!-- build:js app.min.js -->
+        <script src="node_modules/socket.io-client/socket.io.js"></script>
         <script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
         <script src="node_modules/angular/angular.min.js"></script>
         <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -72,7 +72,9 @@
         <script src="app/clients/list.controller.js"></script>
         <script src="app/clients/detail.controller.js"></script>
         <script src="app/suppliers/list.controller.js"></script>
+        <script src="app/suppliers/detail.controller.js"></script>
         <script src="app/employees/list.controller.js"></script>
+        <script src="app/employees/detail.controller.js"></script>
         <script src="app/products/list.controller.js"></script>
         <script src="app/shipments/list.controller.js"></script>
         <!-- endbuild -->

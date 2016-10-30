@@ -10,7 +10,7 @@ angular.module("controk")
             $scope.client = {};
 
             Client.info($stateParams.id).then(function(infoResponse) {
-                // The existence of an email will define that the data is already in the $stateParams
+                // The existence of an email will define if the data is already in the $stateParams
                 if (!$stateParams.email)
                     Client.retrieve($stateParams.id).then(function(retrieveResponse) {
                         $scope.client = prepareClient(Object.assign(infoResponse.data, retrieveResponse.data));

@@ -5,8 +5,8 @@ npm-debug.log
 # Generated files
 css/main.css
 dist/
-index.html
 app/app.module.js
+tests/webservice/database.json
 
 # Directories
 .idea/
