@@ -28,7 +28,7 @@ gulp.task("compile", function() {
             var ext = path.extname.toString();
 
             // Rename the file
-            if (/\.(js|html|json)/.test(ext)) {
+            if (/^\.js/.test(ext)) {
                 path.basename = path.basename.replace(".src", "");
             }
 
@@ -47,7 +47,6 @@ gulp.task("compile", function() {
         .pipe(gulpIf("*.js", replace("***apiURL***", apiURL)))
         .pipe(gulpIf("*.json", replace("***apiURL***", apiURL)))
         .pipe(gulpIf("*.js", replace("***socketHost***", socketHost)))
-        .pipe(gulpIf("index.html", replace("***socketHost***", socketHost)))
         .pipe(gulpIf("*.scss", sass.sync().on("error", sass.logError)))
         .pipe(gulp.dest(""));
 });
