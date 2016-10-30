@@ -18,13 +18,11 @@ env:
     - API_URL=http://localhost:8000/api/v1/
     - SOCKET_HOST=http://localhost:3000/
 
+install: npm install
+
 # https://docs.travis-ci.com/user/gui-and-headless-browsers/#Using-xvfb-to-Run-Tests-That-Require-a-GUI
 before_script:
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3 # give xvfb some time to start
-
-install:
-  - npm install
-  - npm install -g gulp
 
 script: npm test
