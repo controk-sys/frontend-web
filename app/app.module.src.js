@@ -3,7 +3,7 @@
 
     try {
         // Set socket
-        app.value("socket", io.connect("***socketHost***")); // "io" from the imported socket
+        app.value("socket", io.connect("***socketHost***"));
     } catch (error) {
         console.log("Couldn't connect to socket: \"" + error.message + "\".")
     }
