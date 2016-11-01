@@ -1,5 +1,5 @@
 (function() {
-    var app = angular.module("controk", ["ui.router"]);
+    var app = angular.module("controk", ["ui.router", "toastr"]);
 
     try {
         // Set socket
@@ -17,4 +17,14 @@
      */
     var urls = JSON.parse(xmlHttp.responseText);
     app.constant("urls", urls);
+
+    // Set socket listeners
+    app.run(["socket", "toastr",
+        function(socket, toastr) {
+            // Socket events
+            socket.on("client updated", function(message) {
+                toastr.success(message);
+            });
+        }
+    ]);
 })();
