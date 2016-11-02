@@ -18,10 +18,10 @@ describe("The user", function() {
         element.all(by.css("table tbody tr td.ng-binding")).first().click();
         expect(element.all(by.css("table")).count()).toBe(0); // Check if the table is gone
         expect(element.all(by.css(".ui-view [ng-controller]")).count()).toBe(1); // Check if the view was injected
-        // 14 fields must exist
-        expect(element.all(by.css(".column")).count()).toBe(17); // + 3 field divisions
-        expect(element.all(by.css("label")).count()).toBe(14);
-        expect(element.all(by.css("input")).count()).toBe(13);
+        // 13 fields must exist
+        expect(element.all(by.css(".column")).count()).toBe(16); // + 3 field divisions
+        expect(element.all(by.css("label")).count()).toBe(13);
+        expect(element.all(by.css("input")).count()).toBe(12);
         expect(element.all(by.css("select")).count()).toBe(1);
     });
 });

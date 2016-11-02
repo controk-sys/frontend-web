@@ -25,6 +25,18 @@
         </div>
         <div class="row">
             <div class="column">
+                <label for="mobile">Telefone Celular</label>
+                <input id="mobile" type="text" ng-model="supplier.mobile" ng-change="update(supplier)"
+                       ng-model-options="{ debounce: 700 }" />
+            </div>
+            <div class="column">
+                <label for="phone">Telefone Fixo</label>
+                <input id="phone" type="text" ng-model="supplier.phone" ng-change="update(supplier)"
+                       ng-model-options="{ debounce: 700 }" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
                 <label for="email">E-mail</label>
                 <input id="email" type="text" ng-model="supplier.email" ng-change="update(supplier)"
                        ng-model-options="{ debounce: 700 }" />
