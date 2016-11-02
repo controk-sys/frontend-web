@@ -4,10 +4,17 @@ angular.module("controk")
             /**
              * @type {{
              * id, trading_name, email, cnpj, place_options: [{id, name}],
-             * address: {place, place_name, number, complement, neighborhood, city, state, cep}
+             * address: {place: {id, name}, place_name, number, complement, neighborhood, city, state, cep}
              * }}
              */
             $scope.supplier = {};
+            $scope.debounce = 1000;
+
+            $scope.update = function (supplier) {
+                var supplierData = angular.copy(supplier);
+                supplierData.address.place = supplierData.address.place.id;
+                Supplier.update(supplierData);
+            };
 
             Supplier.info($stateParams.id).then(function(infoResponse) {
                 // The existence of an email will define if the data is already in the $stateParams
@@ -17,16 +24,16 @@ angular.module("controk")
                     });
 
                 else $scope.supplier = prepareSupplier(Object.assign(infoResponse.data, $stateParams));
+
+                function prepareSupplier(supplier) {
+                    // Build the "place" attribute to resolve Angular default selected
+                    // It must come to the single value at update
+                    for (var i = 0; i < supplier.place_options.length; i++)
+                        if (supplier.place_options[i].id == supplier.address.place)
+                            supplier.address.place = supplier.place_options[i];
+
+                    return supplier;
+                }
             });
-
-            function prepareSupplier(supplier) {
-                // Build the "place" attribute to resolve Angular default selected
-                // It must come to the single value at update
-                for (var i = 0; i < supplier.place_options.length; i++)
-                    if (supplier.place_options[i].id == supplier.address.place)
-                        supplier.address.place = supplier.place_options[i];
-
-                return supplier;
-            }
         }
     ]);

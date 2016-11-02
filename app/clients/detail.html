@@ -62,8 +62,7 @@
                 <select id="place"
                         ng-options="item.name for item in client.place_options track by item.id"
                         data-ng-change="update(client)"
-                        data-ng-model="client.address.place"
-                        ng-model-options="{ debounce: 700 }">
+                        data-ng-model="client.address.place">
                 </select>
             </div>
             <div class="column">

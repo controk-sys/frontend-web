@@ -1,6 +1,6 @@
 angular.module("controk")
-    .service("Supplier", ["$http", "urls",
-        function($http, urls) {
+    .service("Supplier", ["$http", "urls", "socket",
+        function($http, urls, socket) {
             this.list = function() {
                 return $http.get(urls.suppliers);
             };
@@ -9,6 +9,10 @@ angular.module("controk")
             };
             this.info = function(id) {
                 return $http.get(urls.suppliers + id + "/info");
+            };
+
+            this.update = function (supplier) {
+                socket.emit("update supplier", supplier);
             };
         }
     ]);

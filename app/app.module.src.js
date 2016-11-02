@@ -22,7 +22,7 @@
     app.run(["socket", "toastr",
         function(socket, toastr) {
             // Socket events
-            socket.on("client updated", function(message) {
+            socket.on("update ok", function(message) {
                 toastr.success(message);
             });
         }

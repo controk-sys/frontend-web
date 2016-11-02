@@ -7,21 +7,25 @@
         <div class="row">
             <div class="column">
                 <label for="name">Nome</label>
-                <input id="name" type="text" ng-model="employee.name" />
+                <input id="name" type="text" ng-model="employee.name" ng-change="update(employee)"
+                       ng-model-options="{ debounce: 700 }" />
             </div>
             <div class="column">
                 <label for="cpf">CPF</label>
-                <input id="cpf" type="text" ng-model="employee.cpf" />
+                <input id="cpf" type="text" ng-model="employee.cpf" ng-change="update(employee)"
+                       ng-model-options="{ debounce: 700 }" />
             </div>
         </div>
         <div class="row">
             <div class="column">
                 <label for="obs">Observação</label>
-                <input id="obs" type="text" ng-model="employee.observation" />
+                <input id="obs" type="text" ng-model="employee.observation" ng-change="update(employee)"
+                       ng-model-options="{ debounce: 700 }" />
             </div>
             <div class="column">
                 <label for="role">Cargo</label>
-                <input id="role" type="text" ng-model="employee.role" />
+                <input id="role" type="text" ng-model="employee.role" ng-change="update(employee)"
+                       ng-model-options="{ debounce: 700 }" />
             </div>
         </div>
     </div>
@@ -34,17 +38,20 @@
         <div class="row">
             <div class="column">
                 <label for="mobile">Telefone Celular</label>
-                <input id="mobile" type="text" ng-model="employee.mobile" />
+                <input id="mobile" type="text" ng-model="employee.mobile" ng-change="update(employee)"
+                       ng-model-options="{ debounce: 700 }" />
             </div>
             <div class="column">
                 <label for="phone">Telefone Fixo</label>
-                <input id="phone" type="text" ng-model="employee.phone" />
+                <input id="phone" type="text" ng-model="employee.phone" ng-change="update(employee)"
+                       ng-model-options="{ debounce: 700 }" />
             </div>
         </div>
         <div class="row">
             <div class="column">
                 <label for="email">E-mail</label>
-                <input id="email" type="text" ng-model="employee.email" />
+                <input id="email" type="text" ng-model="employee.email" ng-change="update(employee)"
+                       ng-model-options="{ debounce: 700 }" />
             </div>
         </div>
     </div>
@@ -59,42 +66,50 @@
                 <label for="place">Logradouro</label>
                 <select id="place"
                         ng-options="item.name for item in employee.place_options track by item.id"
+                        data-ng-change="update(employee)"
                         data-ng-model="employee.address.place">
                 </select>
             </div>
             <div class="column">
                 <label for="placeName">Nome do Logradouro</label>
-                <input id="placeName" type="text" ng-model="employee.address.place_name" />
+                <input id="placeName" type="text" ng-model="employee.address.place_name" ng-change="update(employee)"
+                       ng-model-options="{ debounce: 700 }" />
             </div>
         </div>
         <div class="row">
             <div class="column">
                 <label for="number">Número</label>
-                <input id="number" type="number" ng-model="employee.address.number" />
+                <input id="number" type="number" ng-model="employee.address.number" ng-change="update(employee)"
+                       ng-model-options="{ debounce: 700 }" />
             </div>
             <div class="column">
                 <label for="complement">Complemento</label>
-                <input id="complement" type="text" ng-model="employee.address.complement" />
+                <input id="complement" type="text" ng-model="employee.address.complement" ng-change="update(employee)"
+                       ng-model-options="{ debounce: 700 }" />
             </div>
         </div>
         <div class="row">
             <div class="column">
                 <label for="neighborhood">Bairro</label>
-                <input id="neighborhood" type="text" ng-model="employee.address.neighborhood" />
+                <input id="neighborhood" type="text" ng-model="employee.address.neighborhood"
+                       ng-change="update(employee)" ng-model-options="{ debounce: 700 }" />
             </div>
             <div class="column">
                 <label for="city">Cidade</label>
-                <input id="city" type="text" ng-model="employee.address.city" />
+                <input id="city" type="text" ng-model="employee.address.city" ng-change="update(employee)"
+                       ng-model-options="{ debounce: 700 }" />
             </div>
         </div>
         <div class="row">
             <div class="column">
                 <label for="state">Estado</label>
-                <input id="state" type="text" ng-model="employee.address.state" />
+                <input id="state" type="text" ng-model="employee.address.state" ng-change="update(employee)"
+                       ng-model-options="{ debounce: 700 }" />
             </div>
             <div class="column">
                 <label for="cep">CEP</label>
-                <input id="cep" type="text" ng-model="employee.address.cep" />
+                <input id="cep" type="text" ng-model="employee.address.cep" ng-change="update(employee)"
+                       ng-model-options="{ debounce: 700 }" />
             </div>
         </div>
     </div>
