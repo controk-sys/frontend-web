@@ -96,6 +96,19 @@ gulp.task("watch", function() {
     );
 });
 
+// Standalone mode
+gulp.task("standalone", [fileHandlerTask, "connect"], function() {
+    var webservicePath = "tests/webservice/";
+    var webservice = require("gulp-json-srv").create({
+        port: process.env.API_PORT,
+        rewriteRules: JSON.parse(fs.readFileSync(webservicePath + "routes.json"))
+    });
+
+    return gulp
+        .src(webservicePath + "database.json")
+        .pipe(webservice.pipe());
+});
+
 // Setting up the test task
 gulp.task("test", [fileHandlerTask, "connect"], function(callback) {
     var webservicePath = "tests/webservice/";

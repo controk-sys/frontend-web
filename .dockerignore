@@ -1,8 +1,12 @@
 # Files
 .env*
+.travis.yml
+docker-compose.yml
+LICENSE
+README.md
 css/main.css
-index.html
-js/index.js
+app/app.module.js
+tests/webservice/database.json
 
 # Directories
 .git/
