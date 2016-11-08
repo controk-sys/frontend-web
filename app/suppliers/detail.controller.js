@@ -8,7 +8,6 @@ angular.module("controk")
              * }}
              */
             $scope.supplier = {};
-            $scope.debounce = 1000;
 
             $scope.update = function (supplier) {
                 var supplierData = angular.copy(supplier);

@@ -8,7 +8,6 @@ angular.module("controk")
              * }}
              */
             $scope.client = {};
-            $scope.debounce = 1000;
 
             $scope.update = function (client) {
                 var clientData = angular.copy(client);
