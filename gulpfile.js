@@ -12,7 +12,7 @@ var gulp = require("gulp"),
     gulpProtractorAngular = require("gulp-angular-protractor");
 
 // Environment Variables
-var debug = process.env.DEBUG.toString() == "1",
+var debug = process.env.DEBUG == "1",
     apiURL = process.env.API_URL || "",
     socketHost = process.env.SOCKET_HOST || "";
 
