@@ -110,23 +110,14 @@ gulp.task("standalone", [fileHandlerTask, "watch", "connect"], function() {
 });
 
 // Setting up the test task
-gulp.task("test", [fileHandlerTask, "connect"], function(callback) {
-    var webservicePath = "tests/webservice/";
-    var webservice = require("gulp-json-srv").create({
-        port: process.env.API_PORT,
-        rewriteRules: JSON.parse(fs.readFileSync(webservicePath + "routes.json"))
-    });
-
+gulp.task("test", ["standalone"], function(callback) {
     return gulp
-        .src(["tests/*-spec.js", webservicePath + "database.json"])
-        // Run the JSON Server for JSON files
-        .pipe(gulpIf("*.json", webservice.pipe()))
-        // Run the Protractor for JS files
-        .pipe(gulpIf("*.js", gulpProtractorAngular({
+        .src(["tests/*-spec.js"])
+        .pipe(gulpProtractorAngular({
             configFile: "protractor.conf.js",
             debug: debug,
             autoStartStopServer: true
-        })))
+        }))
         .on("error", function(error) {
             throw error;
         })
