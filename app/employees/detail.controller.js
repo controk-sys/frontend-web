@@ -26,11 +26,16 @@ angular.module("controk")
                 else $scope.employee = prepareEmployee(Object.assign(infoResponse.data, $stateParams));
 
                 function prepareEmployee(employee) {
+                    // Put the "place_options" on the scope
+                    $scope.place_options = employee.place_options;
+                    delete employee.place_options;
                     // Build the "place" attribute to resolve default selected
                     // It must come to the single value at update
-                    for (var i = 0; i < employee.place_options.length; i++)
-                        if (employee.place_options[i].id == employee.address.place)
-                            employee.address.place = employee.place_options[i];
+                    for (var i = 0; i < $scope.place_options.length; i++) {
+                        if ($scope.place_options[i].id == employee.address.place) {
+                            employee.address.place = $scope.place_options[i];
+                        }
+                    }
 
                     return employee;
                 }

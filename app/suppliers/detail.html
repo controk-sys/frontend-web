@@ -53,7 +53,7 @@
             <div class="column">
                 <label for="place">Logradouro</label>
                 <select id="place"
-                        ng-options="item.name for item in supplier.place_options track by item.id"
+                        ng-options="item.name for item in place_options track by item.id"
                         data-ng-change="update(supplier)"
                         data-ng-model="supplier.address.place">
                 </select>

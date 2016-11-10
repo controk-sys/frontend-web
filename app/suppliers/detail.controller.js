@@ -25,11 +25,16 @@ angular.module("controk")
                 else $scope.supplier = prepareSupplier(Object.assign(infoResponse.data, $stateParams));
 
                 function prepareSupplier(supplier) {
+                    // Put the "place_options" on the scope
+                    $scope.place_options = supplier.place_options;
+                    delete supplier.place_options;
                     // Build the "place" attribute to resolve Angular default selected
                     // It must come to the single value at update
-                    for (var i = 0; i < supplier.place_options.length; i++)
-                        if (supplier.place_options[i].id == supplier.address.place)
-                            supplier.address.place = supplier.place_options[i];
+                    for (var i = 0; i < $scope.place_options.length; i++) {
+                        if ($scope.place_options[i].id == supplier.address.place) {
+                            supplier.address.place = $scope.place_options[i];
+                        }
+                    }
 
                     return supplier;
                 }
