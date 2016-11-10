@@ -1,3 +1,8 @@
-/**
- * Created by jourdanrodrigues on 11/8/16.
- */
+angular.module("controk")
+    .service("Assets", ["$http", "urls",
+        function($http, urls) {
+            this.getPlaceOptions = function() {
+                return $http.get(urls.place_options);
+            };
+        }
+    ]);

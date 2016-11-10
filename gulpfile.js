@@ -87,7 +87,7 @@ var fileHandlerTask = (debug ? "compile" : "build");
 
 gulp.task("watch", function() {
     gulp.watch(
-        ["css/*.scss", "app/**/*.js", "!app/app.module.js", "index.src.html",
+        ["css/*.scss", "app/**/*.js", "!app/app.module.js", "index.html",
             "app/**/*.html", "tests/webservice/*.json", "!tests/webservice/database.json"],
         [fileHandlerTask],
         function() {
