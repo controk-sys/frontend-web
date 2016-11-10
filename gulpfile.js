@@ -97,7 +97,7 @@ gulp.task("watch", function() {
 });
 
 // Standalone mode
-gulp.task("standalone", [fileHandlerTask, "connect"], function() {
+gulp.task("standalone", [fileHandlerTask, "watch", "connect"], function() {
     var webservicePath = "tests/webservice/";
     var webservice = require("gulp-json-srv").create({
         port: process.env.API_PORT,
