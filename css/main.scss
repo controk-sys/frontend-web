@@ -1,4 +1,8 @@
 $shadow_color: #666;
+$v_button_active_color: #45881C;
+$v_button_color: #67AA3E;
+$v_shape_active_color: #DDD;
+$v_shape_color: #FFF;
 
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
@@ -20,6 +24,7 @@ $shadow_color: #666;
 }
 
 body {
+  outline: none;
   background: #E7E7E7;
 }
 
@@ -28,7 +33,8 @@ body {
 }
 
 .component-button-v {
-  background: #67AA3E;
+  outline: none;
+  background-color: $v_button_color;
   height: 4em;
   width: 4em;
   right: 1em;
@@ -40,15 +46,44 @@ body {
 
   &:active {
     top: 20.3em;
-    background: #45881C;
+    background-color: $v_button_active_color !important;
     @include box-shadow(0, 0.2em, 0.5em, $shadow_color);
+
+    .v-shape {
+      border-bottom: 0.3em solid $v_shape_active_color;
+      border-right: 0.3em solid $v_shape_active_color;
+    }
   }
 
-  img {
-    display: block;
-    margin-top: 0.5em;
-    margin-left: auto;
-    margin-right: auto;
+  .v-shape {
+    margin: -0.3em auto auto auto;
+    height: 60%;
+    width: 30%;
+    border-bottom: 0.3em solid $v_shape_color;
+    border-right: 0.3em solid $v_shape_color;
+    transform: rotate(45deg) skew(0deg);
+  }
+
+  // Disable Milliagram's button properties
+  border: medium none #000;
+  color: #fff;
+  cursor: pointer;
+  display: inline;
+  font-size: medium;
+  font-weight: normal;
+  letter-spacing: normal;
+  line-height: normal;
+  padding: 0;
+  text-align: left;
+  text-decoration: none;
+  text-transform: none;
+  white-space: normal;
+
+  &:focus, &:hover {
+    background-color: $v_button_color;
+    border-color: $v_button_color;
+    color: #FFF;
+    outline: invert none medium;
   }
 }
 
