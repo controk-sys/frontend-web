@@ -1,9 +1,56 @@
+$shadow_color: #666;
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin box-shadow($hoff, $voff, $blur, $color) {
+  -webkit-box-shadow: $hoff $voff $blur $color;
+  -moz-box-shadow: $hoff $voff $blur $color;
+  box-shadow: $hoff $voff $blur $color;
+}
+
+@mixin transition($seconds) {
+  -webkit-transition: $seconds;
+  -moz-transition: $seconds;
+  -o-transition: $seconds;
+  transition: $seconds;
+}
+
 body {
   background: #E7E7E7;
 }
 
 .click {
   cursor: pointer;
+}
+
+.component-button-v {
+  cursor: pointer;
+  background: #67AA3E;
+  height: 4em;
+  width: 4em;
+  right: 1em;
+  top: 20em;
+  position: fixed;
+  @include border-radius(50%);
+  @include box-shadow(0, 0.5em, 0.5em, $shadow_color);
+  @include transition(0.05s);
+
+  &:active {
+    top: 20.3em;
+    background: #45881C;
+    @include box-shadow(0, 0.2em, 0.5em, $shadow_color);
+  }
+
+  img {
+    display: block;
+    margin-top: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 .logo{

@@ -25,6 +25,10 @@
             socket.on("update ok", function(message) {
                 toastr.success(message);
             });
+            // Socket events
+            socket.on("create ok", function(message) {
+                toastr.success(message);
+            });
         }
     ]);
 })();
