@@ -3,11 +3,12 @@ angular.module("controk")
         function ($stateProvider, $urlRouterProvider) {
             $stateProvider
                 .state("home", {url: "/"})
+                // Clients
                 .state("clients", {
                     url: "/clients",
                     templateUrl: "app/clients/list.html"
                 })
-                .state("createClient", {
+                .state("clientCreation", {
                     url: "/clients/create",
                     templateUrl: "app/clients/create.html"
                 })
@@ -21,9 +22,14 @@ angular.module("controk")
                     },
                     templateUrl: "app/clients/detail.html"
                 })
+                // Employees
                 .state("employees", {
                     url: "/employees",
                     templateUrl: "app/employees/list.html"
+                })
+                .state("employeeCreation", {
+                    url: "/employees/create",
+                    templateUrl: "app/employees/create.html"
                 })
                 .state("employeeDetail", {
                     url: "/employees/:id",
@@ -36,17 +42,24 @@ angular.module("controk")
                     },
                     templateUrl: "app/employees/detail.html"
                 })
+                // Products
                 .state("products", {
                     url: "/products",
                     templateUrl: "app/products/list.html"
                 })
+                // Shipments
                 .state("shipments", {
                     url: "/shipments",
                     templateUrl: "app/shipments/list.html"
                 })
+                // Suppliers
                 .state("suppliers", {
                     url: "/suppliers",
                     templateUrl: "app/suppliers/list.html"
+                })
+                .state("supplierCreation", {
+                    url: "/suppliers/create",
+                    templateUrl: "app/suppliers/create.html"
                 })
                 .state("supplierDetail", {
                     url: "/suppliers/:id",
