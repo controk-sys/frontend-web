@@ -1,20 +1,24 @@
-<table ng-controller="ClientsListCtrl">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>E-mail</th>
-            <th>CPF</th>
-            <th>Observação</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr class="click" ng-repeat="client in clients" ui-sref="clientDetail(client)">
-            <td>{{ client.id }}</td>
-            <td>{{ client.name }}</td>
-            <td>{{ client.email }}</td>
-            <td>{{ client.cpf }}</td>
-            <td>{{ client.observation }}</td>
-        </tr>
-    </tbody>
-</table>
+<div ng-controller="ClientsListCtrl as ctrl">
+    <!--suppress HtmlUnknownAttribute -->
+    <button-plus create="ctrl.createState"></button-plus>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>CPF</th>
+                <th>Observação</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="click" ng-repeat="client in clients" ui-sref="clientDetail(client)">
+                <td>{{ client.id }}</td>
+                <td>{{ client.name }}</td>
+                <td>{{ client.email }}</td>
+                <td>{{ client.cpf }}</td>
+                <td>{{ client.observation }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

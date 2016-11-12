@@ -7,6 +7,10 @@ angular.module("controk")
                     url: "/clients",
                     templateUrl: "app/clients/list.html"
                 })
+                .state("createClient", {
+                    url: "/clients/create",
+                    templateUrl: "app/clients/create.html"
+                })
                 .state("clientDetail", {
                     url: "/clients/:id",
                     params: { // This data won't come from webservice but it is already available here

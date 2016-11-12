@@ -2,7 +2,8 @@
   "endpoints": {
     "clients": "***apiURL***clients/",
     "employees": "***apiURL***employees/",
-    "suppliers": "***apiURL***suppliers/"
+    "suppliers": "***apiURL***suppliers/",
+    "place_options": "***apiURL***place_options/"
   },
   "clients": [
     {
@@ -58,5 +59,19 @@
         "name": "Travessa"
       }
     ]
-  }
+  },
+  "place_options": [
+    {
+      "id": 1,
+      "name": "Rua"
+    },
+    {
+      "id": 2,
+      "name": "Avenida"
+    },
+    {
+      "id": 3,
+      "name": "Travessa"
+    }
+  ]
 }

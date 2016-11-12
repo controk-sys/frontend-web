@@ -1,3 +1,9 @@
+$shadow_color: #666;
+$v_button_active_color: #45881C;
+$v_button_color: #67AA3E;
+$shape_active_color: #DDD;
+$shape_color: #EEE;
+
 @mixin keyframes ($animationName) {
   @-webkit-keyframes #{$animationName} {
     @content;
@@ -22,6 +28,18 @@
   animation: $value;
 }
 
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin box-shadow($hoff, $voff, $blur, $color) {
+  -webkit-box-shadow: $hoff $voff $blur $color;
+  -moz-box-shadow: $hoff $voff $blur $color;
+  box-shadow: $hoff $voff $blur $color;
+}
+
 @mixin transition($seconds) {
   -webkit-transition: $seconds;
   -moz-transition: $seconds;
@@ -40,11 +58,101 @@
 }
 
 body {
+  outline: none;
   background: #E7E7E7;
 }
 
 .click {
   cursor: pointer;
+}
+
+.component-button {
+  outline: none;
+  background-color: $v_button_color;
+  height: 4em;
+  width: 4em;
+  right: 1em;
+  top: 5em;
+  position: fixed;
+  @include border-radius(50%);
+  @include box-shadow(0, 0.5em, 0.5em, $shadow_color);
+  @include transition(0.05s);
+
+  &:active {
+    top: 5.3em;
+    background-color: $v_button_active_color !important;
+    @include box-shadow(0, 0.2em, 0.3em, $shadow_color);
+
+    .v-shape {
+      border-bottom: 0.3em solid $shape_active_color;
+      border-right: 0.3em solid $shape_active_color;
+    }
+    .cross-shape:before, .cross-shape:after {
+      background-color: $shape_active_color;
+    }
+    // http://danbarnett.net/how-to-hide-android-webview-highlight-border-or-change-its-color-142.html
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+
+  .v-shape {
+    @include border-radius(0.1em);
+    display: block;
+    margin: -0.3em auto auto auto;
+    height: 55%;
+    width: 25%;
+    border-bottom: 0.3em solid $shape_color;
+    border-right: 0.3em solid $shape_color;
+    transform: rotate(45deg) skew(0deg);
+  }
+
+  .cross-shape {
+    position: relative;
+    &:before, &:after {
+      @include border-radius(0.1em);
+      display: block;
+      content: "";
+      position: absolute;
+      background-color: $shape_color;
+    }
+
+    &:before {
+      top: -1em;
+      margin: auto;
+      left: 1.85em;
+      width: 0.2em;
+      height: 2.1em;
+    }
+
+    &:after {
+      margin: auto;
+      left: 0.9em;
+      height: 0.2em;
+      width: 2.1em;
+    }
+  }
+
+
+  // Disable Milliagram's button properties
+  border: medium none #000;
+  color: #FFF;
+  cursor: pointer;
+  display: inline;
+  font-size: medium;
+  font-weight: normal;
+  letter-spacing: normal;
+  line-height: normal;
+  padding: 0;
+  text-align: left;
+  text-decoration: none;
+  text-transform: none;
+  white-space: normal;
+
+  &:focus, &:hover {
+    background-color: $v_button_color;
+    border-color: $v_button_color;
+    color: #FFF;
+    outline: invert none medium;
+  }
 }
 
 .logo{

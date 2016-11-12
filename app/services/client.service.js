@@ -13,6 +13,10 @@ angular.module("controk")
                 return $http.get(urls.clients + id + "/info/");
             };
 
+            this.create = function(client) {
+                socket.emit("create client", client);
+            };
+
             this.update = function (client) {
                 socket.emit("update client", client);
             };
