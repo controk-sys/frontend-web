@@ -1,5 +1,5 @@
 (function() {
-    var app = angular.module("controk", ["ui.router", "toastr", "ui.utils.masks"]);
+    var app = angular.module("controk", ["ui.router", "toastr", "ngMask"]);
 
     try {
         // Set socket
