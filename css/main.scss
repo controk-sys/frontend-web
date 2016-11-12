@@ -38,14 +38,14 @@ body {
   height: 4em;
   width: 4em;
   right: 1em;
-  top: 20em;
+  top: 5em;
   position: fixed;
   @include border-radius(50%);
   @include box-shadow(0, 0.5em, 0.5em, $shadow_color);
   @include transition(0.05s);
 
   &:active {
-    top: 20.3em;
+    top: 5.3em;
     background-color: $v_button_active_color !important;
     @include box-shadow(0, 0.2em, 0.3em, $shadow_color);
 
@@ -53,6 +53,8 @@ body {
       border-bottom: 0.3em solid $v_shape_active_color;
       border-right: 0.3em solid $v_shape_active_color;
     }
+    // http://danbarnett.net/how-to-hide-android-webview-highlight-border-or-change-its-color-142.html
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
 
   .v-shape {
