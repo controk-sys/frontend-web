@@ -47,6 +47,14 @@ angular.module("controk")
                     url: "/products",
                     templateUrl: "app/products/list.html"
                 })
+                .state("productCreation", {
+                    url: "/products/create",
+                    templateUrl: "app/products/create.html"
+                })
+                .state("productDetail", {
+                    url: "/products/:id",
+                    templateUrl: "app/products/detail.html"
+                })
                 // Shipments
                 .state("shipments", {
                     url: "/shipments",

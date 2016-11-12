@@ -3,8 +3,18 @@
     "clients": "***apiURL***clients/",
     "employees": "***apiURL***employees/",
     "suppliers": "***apiURL***suppliers/",
+    "products": "***apiURL***products/",
     "place_options": "***apiURL***place_options/"
   },
+  "products": [
+    {
+      "id": 1,
+      "name": "Product name",
+      "description": "Product description",
+      "sell_value": 15,
+      "cost": 12
+    }
+  ],
   "clients": [
     {
       "id": 1,
