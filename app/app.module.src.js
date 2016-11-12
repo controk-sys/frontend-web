@@ -1,5 +1,5 @@
 (function() {
-    var app = angular.module("controk", ["ui.router", "toastr"]);
+    var app = angular.module("controk", ["ui.router", "toastr", "ui.utils.masks"]);
 
     try {
         // Set socket
@@ -22,12 +22,17 @@
     app.run(["socket", "toastr",
         function(socket, toastr) {
             // Socket events
+            socket.on("create ok", function(message) {
+                toastr.success(message);
+            });
+            socket.on("create failed", function(message) {
+                toastr.error(message);
+            });
             socket.on("update ok", function(message) {
                 toastr.success(message);
             });
-            // Socket events
-            socket.on("create ok", function(message) {
-                toastr.success(message);
+            socket.on("update failed", function(message) {
+                toastr.error(message);
             });
         }
     ]);

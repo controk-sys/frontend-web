@@ -12,7 +12,7 @@
             </div>
             <div class="column">
                 <label for="cpf">CPF</label>
-                <input id="cpf" type="text" ng-model="client.cpf" required />
+                <input id="cpf" type="text" ng-model="client.cpf" ui-br-cpf-mask required />
             </div>
         </div>
         <div class="row">
@@ -31,11 +31,11 @@
         <div class="row">
             <div class="column">
                 <label for="mobile">Telefone Celular</label>
-                <input id="mobile" type="text" ng-model="client.mobile" required />
+                <input id="mobile" type="text" ng-model="client.mobile" ui-br-phone-number required />
             </div>
             <div class="column">
                 <label for="phone">Telefone Fixo</label>
-                <input id="phone" type="text" ng-model="client.phone" required />
+                <input id="phone" type="text" ng-model="client.phone" ui-br-phone-number required />
             </div>
         </div>
         <div class="row">
@@ -91,7 +91,7 @@
             </div>
             <div class="column">
                 <label for="cep">CEP</label>
-                <input id="cep" type="text" ng-model="client.address.cep" required />
+                <input id="cep" type="text" ng-model="client.address.cep" ui-br-cep-mask required />
             </div>
         </div>
     </div>
