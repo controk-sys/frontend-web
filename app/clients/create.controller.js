@@ -7,7 +7,7 @@ angular.module("controk")
              * address: {place: {id, name}, place_name, number, complement, neighborhood, city, state, cep}
              * }}
              */
-            $scope.client = {};
+            $scope.client = {address: {}}; // To set the default value in "getPlaceOptions"
 
             $scope.create = function (client) {
                 var clientData = angular.copy(client);
@@ -18,6 +18,8 @@ angular.module("controk")
             // Load place options
             Assets.getPlaceOptions().then(function(response) {
                 $scope.place_options = response.data;
+                // Set a default value for it
+                $scope.client.address.place = $scope.place_options[0];
             });
         }
     ]);

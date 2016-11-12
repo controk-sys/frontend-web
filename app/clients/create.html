@@ -8,11 +8,11 @@
         <div class="row">
             <div class="column">
                 <label for="name">Nome</label>
-                <input id="name" type="text" ng-model="client.name" />
+                <input id="name" type="text" ng-model="client.name" required />
             </div>
             <div class="column">
                 <label for="cpf">CPF</label>
-                <input id="cpf" type="text" ng-model="client.cpf" />
+                <input id="cpf" type="text" ng-model="client.cpf" required />
             </div>
         </div>
         <div class="row">
@@ -31,17 +31,17 @@
         <div class="row">
             <div class="column">
                 <label for="mobile">Telefone Celular</label>
-                <input id="mobile" type="text" ng-model="client.mobile" />
+                <input id="mobile" type="text" ng-model="client.mobile" required />
             </div>
             <div class="column">
                 <label for="phone">Telefone Fixo</label>
-                <input id="phone" type="text" ng-model="client.phone" />
+                <input id="phone" type="text" ng-model="client.phone" required />
             </div>
         </div>
         <div class="row">
             <div class="column">
                 <label for="email">E-mail</label>
-                <input id="email" type="text" ng-model="client.email" />
+                <input id="email" type="email" ng-model="client.email" required />
             </div>
         </div>
     </div>
@@ -54,20 +54,20 @@
         <div class="row">
             <div class="column">
                 <label for="place">Logradouro</label>
-                <select id="place"
+                <select id="place" required
                         ng-options="item.name for item in place_options track by item.id"
                         data-ng-model="client.address.place">
                 </select>
             </div>
             <div class="column">
                 <label for="placeName">Nome do Logradouro</label>
-                <input id="placeName" type="text" ng-model="client.address.place_name" />
+                <input id="placeName" type="text" ng-model="client.address.place_name" required />
             </div>
         </div>
         <div class="row">
             <div class="column">
                 <label for="number">Número</label>
-                <input id="number" type="number" ng-model="client.address.number" />
+                <input id="number" type="number" ng-model="client.address.number" required />
             </div>
             <div class="column">
                 <label for="complement">Complemento</label>
@@ -77,21 +77,21 @@
         <div class="row">
             <div class="column">
                 <label for="neighborhood">Bairro</label>
-                <input id="neighborhood" type="text" ng-model="client.address.neighborhood" />
+                <input id="neighborhood" type="text" ng-model="client.address.neighborhood" required />
             </div>
             <div class="column">
                 <label for="city">Cidade</label>
-                <input id="city" type="text" ng-model="client.address.city" />
+                <input id="city" type="text" ng-model="client.address.city" required />
             </div>
         </div>
         <div class="row">
             <div class="column">
                 <label for="state">Estado</label>
-                <input id="state" type="text" ng-model="client.address.state" />
+                <input id="state" type="text" ng-model="client.address.state" required />
             </div>
             <div class="column">
                 <label for="cep">CEP</label>
-                <input id="cep" type="text" ng-model="client.address.cep" />
+                <input id="cep" type="text" ng-model="client.address.cep" required />
             </div>
         </div>
     </div>
