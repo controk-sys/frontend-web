@@ -1,25 +1,14 @@
 $shadow_color: #666;
-$v_button_active_color: #45881C;
-$v_button_color: #67AA3E;
+$button_active_color: #45881C;
+$button_color: #67AA3E;
 $shape_active_color: #DDD;
 $shape_color: #EEE;
 
 @mixin keyframes ($animationName) {
-  @-webkit-keyframes #{$animationName} {
-    @content;
-  }
-
-  @-moz-keyframes #{$animationName} {
-    @content;
-  }
-
-  @-o-keyframes #{$animationName} {
-    @content;
-  }
-
-  @keyframes #{$animationName} {
-    @content;
-  }
+  @-webkit-keyframes #{$animationName} { @content; }
+  @-moz-keyframes #{$animationName} { @content; }
+  @-o-keyframes #{$animationName} { @content; }
+  @keyframes #{$animationName} { @content; }
 }
 
 @mixin animation ($value) {
@@ -34,17 +23,17 @@ $shape_color: #EEE;
   border-radius: $radius;
 }
 
-@mixin box-shadow($hoff, $voff, $blur, $color) {
-  -webkit-box-shadow: $hoff $voff $blur $color;
-  -moz-box-shadow: $hoff $voff $blur $color;
-  box-shadow: $hoff $voff $blur $color;
+@mixin box-shadow($value) {
+  -webkit-box-shadow: $value;
+  -moz-box-shadow: $value;
+  box-shadow: $value;
 }
 
-@mixin transition($seconds) {
-  -webkit-transition: $seconds;
-  -moz-transition: $seconds;
-  -o-transition: $seconds;
-  transition: $seconds;
+@mixin transition($value) {
+  -webkit-transition: $value;
+  -moz-transition: $value;
+  -o-transition: $value;
+  transition: $value;
 }
 
 @include keyframes(enter-sequence) {
@@ -68,20 +57,20 @@ body {
 
 .component-button {
   outline: none;
-  background-color: $v_button_color;
+  background-color: $button_color;
   height: 4em;
   width: 4em;
   right: 1em;
   top: 5em;
   position: fixed;
   @include border-radius(50%);
-  @include box-shadow(0, 0.5em, 0.5em, $shadow_color);
+  @include box-shadow(0 0.5em 0.5em $shadow_color);
   @include transition(0.05s);
 
   &:active {
     top: 5.3em;
-    background-color: $v_button_active_color !important;
-    @include box-shadow(0, 0.2em, 0.3em, $shadow_color);
+    background-color: $button_active_color !important;
+    @include box-shadow(0 0.2em 0.3em $shadow_color);
 
     .v-shape {
       border-bottom: 0.3em solid $shape_active_color;
@@ -148,8 +137,8 @@ body {
   white-space: normal;
 
   &:focus, &:hover {
-    background-color: $v_button_color;
-    border-color: $v_button_color;
+    background-color: $button_color;
+    border-color: $button_color;
     color: #FFF;
     outline: invert none medium;
   }
