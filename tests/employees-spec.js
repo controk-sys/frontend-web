@@ -30,7 +30,7 @@ describe("The user", function() {
         expect(element(by.css("#cep")).getAttribute("value")).toMatch(/\d{5}-\d{3}/);
     });
 
-    it("should be able to see the view for client creation", function() {
+    it("should be able to see the view for employee creation", function() {
         browser.get("#/employees");
 
         expect(element.all(by.css("button-plus button")).count()).toBe(1);
