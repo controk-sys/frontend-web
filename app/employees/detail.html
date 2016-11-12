@@ -12,7 +12,7 @@
             </div>
             <div class="column">
                 <label for="cpf">CPF</label>
-                <input id="cpf" type="text" ng-model="employee.cpf" ng-change="update(employee)"
+                <input id="cpf" type="text" ng-model="employee.cpf" ng-change="update(employee)" mask="999.999.999-99"
                        ng-model-options="{ debounce: 700 }" />
             </div>
         </div>
@@ -39,18 +39,18 @@
             <div class="column">
                 <label for="mobile">Telefone Celular</label>
                 <input id="mobile" type="text" ng-model="employee.mobile" ng-change="update(employee)"
-                       ng-model-options="{ debounce: 700 }" />
+                       mask="(999) 9 9999-9999" ng-model-options="{ debounce: 700 }" />
             </div>
             <div class="column">
                 <label for="phone">Telefone Fixo</label>
                 <input id="phone" type="text" ng-model="employee.phone" ng-change="update(employee)"
-                       ng-model-options="{ debounce: 700 }" />
+                       mask="(999) 9999-9999" ng-model-options="{ debounce: 700 }" />
             </div>
         </div>
         <div class="row">
             <div class="column">
                 <label for="email">E-mail</label>
-                <input id="email" type="text" ng-model="employee.email" ng-change="update(employee)"
+                <input id="email" type="email" ng-model="employee.email" ng-change="update(employee)"
                        ng-model-options="{ debounce: 700 }" />
             </div>
         </div>
@@ -109,7 +109,7 @@
             <div class="column">
                 <label for="cep">CEP</label>
                 <input id="cep" type="text" ng-model="employee.address.cep" ng-change="update(employee)"
-                       ng-model-options="{ debounce: 700 }" />
+                       mask="99999-999" ng-model-options="{ debounce: 700 }" />
             </div>
         </div>
     </div>
