@@ -1,5 +1,5 @@
 (function() {
-    var app = angular.module("controk", ["ui.router", "toastr"]);
+    var app = angular.module("controk", ["ngAnimate", "ui.router", "toastr"]);
 
     try {
         // Set socket

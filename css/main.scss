@@ -1,3 +1,44 @@
+@mixin keyframes ($animationName) {
+  @-webkit-keyframes #{$animationName} {
+    @content;
+  }
+
+  @-moz-keyframes #{$animationName} {
+    @content;
+  }
+
+  @-o-keyframes #{$animationName} {
+    @content;
+  }
+
+  @keyframes #{$animationName} {
+    @content;
+  }
+}
+
+@mixin animation ($value) {
+  -webkit-animation: $value;
+  -o-animation: $value;
+  animation: $value;
+}
+
+@mixin transition($seconds) {
+  -webkit-transition: $seconds;
+  -moz-transition: $seconds;
+  -o-transition: $seconds;
+  transition: $seconds;
+}
+
+@include keyframes(enter-sequence) {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 body {
   background: #E7E7E7;
 }
@@ -13,4 +54,8 @@ body {
 .ui-view {
   width: 80%;
   margin: 10rem auto auto;
+
+  &.ng-enter {
+    @include animation(enter-sequence 0.3s);
+  }
 }
