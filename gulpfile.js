@@ -12,10 +12,15 @@ var gulp = require("gulp"),
     gulpProtractorAngular = require("gulp-angular-protractor");
 
 // Environment Variables
+if (process.argv.indexOf("test") > -1) { // Execute tests without debug
+    process.env["DEBUG"] = "0";
+}
+
 var debug = process.env.DEBUG == "1",
     apiURL = process.env.API_URL || "",
     socketHost = process.env.SOCKET_HOST || "";
 
+// Tasks definitions
 gulp.task("compile", function() {
     var rename = require("gulp-rename"),
         replace = require("gulp-replace"),
