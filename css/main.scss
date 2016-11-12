@@ -47,7 +47,7 @@ body {
   &:active {
     top: 20.3em;
     background-color: $v_button_active_color !important;
-    @include box-shadow(0, 0.2em, 0.5em, $shadow_color);
+    @include box-shadow(0, 0.2em, 0.3em, $shadow_color);
 
     .v-shape {
       border-bottom: 0.3em solid $v_shape_active_color;
@@ -56,9 +56,10 @@ body {
   }
 
   .v-shape {
+    display: block;
     margin: -0.3em auto auto auto;
-    height: 60%;
-    width: 30%;
+    height: 55%;
+    width: 25%;
     border-bottom: 0.3em solid $v_shape_color;
     border-right: 0.3em solid $v_shape_color;
     transform: rotate(45deg) skew(0deg);
@@ -66,7 +67,7 @@ body {
 
   // Disable Milliagram's button properties
   border: medium none #000;
-  color: #fff;
+  color: #FFF;
   cursor: pointer;
   display: inline;
   font-size: medium;
