@@ -10,6 +10,7 @@ describe("The user", function() {
             return elements.length % 6;
         })).toBe(0);
     });
+
     it("should be able to open the details of a employee", function() {
         browser.get("#/employees");
 
@@ -21,7 +22,14 @@ describe("The user", function() {
         expect(element.all(by.css("label")).count()).toBe(15);
         expect(element.all(by.css("input")).count()).toBe(14);
         expect(element.all(by.css("select")).count()).toBe(1);
+
+        // Test masks
+        expect(element(by.css("#cpf")).getAttribute("value")).toMatch(/\d{3}\.\d{3}\.\d{3}-\d{2}/);
+        expect(element(by.css("#mobile")).getAttribute("value")).toMatch(/\(\d{3}\) \d \d{4}-\d{4}/);
+        expect(element(by.css("#phone")).getAttribute("value")).toMatch(/\(\d{3}\) \d{4}-\d{4}/);
+        expect(element(by.css("#cep")).getAttribute("value")).toMatch(/\d{5}-\d{3}/);
     });
+
     it("should be able to see the view for client creation", function() {
         browser.get("#/employees");
 
@@ -38,5 +46,22 @@ describe("The user", function() {
         expect(element.all(by.css("input")).count()).toBe(14);
         expect(element.all(by.css("select")).count()).toBe(1);
         expect(element.all(by.css("select option")).count()).toBe(3);
+
+        // Test masks
+        var cpfInput = element(by.css("#cpf"));
+        cpfInput.sendKeys("12345678912");
+        expect(cpfInput.getAttribute("value")).toBe("123.456.789-12");
+
+        var mobileInput = element(by.css("#mobile"));
+        mobileInput.sendKeys("123456789123");
+        expect(mobileInput.getAttribute("value")).toBe("(123) 4 5678-9123");
+
+        var phoneInput = element(by.css("#phone"));
+        phoneInput.sendKeys("12345678912");
+        expect(phoneInput.getAttribute("value")).toBe("(123) 4567-8912");
+
+        var cepInput = element(by.css("#cep"));
+        cepInput.sendKeys("12345678");
+        expect(cepInput.getAttribute("value")).toBe("12345-678");
     });
 });
