@@ -89,18 +89,16 @@ var fileHandlerTask = ((debug || testing) ? "compile" : "build");
 
 // Set coverage on JS files and create the test directory
 gulp.task("coverage", [fileHandlerTask], function () {
-    gulp.src([
-        `${__dirname}/node_modules/**`
-    ])
-        .pipe(gulp.dest("test-root/node_modules"));
+    var coverageCondition = (file) => !/node_modules|assets/.test(file.history[0]) && /\.js$/.test(file.history[0]);
 
     return gulp.src([
         `${__dirname}/**/*.{js,html,css,ico,png}`,
         // Not need
         `!${__dirname}/**/{gulpfile,protractor.conf,*.src}.js`,
-        `!${__dirname}/{coverage,dist,tests,test-root,node_modules}/**`,
+        `!${__dirname}/{coverage,dist,tests,test-root}/**`
     ])
-        .pipe(gulpIf("*.js", gulpIf("!node_modules", istanbul())))
+        .pipe(gulpIf(coverageCondition, istanbul({includeUntested: true})))
+        .pipe(gulpIf(coverageCondition, istanbul.hookRequire()))
         .pipe(gulp.dest("test-root"));
 });
 
