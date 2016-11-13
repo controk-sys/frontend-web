@@ -1,3 +1,5 @@
+'use strict';
+
 // Synchronously check if ".env" exists before import
 var fs = require("fs");
 
@@ -7,8 +9,9 @@ if (fs.existsSync(".env")) {
 
 // Imports
 var gulp = require("gulp"),
-    connect = require("gulp-connect"),
     gulpIf = require("gulp-if"),
+    connect = require("gulp-connect"),
+    istanbul = require('gulp-istanbul'),
     gulpProtractorAngular = require("gulp-angular-protractor");
 
 var testing = process.argv.indexOf("test") >= 0;
@@ -82,20 +85,36 @@ gulp.task("build", ["compile"], function() {
         .pipe(gulp.dest("dist"));
 });
 
+var fileHandlerTask = ((debug || testing) ? "compile" : "build");
+
+// Set coverage on JS files and create the test directory
+gulp.task("coverage", [fileHandlerTask], function () {
+    gulp.src([
+        `${__dirname}/node_modules/**`
+    ])
+        .pipe(gulp.dest("test-root/node_modules"));
+
+    return gulp.src([
+        `${__dirname}/**/*.{js,html,css,ico,png}`,
+        // Not need
+        `!${__dirname}/**/{gulpfile,protractor.conf,*.src}.js`,
+        `!${__dirname}/{coverage,dist,tests,test-root,node_modules}/**`,
+    ])
+        .pipe(gulpIf("*.js", gulpIf("!node_modules", istanbul())))
+        .pipe(gulp.dest("test-root"));
+});
+
 gulp.task("connect", function() {
     var port = process.env.PORT;
     connect.server({
-        root: (debug || testing) ? "." : "dist",
+        root: (testing ? "test-root" : (debug ? "." : "dist")),
         port: typeof(port) != "undefined" && port != "" ? port : 8888
     });
 });
 
-var fileHandlerTask = ((debug || testing) ? "compile" : "build");
-
 gulp.task("watch", function() {
     gulp.watch(
-        ["css/*.scss", "app/**/*.js", "!app/app.module.js", "index.html",
-            "app/**/*.html", "tests/webservice/*.json", "!tests/webservice/database.json"],
+        ["css/*.scss", "app/**/*.{js,html}", "!app/app.module.js", "index.html"],
         [fileHandlerTask],
         function() {
             connect.reload();
@@ -104,7 +123,12 @@ gulp.task("watch", function() {
 });
 
 // Standalone mode
-gulp.task("standalone", [fileHandlerTask, "watch", "connect"], function() {
+var standaloneTaskDependencies = [(testing ? "coverage" : fileHandlerTask), "connect"];
+if (!testing) {
+    standaloneTaskDependencies.push("watch");
+}
+
+gulp.task("standalone", standaloneTaskDependencies, function() {
     var webservicePath = "tests/webservice/";
     var webservice = require("gulp-json-srv").create({
         port: process.env.API_PORT,
@@ -117,7 +141,7 @@ gulp.task("standalone", [fileHandlerTask, "watch", "connect"], function() {
 });
 
 // Setting up the test task
-gulp.task("test", ["standalone"], function(callback) {
+gulp.task("test", ["coverage", "standalone"], function(callback) {
     return gulp
         .src(["tests/*-spec.js"])
         .pipe(gulpProtractorAngular({
@@ -125,6 +149,7 @@ gulp.task("test", ["standalone"], function(callback) {
             debug: debug,
             autoStartStopServer: true
         }))
+        .pipe(istanbul.writeReports())
         .on("error", function(error) {
             throw error;
         })
