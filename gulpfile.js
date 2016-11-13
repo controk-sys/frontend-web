@@ -11,8 +11,10 @@ var gulp = require("gulp"),
     gulpIf = require("gulp-if"),
     gulpProtractorAngular = require("gulp-angular-protractor");
 
+var testing = process.argv.indexOf("test") >= 0;
+
 // Environment Variables
-if (process.argv.indexOf("test") > -1) { // Execute tests without debug
+if (testing) { // Execute tests without debug
     process.env["DEBUG"] = "0";
 }
 
@@ -83,12 +85,12 @@ gulp.task("build", ["compile"], function() {
 gulp.task("connect", function() {
     var port = process.env.PORT;
     connect.server({
-        root: debug ? "." : "dist",
+        root: (debug || testing) ? "." : "dist",
         port: typeof(port) != "undefined" && port != "" ? port : 8888
     });
 });
 
-var fileHandlerTask = (debug ? "compile" : "build");
+var fileHandlerTask = ((debug || testing) ? "compile" : "build");
 
 gulp.task("watch", function() {
     gulp.watch(

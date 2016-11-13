@@ -10,4 +10,5 @@ tests/webservice/database.json
 
 # Directories
 .idea/
+coverage/
 node_modules/
