@@ -2,6 +2,7 @@ sudo: required
 dist: trusty
 
 language: node_js
+
 node_js:
   - "6"
 
@@ -26,3 +27,5 @@ before_script:
   - sleep 3 # give xvfb some time to start
 
 script: npm test
+
+after_success: bash <(curl -s https://codecov.io/bash)

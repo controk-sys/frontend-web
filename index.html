@@ -8,14 +8,14 @@
 
         <!-- build:css app.min.css -->
         <link rel="stylesheet" href="node_modules/milligram/dist/milligram.min.css">
-        <link rel="stylesheet" href="node_modules/sweetalert/dist/sweetalert.css">
-        <link rel="stylesheet" href="css/milligram.main.min.css">
+        <link rel="stylesheet" href="node_modules/angular-toastr/dist/angular-toastr.min.css">
+        <link rel="stylesheet" href="assets/css/milligram.main.min.css">
         <link rel="stylesheet" href="css/main.css">
         <!-- endbuild -->
 
     </head>
     <body>
-        <div ng-app="controk" class="controk">
+        <div ng-app="controk" class="controk" ng-controller="MainCtrl">
             <nav class="navigation">
                 <section class="container">
                     <a ui-sref="home" class="navigation-title">
@@ -51,32 +51,43 @@
                 </section>
             </nav>
             <div class="ui-view"></div>
+            <button id="code-coverage" ng-click="uploadCoverageReport()" style="opacity: 0"
+                    ng-style="{display: buttonCoverage ? 'block' : 'none'}"></button>
         </div>
 
         <!-- build:js app.min.js -->
         <script src="node_modules/socket.io-client/socket.io.js"></script>
-        <script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
         <script src="node_modules/angular/angular.min.js"></script>
+        <script src="node_modules/angular-animate/angular-animate.min.js"></script>
         <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
-        <script src="js/milligram.main.min.js"></script>
+        <script src="node_modules/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
+        <script src="assets/js/ngMask.min.js"></script>
+        <script src="assets/js/milligram.main.min.js"></script>
         <!-- Main -->
         <script src="app/app.module.js"></script>
         <script src="app/app.config.js"></script>
+        <script src="app/app.components.js"></script>
         <!-- Services -->
-        <script src="app/services/shipment.service.js"></script>
-        <script src="app/services/supplier.service.js"></script>
+        <script src="app/services/assets.service.js"></script>
         <script src="app/services/client.service.js"></script>
         <script src="app/services/employee.service.js"></script>
         <script src="app/services/product.service.js"></script>
+        <script src="app/services/shipment.service.js"></script>
+        <script src="app/services/supplier.service.js"></script>
         <!-- Controllers -->
-        <script src="app/clients/list.controller.js"></script>
+        <script src="app/clients/create.controller.js"></script>
         <script src="app/clients/detail.controller.js"></script>
-        <script src="app/suppliers/list.controller.js"></script>
-        <script src="app/suppliers/detail.controller.js"></script>
-        <script src="app/employees/list.controller.js"></script>
+        <script src="app/clients/list.controller.js"></script>
+        <script src="app/employees/create.controller.js"></script>
         <script src="app/employees/detail.controller.js"></script>
+        <script src="app/employees/list.controller.js"></script>
+        <script src="app/products/create.controller.js"></script>
+        <script src="app/products/detail.controller.js"></script>
         <script src="app/products/list.controller.js"></script>
         <script src="app/shipments/list.controller.js"></script>
+        <script src="app/suppliers/create.controller.js"></script>
+        <script src="app/suppliers/detail.controller.js"></script>
+        <script src="app/suppliers/list.controller.js"></script>
         <!-- endbuild -->
     </body>
 </html>
