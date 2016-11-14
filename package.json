@@ -21,19 +21,18 @@
   "devDependencies": {
     "dotenv": "^2.0.0",
     "gulp": "^3.9.1",
-    "gulp-angular-protractor": "^0.2.0",
     "gulp-clean-css": "^2.0.13",
-    "gulp-connect": "^5.0.0",
     "gulp-htmlmin": "^3.0.0",
     "gulp-if": "^2.0.1",
-    "gulp-istanbul": "^1.1.1",
-    "gulp-json-srv": "^1.0.1",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.5.4",
     "gulp-sass": "^2.3.2",
     "gulp-uglify": "^2.0.0",
     "gulp-useref": "^3.1.2",
-    "lodash": "^4.16.4"
+    "http-server": "^0.9.0",
+    "json-server": "^0.9.0",
+    "lodash": "^4.16.4",
+    "protractor": "^4.0.11"
   },
   "scripts": {
     "start": "gulp",

@@ -1,5 +1,18 @@
 'use strict';
 
+var childProcesses = [],
+    spawn = require("child_process").spawn,
+    exitHandler = function (code) {
+        // Exit handler thought: http://stackoverflow.com/a/14032965
+        spawn("pkill", ["-TERM", "-P", process.pid]);
+        process.exit(code);
+    };
+
+process.on("exit", exitHandler);
+process.on("SIGINT", exitHandler.bind(1));
+
+var emitMessage = (message) => { console.log("\x1b[36m", message, "\x1b[0m"); };
+
 // Synchronously check if ".env" exists before import
 var fs = require("fs");
 
@@ -9,10 +22,7 @@ if (fs.existsSync(".env")) {
 
 // Imports
 var gulp = require("gulp"),
-    gulpIf = require("gulp-if"),
-    connect = require("gulp-connect"),
-    istanbul = require('gulp-istanbul'),
-    gulpProtractorAngular = require("gulp-angular-protractor");
+    gulpIf = require("gulp-if");
 
 var testing = process.argv.indexOf("test") >= 0;
 
@@ -68,16 +78,8 @@ gulp.task("build", ["compile"], function() {
         cleanCss = require("gulp-clean-css"),
         htmlMin = require("gulp-htmlmin");
 
-    gulp
-        .src("app/**/*.html")
-        .pipe(htmlMin({collapseWhitespace: true}))
-        .pipe(gulp.dest("dist/app"));
-    gulp
-        .src("images/*.*")
-        .pipe(gulp.dest("dist/images"));
-
     return gulp
-        .src("index.html")
+        .src(["**/*.{html,png,ico}"])
         .pipe(useref())
         .pipe(gulpIf("*.js", uglify()))
         .pipe(gulpIf("*.css", cleanCss({removeComments: true})))
@@ -87,27 +89,14 @@ gulp.task("build", ["compile"], function() {
 
 var fileHandlerTask = ((debug || testing) ? "compile" : "build");
 
-// Set coverage on JS files and create the test directory
-gulp.task("coverage", [fileHandlerTask], function () {
-    var coverageCondition = (file) => !/node_modules|assets/.test(file.history[0]) && /\.js$/.test(file.history[0]);
-
-    return gulp.src([
-        `${__dirname}/**/*.{js,html,css,ico,png}`,
-        // Not need
-        `!${__dirname}/**/{gulpfile,protractor.conf,*.src}.js`,
-        `!${__dirname}/{coverage,dist,tests,test-root}/**`
-    ])
-        .pipe(gulpIf(coverageCondition, istanbul({includeUntested: true})))
-        .pipe(gulpIf(coverageCondition, istanbul.hookRequire()))
-        .pipe(gulp.dest("test-root"));
-});
-
 gulp.task("connect", function() {
-    var port = process.env.PORT;
-    connect.server({
-        root: (testing ? "test-root" : (debug ? "." : "dist")),
-        port: typeof(port) != "undefined" && port != "" ? port : 8888
-    });
+    var port = process.env.PORT || "8888",
+        server = spawn("node_modules/.bin/http-server", ["-p", port]);
+
+    childProcesses.push(server);
+
+    emitMessage(`Server started at "0.0.0.0:${port}".`);
+    server.stderr.on("data", (data) => { process.stderr.write(data.toString()) });
 });
 
 gulp.task("watch", function() {
@@ -121,40 +110,43 @@ gulp.task("watch", function() {
 });
 
 // Standalone mode
-var standaloneTaskDependencies = [(testing ? "coverage" : fileHandlerTask), "connect"];
+var standaloneTaskDependencies = [fileHandlerTask, "connect"];
 if (!testing) {
     standaloneTaskDependencies.push("watch");
 }
 
 gulp.task("standalone", standaloneTaskDependencies, function() {
-    var webservicePath = "tests/webservice/";
-    var webservice = require("gulp-json-srv").create({
-        port: process.env.API_PORT,
-        rewriteRules: JSON.parse(fs.readFileSync(webservicePath + "routes.json"))
-    });
+    var webservicePath = "tests/webservice/",
+        jsonServer = spawn(
+            "node_modules/.bin/json-server", [
+                `${webservicePath}database.json`,
+                "--routes", `${webservicePath}routes.json`,
+                "--port", process.env.API_PORT
+            ]
+        );
 
-    return gulp
-        .src(webservicePath + "database.json")
-        .pipe(webservice.pipe());
+    childProcesses.push(jsonServer);
+    jsonServer.stderr.on("data", (data) => { process.stderr.write(data.toString()) });
 });
 
-// Setting up the test task
-gulp.task("test", ["coverage", "standalone"], function(callback) {
-    return gulp
-        .src(["tests/*-spec.js"])
-        .pipe(gulpProtractorAngular({
-            configFile: "protractor.conf.js",
-            debug: debug,
-            autoStartStopServer: true
-        }))
-        .pipe(istanbul.writeReports())
-        .on("error", function(error) {
-            throw error;
-        })
-        .on("end", function() {
-            callback();
-            process.exit();
-        });
+gulp.task("test", ["standalone"], function() {
+    var updateWebdriver = spawn("node_modules/.bin/webdriver-manager", ["update"]);
+    emitMessage("Forget the message ahead. The \"webdriver\" is being updated...");
+
+    childProcesses.push(updateWebdriver);
+
+    updateWebdriver.on("close", function (code) {
+        if (code != 0) {
+            process.exit(code);
+        }
+        emitMessage("To the tests...");
+
+        var protractor = spawn("node_modules/.bin/protractor");
+
+        childProcesses.push(protractor);
+        protractor.stdout.on("data", (data) => { process.stdout.write(data.toString()) });
+        protractor.on("close", process.exit);
+    });
 });
 
 gulp.task("default", [fileHandlerTask, "connect", "watch"]);
