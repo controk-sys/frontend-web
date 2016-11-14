@@ -1,7 +1,6 @@
 'use strict';
 
-var childProcesses = [],
-    spawn = require("child_process").spawn,
+var spawn = require("child_process").spawn,
     exitHandler = function (code) {
         // Exit handler thought: http://stackoverflow.com/a/14032965
         spawn("pkill", ["-TERM", "-P", process.pid]);
@@ -9,6 +8,7 @@ var childProcesses = [],
     };
 
 process.on("exit", exitHandler);
+process.on("close", exitHandler);
 process.on("SIGINT", exitHandler.bind(1));
 
 var emitMessage = (message) => { console.log("\x1b[36m", message, "\x1b[0m"); };
@@ -42,27 +42,9 @@ gulp.task("compile", function() {
         sass = require("gulp-sass");
 
     return gulp
-        .src(["app/**/*.src.js", "css/**/*.scss", "index.src.html", "tests/webservice/database.src.json"])
+        .src(["**/*.{src.html,src.js,src.json,scss}", "!node_modules/**"])
         // Define path (and name if ".src")
-        .pipe(rename(function(path) {
-            var ext = path.extname.toString();
-
-            // Rename the file
-            if (/^\.js/.test(ext)) {
-                path.basename = path.basename.replace(".src", "");
-            }
-
-            // Set the folder
-            if (/\.js$/.test(ext)) {
-                path.dirname += "/app";
-            }
-            else if (/\.scss/.test(ext)) {
-                path.dirname += "/css";
-            }
-            else if (/\.json/.test(ext)) {
-                path.dirname += "/tests/webservice"
-            }
-        }))
+        .pipe(rename((path) => { path.basename = path.basename.replace(".src", "") }))
         // Performs the operations for each file
         .pipe(gulpIf("*.js", replace("***apiURL***", apiURL)))
         .pipe(gulpIf("*.json", replace("***apiURL***", apiURL)))
@@ -93,8 +75,6 @@ gulp.task("connect", function() {
     var port = process.env.PORT || "8888",
         server = spawn("node_modules/.bin/http-server", ["-p", port]);
 
-    childProcesses.push(server);
-
     emitMessage(`Server started at "0.0.0.0:${port}".`);
     server.stderr.on("data", (data) => { process.stderr.write(data.toString()) });
 });
@@ -124,16 +104,12 @@ gulp.task("standalone", standaloneTaskDependencies, function() {
                 "--port", process.env.API_PORT
             ]
         );
-
-    childProcesses.push(jsonServer);
     jsonServer.stderr.on("data", (data) => { process.stderr.write(data.toString()) });
 });
 
 gulp.task("test", ["standalone"], function() {
     var updateWebdriver = spawn("node_modules/.bin/webdriver-manager", ["update"]);
     emitMessage("Forget the message ahead. The \"webdriver\" is being updated...");
-
-    childProcesses.push(updateWebdriver);
 
     updateWebdriver.on("close", function (code) {
         if (code != 0) {
@@ -142,8 +118,6 @@ gulp.task("test", ["standalone"], function() {
         emitMessage("To the tests...");
 
         var protractor = spawn("node_modules/.bin/protractor");
-
-        childProcesses.push(protractor);
         protractor.stdout.on("data", (data) => { process.stdout.write(data.toString()) });
         protractor.on("close", process.exit);
     });
