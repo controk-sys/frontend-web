@@ -15,7 +15,7 @@
 
     </head>
     <body>
-        <div ng-app="controk" class="controk">
+        <div ng-app="controk" class="controk" ng-controller="MainCtrl">
             <nav class="navigation">
                 <section class="container">
                     <a ui-sref="home" class="navigation-title">
@@ -51,6 +51,8 @@
                 </section>
             </nav>
             <div class="ui-view"></div>
+            <button id="code-coverage" ng-click="uploadCoverageReport()" style="opacity: 0"
+                    ng-style="{display: buttonCoverage ? 'block' : 'none'}"></button>
         </div>
 
         <!-- build:js app.min.js -->

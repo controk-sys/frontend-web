@@ -1,12 +1,12 @@
 # Files
-npm-debug.log
 .env
+npm-debug.log
 
 # Generated files
+app/app.module.js
+coverage.zip
 css/main.css
 dist/
-test-root/
-app/app.module.js
 tests/webservice/database.json
 
 # Directories

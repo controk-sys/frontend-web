@@ -6,9 +6,14 @@ describe("The user", function() {
         element(by.css("a[ui-sref=suppliers]")).click(); // Click on the "suppliers" option
         expect(element.all(by.css("table")).count()).toBe(1); // Check if the table exists
         // Must exist five fields per supplier
-        expect(element.all(by.css("table tbody tr td.ng-binding")).then(function (elements) {
-            return elements.length % 4;
-        })).toBe(0);
+        expect(element.all(by.css("table tbody tr td.ng-binding")).then(
+            /**
+             * @param {{length}} elements
+             */
+            (elements) => elements.length % 4
+        )).toBe(0);
+
+        element(by.css("#code-coverage")).click();
     });
     it("should be able to open the details of a supplier", function() {
         browser.get("#/suppliers");
@@ -27,6 +32,8 @@ describe("The user", function() {
         expect(element(by.css("#mobile")).getAttribute("value")).toMatch(/\(\d{3}\) \d \d{4}-\d{4}/);
         expect(element(by.css("#phone")).getAttribute("value")).toMatch(/\(\d{3}\) \d{4}-\d{4}/);
         expect(element(by.css("#cep")).getAttribute("value")).toMatch(/\d{5}-\d{3}/);
+
+        element(by.css("#code-coverage")).click();
     });
 
     it("should be able to see the view for supplier creation", function() {
@@ -62,5 +69,7 @@ describe("The user", function() {
         var cepInput = element(by.css("#cep"));
         cepInput.sendKeys("12345678");
         expect(cepInput.getAttribute("value")).toBe("12345-678");
+
+        element(by.css("#code-coverage")).click();
     });
 });

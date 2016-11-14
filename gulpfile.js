@@ -24,7 +24,8 @@ if (fs.existsSync(".env")) {
 var gulp = require("gulp"),
     gulpIf = require("gulp-if");
 
-var testing = process.argv.indexOf("test") >= 0;
+var testing = process.argv.indexOf("test") >= 0,
+    port = process.env.PORT || "8888";
 
 // Environment Variables
 if (testing) { // Execute tests without debug
@@ -49,6 +50,7 @@ gulp.task("compile", function() {
         .pipe(gulpIf("*.js", replace("***apiURL***", apiURL)))
         .pipe(gulpIf("*.json", replace("***apiURL***", apiURL)))
         .pipe(gulpIf("*.js", replace("***socketHost***", socketHost)))
+        .pipe(gulpIf("*.js", replace("***codeCoverage***", testing.toString())))
         .pipe(gulpIf("*.scss", sass.sync().on("error", sass.logError)))
         .pipe(gulp.dest(""));
 });
@@ -61,7 +63,7 @@ gulp.task("build", ["compile"], function() {
         htmlMin = require("gulp-htmlmin");
 
     return gulp
-        .src(["**/*.{html,png,ico}", "!{dist,node_modules}/**"])
+        .src(["**/*.{html,png,ico}", "!{coverage,dist,node_modules}/**"])
         .pipe(gulpIf("index.html", useref()))
         .pipe(gulpIf("*.js", uglify()))
         .pipe(gulpIf("*.css", cleanCss({removeComments: true})))
@@ -72,16 +74,27 @@ gulp.task("build", ["compile"], function() {
 var fileHandlerTask = ((debug || testing) ? "compile" : "build");
 
 gulp.task("connect", function() {
-    var port = process.env.PORT || "8888",
-        server = spawn("node_modules/.bin/http-server", ["-p", port]);
+    var express = require('express'),
+        app = express(),
+        im = require('istanbul-middleware');
 
-    emitMessage(`Server started at "0.0.0.0:${port}".`);
-    server.stderr.on("data", (data) => { process.stderr.write(data.toString()) });
+    if (testing) {
+        im.hookLoader(".");
+        app.use("/coverage", im.createHandler());
+        app.use(im.createClientHandler(__dirname));
+    }
+
+    app.use(express.static(`${__dirname}/${debug || testing ? "" : "dist"}`));
+
+    app.listen(port, function () {
+        emitMessage(`Server started at "http://0.0.0.0:${port}/".`);
+    });
 });
 
 gulp.task("watch", function() {
     gulp.watch(
-        ["css/*.scss", "app/**/*.{js,html}", "!app/app.module.js", "index.html"],
+        ["**/*.{js,html,scss}", "!app/app.module.js", "!{assets,dist,node_modules,tests}/**",
+            "!{protractor.conf,gulpfile}.js"],
         [fileHandlerTask],
         function() {
             connect.reload();
@@ -108,7 +121,8 @@ gulp.task("standalone", standaloneTaskDependencies, function() {
 });
 
 gulp.task("test", ["standalone"], function() {
-    var updateWebdriver = spawn("node_modules/.bin/webdriver-manager", ["update"]);
+    var request = require("request"),
+        updateWebdriver = spawn("node_modules/.bin/webdriver-manager", ["update"]);
     emitMessage("Forget the message ahead. The \"webdriver\" is being updated...");
 
     updateWebdriver.on("close", function (code) {
@@ -119,7 +133,17 @@ gulp.task("test", ["standalone"], function() {
 
         var protractor = spawn("node_modules/.bin/protractor");
         protractor.stdout.on("data", (data) => { process.stdout.write(data.toString()) });
-        protractor.on("close", process.exit);
+        protractor.on("close", function (code) {
+            //noinspection JSCheckFunctionSignatures
+            request(`http://localhost:${port}/coverage/download`)
+                .pipe(fs.createWriteStream("coverage.zip"))
+                .on("close", function () {
+                    var zip = new (require("adm-zip"))("./coverage.zip");
+                    //noinspection JSUnresolvedFunction
+                    zip.extractAllTo("coverage", true);
+                    process.exit(code);
+                });
+        });
     });
 });
 

@@ -18,6 +18,18 @@
     var urls = JSON.parse(xmlHttp.responseText);
     app.constant("urls", urls);
 
+    app.controller("MainCtrl", ["$scope", "$http", "toastr", function ($scope, $http, toastr) {
+        // Set function to upload coverage report
+        $scope.buttonCoverage = eval("***codeCoverage***");
+        $scope.uploadCoverageReport = function () {
+            if ($scope.buttonCoverage) {
+                $http.post("/coverage/client", window.__coverage__).then(function (response) {})
+            } else {
+                toastr.warning("Don't try to do anything stupid...");
+            }
+        }
+    }]);
+
     // Set socket listeners
     app.run(["socket", "toastr",
         function(socket, toastr) {
