@@ -61,8 +61,8 @@ gulp.task("build", ["compile"], function() {
         htmlMin = require("gulp-htmlmin");
 
     return gulp
-        .src(["**/*.{html,png,ico}"])
-        .pipe(useref())
+        .src(["**/*.{html,png,ico}", "!{dist,node_modules}/**"])
+        .pipe(gulpIf("index.html", useref()))
         .pipe(gulpIf("*.js", uglify()))
         .pipe(gulpIf("*.css", cleanCss({removeComments: true})))
         .pipe(gulpIf("*.html", htmlMin({collapseWhitespace: true})))
