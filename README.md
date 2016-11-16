@@ -55,7 +55,7 @@ The server must be running at [http://localhost:8888/].
 
 ### Based on "docker"
 
-- Open the `docker-compose.yml` file with your favorite text editor and change the `webservice` service command to `npm test`;
+- Open the `docker-compose.yml` file with your favorite text editor and change the `frontend-web` service command to `npm test`;
 - `docker-compose up`.
 
 ## Deployment
