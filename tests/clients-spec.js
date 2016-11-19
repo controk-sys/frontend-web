@@ -37,6 +37,25 @@ describe("The user", function() {
         element(by.css("#code-coverage")).click();
     });
 
+    it("should be able to navigate to the details of a client", function() {
+        // Note: this client id is specified in the file "tests/webservice/database.json"
+        browser.get("#/clients/1");
+
+        // 14 fields must exist
+        expect(element.all(by.css(".column")).count()).toBe(17); // + 3 field divisions
+        expect(element.all(by.css("label")).count()).toBe(14);
+        expect(element.all(by.css("input")).count()).toBe(13);
+        expect(element.all(by.css("select")).count()).toBe(1);
+
+        // Test masks
+        expect(element(by.css("#cpf")).getAttribute("value")).toMatch(/\d{3}\.\d{3}\.\d{3}-\d{2}/);
+        expect(element(by.css("#mobile")).getAttribute("value")).toMatch(/\(\d{3}\) \d \d{4}-\d{4}/);
+        expect(element(by.css("#phone")).getAttribute("value")).toMatch(/\(\d{3}\) \d{4}-\d{4}/);
+        expect(element(by.css("#cep")).getAttribute("value")).toMatch(/\d{5}-\d{3}/);
+
+        element(by.css("#code-coverage")).click();
+    });
+
     it("should be able to see the view for client creation", function() {
         browser.get("#/clients");
 

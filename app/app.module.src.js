@@ -19,7 +19,7 @@
     app.constant("urls", urls);
 
     app.controller("MainCtrl", ["$scope", "$http", "toastr", function ($scope, $http, toastr) {
-        // Set function to upload coverage report
+        // Function to upload coverage report: https://github.com/gotwarlost/istanbul-middleware#client-side-coverage
         $scope.buttonCoverage = eval("***codeCoverage***");
         $scope.uploadCoverageReport = function () {
             if ($scope.buttonCoverage) {
