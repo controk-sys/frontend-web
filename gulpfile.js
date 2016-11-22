@@ -37,7 +37,16 @@ var debug = process.env.DEBUG == "1",
     socketHost = process.env.SOCKET_HOST || "";
 
 // Tasks definitions
-gulp.task("compile", function() {
+
+gulp.task("jshint", function() {
+    var jshint = require("gulp-jshint");
+
+    return gulp.src(["**/*.js", "!{assets,dist,node_modules,coverage}/**", "!app/app.module.js"])
+        .pipe(jshint())
+        .pipe(jshint.reporter('default'));
+});
+
+gulp.task("compile", ["jshint"], function() {
     var rename = require("gulp-rename"),
         replace = require("gulp-replace"),
         sass = require("gulp-sass");
@@ -95,10 +104,7 @@ gulp.task("watch", function() {
     gulp.watch(
         ["**/*.{js,html,scss}", "!app/app.module.js", "!{assets,dist,node_modules,tests}/**",
             "!{protractor.conf,gulpfile}.js"],
-        [fileHandlerTask],
-        function() {
-            connect.reload();
-        }
+        [fileHandlerTask]
     );
 });
 

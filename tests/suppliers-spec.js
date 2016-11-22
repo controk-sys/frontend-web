@@ -15,12 +15,32 @@ describe("The user", function() {
 
         element(by.css("#code-coverage")).click();
     });
+
     it("should be able to open the details of a supplier", function() {
         browser.get("#/suppliers");
 
         element.all(by.css("table tbody tr td.ng-binding")).first().click();
         expect(element.all(by.css("table")).count()).toBe(0); // Check if the table is gone
         expect(element.all(by.css(".ui-view [ng-controller]")).count()).toBe(1); // Check if the view was injected
+        // 13 fields must exist
+        expect(element.all(by.css(".column")).count()).toBe(16); // + 3 field divisions
+        expect(element.all(by.css("label")).count()).toBe(13);
+        expect(element.all(by.css("input")).count()).toBe(12);
+        expect(element.all(by.css("select")).count()).toBe(1);
+
+        // Test masks
+        expect(element(by.css("#cnpj")).getAttribute("value")).toMatch(/\d{2}\.\d{3}\.\d{3}\/0001-\d{2}/);
+        expect(element(by.css("#mobile")).getAttribute("value")).toMatch(/\(\d{3}\) \d \d{4}-\d{4}/);
+        expect(element(by.css("#phone")).getAttribute("value")).toMatch(/\(\d{3}\) \d{4}-\d{4}/);
+        expect(element(by.css("#cep")).getAttribute("value")).toMatch(/\d{5}-\d{3}/);
+
+        element(by.css("#code-coverage")).click();
+    });
+
+    it("should be able to navigate to the details of a supplier", function() {
+        // Note: this supplier id is specified in the file "tests/webservice/database.json"
+        browser.get("#/suppliers/1");
+
         // 13 fields must exist
         expect(element.all(by.css(".column")).count()).toBe(16); // + 3 field divisions
         expect(element.all(by.css("label")).count()).toBe(13);
