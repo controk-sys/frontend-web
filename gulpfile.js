@@ -71,14 +71,16 @@ gulp.task("build", ["compile"], function() {
     let useref = require("gulp-useref"),
         uglify = require("gulp-uglify"),
         cleanCss = require("gulp-clean-css"),
-        htmlMin = require("gulp-htmlmin");
+        htmlMin = require("gulp-htmlmin"),
+        img64 = require("gulp-img64");
 
     return gulp
-        .src(["**/*.{html,png,ico}", "!{coverage,dist,node_modules}/**"])
+        .src(["**/*.html", "!{coverage,dist,node_modules}/**"])
         .pipe(gulpIf("index.html", useref()))
         .pipe(gulpIf("*.js", uglify()))
         .pipe(gulpIf("*.css", cleanCss({removeComments: true})))
         .pipe(gulpIf("*.html", htmlMin({collapseWhitespace: true})))
+        .pipe(gulpIf("*.html", img64()))
         .pipe(gulp.dest("dist"));
 });
 
