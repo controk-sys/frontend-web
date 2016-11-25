@@ -74,19 +74,19 @@ describe("The user", function() {
         expect(element.all(by.css("select option")).count()).toBe(3);
 
         // Test masks
-        var cpfInput = element(by.css("#cpf"));
+        let cpfInput = element(by.css("#cpf"));
         cpfInput.sendKeys("12345678912");
         expect(cpfInput.getAttribute("value")).toBe("123.456.789-12");
 
-        var mobileInput = element(by.css("#mobile"));
+        let mobileInput = element(by.css("#mobile"));
         mobileInput.sendKeys("123456789123");
         expect(mobileInput.getAttribute("value")).toBe("(123) 4 5678-9123");
 
-        var phoneInput = element(by.css("#phone"));
+        let phoneInput = element(by.css("#phone"));
         phoneInput.sendKeys("12345678912");
         expect(phoneInput.getAttribute("value")).toBe("(123) 4567-8912");
 
-        var cepInput = element(by.css("#cep"));
+        let cepInput = element(by.css("#cep"));
         cepInput.sendKeys("12345678");
         expect(cepInput.getAttribute("value")).toBe("12345-678");
 

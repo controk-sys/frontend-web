@@ -1,6 +1,6 @@
 'use strict';
 
-var spawn = require("child_process").spawn,
+let spawn = require("child_process").spawn,
     exitHandler = function (code) {
         // Exit handler thought: http://stackoverflow.com/a/14032965
         spawn("pkill", ["-TERM", "-P", process.pid]);
@@ -11,20 +11,22 @@ process.on("exit", exitHandler);
 process.on("close", exitHandler);
 process.on("SIGINT", exitHandler.bind(1));
 
-var emitMessage = (message) => { console.log("\x1b[36m", message, "\x1b[0m"); };
+let emitMessage = (message) => {
+    console.log("\x1b[36m", message, "\x1b[0m");
+};
 
 // Synchronously check if ".env" exists before import
-var fs = require("fs");
+let fs = require("fs");
 
 if (fs.existsSync(".env")) {
     require("dotenv").config();
 }
 
 // Imports
-var gulp = require("gulp"),
+let gulp = require("gulp"),
     gulpIf = require("gulp-if");
 
-var testing = process.argv.indexOf("test") >= 0,
+let testing = process.argv.indexOf("test") >= 0,
     port = process.env.PORT || "8888";
 
 // Environment Variables
@@ -32,14 +34,14 @@ if (testing) { // Execute tests without debug
     process.env["DEBUG"] = "0";
 }
 
-var debug = process.env.DEBUG == "1",
+let debug = process.env.DEBUG == "1",
     apiURL = process.env.API_URL || "",
     socketHost = process.env.SOCKET_HOST || "";
 
 // Tasks definitions
 
 gulp.task("jshint", function() {
-    var jshint = require("gulp-jshint");
+    let jshint = require("gulp-jshint");
 
     return gulp.src(["**/*.js", "!{assets,dist,node_modules,coverage}/**", "!app/app.module.js"])
         .pipe(jshint())
@@ -47,7 +49,7 @@ gulp.task("jshint", function() {
 });
 
 gulp.task("compile", ["jshint"], function() {
-    var rename = require("gulp-rename"),
+    let rename = require("gulp-rename"),
         replace = require("gulp-replace"),
         sass = require("gulp-sass");
 
@@ -66,7 +68,7 @@ gulp.task("compile", ["jshint"], function() {
 
 // Last task before connection
 gulp.task("build", ["compile"], function() {
-    var useref = require("gulp-useref"),
+    let useref = require("gulp-useref"),
         uglify = require("gulp-uglify"),
         cleanCss = require("gulp-clean-css"),
         htmlMin = require("gulp-htmlmin");
@@ -80,10 +82,10 @@ gulp.task("build", ["compile"], function() {
         .pipe(gulp.dest("dist"));
 });
 
-var fileHandlerTask = ((debug || testing) ? "compile" : "build");
+let fileHandlerTask = ((debug || testing) ? "compile" : "build");
 
 gulp.task("connect", function() {
-    var express = require('express'),
+    let express = require('express'),
         app = express(),
         im = require('istanbul-middleware');
 
@@ -109,13 +111,13 @@ gulp.task("watch", function() {
 });
 
 // Standalone mode
-var standaloneTaskDependencies = [fileHandlerTask, "connect"];
+let standaloneTaskDependencies = [fileHandlerTask, "connect"];
 if (!testing) {
     standaloneTaskDependencies.push("watch");
 }
 
 gulp.task("standalone", standaloneTaskDependencies, function() {
-    var webservicePath = "tests/webservice/",
+    let webservicePath = "tests/webservice/",
         jsonServer = spawn(
             "node_modules/.bin/json-server", [
                 `${webservicePath}database.json`,
@@ -127,24 +129,24 @@ gulp.task("standalone", standaloneTaskDependencies, function() {
 });
 
 gulp.task("test", ["standalone"], function() {
-    var request = require("request"),
-        updateWebdriver = spawn("node_modules/.bin/webdriver-manager", ["update"]);
+    let request = require("request"),
+        updateWebDriver = spawn("node_modules/.bin/webdriver-manager", ["update"]);
     emitMessage("Forget the message ahead. The \"webdriver\" is being updated...");
 
-    updateWebdriver.on("close", function (code) {
+    updateWebDriver.on("close", function (code) {
         if (code != 0) {
             process.exit(code);
         }
         emitMessage("To the tests...");
 
-        var protractor = spawn("node_modules/.bin/protractor");
+        let protractor = spawn("node_modules/.bin/protractor");
         protractor.stdout.on("data", (data) => { process.stdout.write(data.toString()) });
         protractor.on("close", function (code) {
             //noinspection JSCheckFunctionSignatures
             request(`http://localhost:${port}/coverage/download`)
                 .pipe(fs.createWriteStream("coverage.zip"))
                 .on("close", function () {
-                    var zip = new (require("adm-zip"))("./coverage.zip");
+                    let zip = new (require("adm-zip"))("./coverage.zip");
                     //noinspection JSUnresolvedFunction
                     zip.extractAllTo("coverage", true);
                     process.exit(code);
