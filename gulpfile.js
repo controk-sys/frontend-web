@@ -45,7 +45,7 @@ gulp.task("jshint", function() {
 
     return gulp.src(["**/*.js", "!{assets,dist,node_modules,coverage}/**", "!app/app.module.js"])
         .pipe(jshint())
-        .pipe(jshint.reporter('default'));
+        .pipe(jshint.reporter("default"));
 });
 
 gulp.task("compile", ["jshint"], function() {
@@ -75,7 +75,7 @@ gulp.task("build", ["compile"], function() {
         img64 = require("gulp-img64");
 
     return gulp
-        .src(["**/*.html", "!{coverage,dist,node_modules}/**"])
+        .src(["**/*.{html,ico}", "!{coverage,dist,node_modules}/**"])
         .pipe(gulpIf("index.html", useref()))
         .pipe(gulpIf("*.js", uglify()))
         .pipe(gulpIf("*.css", cleanCss({removeComments: true})))
