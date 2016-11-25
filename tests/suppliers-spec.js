@@ -1,4 +1,6 @@
 describe("The user", function() {
+    afterEach(element(by.css("#code-coverage")).click);
+
     it("should be able to open the list of suppliers", function() {
         browser.get("");
 
@@ -12,8 +14,6 @@ describe("The user", function() {
              */
             (elements) => elements.length % 4
         )).toBe(0);
-
-        element(by.css("#code-coverage")).click();
     });
 
     it("should be able to open the details of a supplier", function() {
@@ -33,8 +33,6 @@ describe("The user", function() {
         expect(element(by.css("#mobile")).getAttribute("value")).toMatch(/\(\d{3}\) \d \d{4}-\d{4}/);
         expect(element(by.css("#phone")).getAttribute("value")).toMatch(/\(\d{3}\) \d{4}-\d{4}/);
         expect(element(by.css("#cep")).getAttribute("value")).toMatch(/\d{5}-\d{3}/);
-
-        element(by.css("#code-coverage")).click();
     });
 
     it("should be able to navigate to the details of a supplier", function() {
@@ -52,8 +50,6 @@ describe("The user", function() {
         expect(element(by.css("#mobile")).getAttribute("value")).toMatch(/\(\d{3}\) \d \d{4}-\d{4}/);
         expect(element(by.css("#phone")).getAttribute("value")).toMatch(/\(\d{3}\) \d{4}-\d{4}/);
         expect(element(by.css("#cep")).getAttribute("value")).toMatch(/\d{5}-\d{3}/);
-
-        element(by.css("#code-coverage")).click();
     });
 
     it("should be able to see the view for supplier creation", function() {
@@ -89,7 +85,5 @@ describe("The user", function() {
         let cepInput = element(by.css("#cep"));
         cepInput.sendKeys("12345678");
         expect(cepInput.getAttribute("value")).toBe("12345-678");
-
-        element(by.css("#code-coverage")).click();
     });
 });
