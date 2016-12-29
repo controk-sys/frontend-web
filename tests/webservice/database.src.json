@@ -2,8 +2,19 @@
   "endpoints": {
     "clients": "***apiURL***clients/",
     "employees": "***apiURL***employees/",
-    "suppliers": "***apiURL***suppliers/"
+    "suppliers": "***apiURL***suppliers/",
+    "products": "***apiURL***products/",
+    "place_options": "***apiURL***place_options/"
   },
+  "products": [
+    {
+      "id": 1,
+      "name": "Product name",
+      "description": "Product description",
+      "sell_value": 15,
+      "cost": 12
+    }
+  ],
   "clients": [
     {
       "id": 1,
@@ -27,13 +38,13 @@
     {
       "id": 1,
       "email": "supplier@email.com",
-      "cnpj": "1234567894562",
+      "cnpj": "12345678000123",
       "trading_name": "Supplier Trading Name"
     }
   ],
   "info": {
-    "phone": "8530412354",
-    "mobile": "85994126714",
+    "phone": "08530412354",
+    "mobile": "085994126714",
     "address": {
       "place": 1,
       "place_name": "Julio Gonzaga",
@@ -58,5 +69,19 @@
         "name": "Travessa"
       }
     ]
-  }
+  },
+  "place_options": [
+    {
+      "id": 1,
+      "name": "Rua"
+    },
+    {
+      "id": 2,
+      "name": "Avenida"
+    },
+    {
+      "id": 3,
+      "name": "Travessa"
+    }
+  ]
 }

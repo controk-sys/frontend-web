@@ -1,20 +1,24 @@
-<table ng-controller="ProductCtrl">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Descrição</th>
-            <th>Custo</th>
-            <th>Valor de venda</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="product in products">
-            <td>{{ product.id }}</td>
-            <td>{{ product.name }}</td>
-            <td>{{ product.description }}</td>
-            <td>{{ product.cost }}</td>
-            <td>{{ product.sell_value }}</td>
-        </tr>
-    </tbody>
-</table>
+<div ng-controller="ProductListCtrl as ctrl">
+    <!--suppress HtmlUnknownAttribute -->
+    <button-plus create="ctrl.createState"></button-plus>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Custo (R$)</th>
+                <th>Valor de venda (R$)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="click" ng-repeat="product in products" ui-sref="productDetail({id: product.id})">
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.cost }}</td>
+                <td>{{ product.sell_value }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

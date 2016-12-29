@@ -13,7 +13,7 @@
             <div class="column">
                 <label for="cnpj">CNPJ</label>
                 <input id="cnpj" type="text" ng-model="supplier.cnpj" ng-change="update(supplier)"
-                       ng-model-options="{ debounce: 700 }" />
+                       mask="99.999.999/0001-99" ng-model-options="{ debounce: 700 }" />
             </div>
         </div>
     </div>
@@ -27,12 +27,12 @@
             <div class="column">
                 <label for="mobile">Telefone Celular</label>
                 <input id="mobile" type="text" ng-model="supplier.mobile" ng-change="update(supplier)"
-                       ng-model-options="{ debounce: 700 }" />
+                       mask="(999) 9 9999-9999" ng-model-options="{ debounce: 700 }" />
             </div>
             <div class="column">
                 <label for="phone">Telefone Fixo</label>
                 <input id="phone" type="text" ng-model="supplier.phone" ng-change="update(supplier)"
-                       ng-model-options="{ debounce: 700 }" />
+                       mask="(999) 9999-9999" ng-model-options="{ debounce: 700 }" />
             </div>
         </div>
         <div class="row">
@@ -53,7 +53,7 @@
             <div class="column">
                 <label for="place">Logradouro</label>
                 <select id="place"
-                        ng-options="item.name for item in supplier.place_options track by item.id"
+                        ng-options="item.name for item in place_options track by item.id"
                         data-ng-change="update(supplier)"
                         data-ng-model="supplier.address.place">
                 </select>
@@ -97,7 +97,7 @@
             <div class="column">
                 <label for="cep">CEP</label>
                 <input id="cep" type="text" ng-model="supplier.address.cep" ng-change="update(supplier)"
-                       ng-model-options="{ debounce: 700 }" />
+                       mask="99999-999" ng-model-options="{ debounce: 700 }" />
             </div>
         </div>
     </div>

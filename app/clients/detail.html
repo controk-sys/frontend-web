@@ -12,7 +12,7 @@
             </div>
             <div class="column">
                 <label for="cpf">CPF</label>
-                <input id="cpf" type="text" ng-change="update(client)" ng-model="client.cpf"
+                <input id="cpf" type="text" ng-change="update(client)" ng-model="client.cpf" mask="999.999.999-99"
                        ng-model-options="{ debounce: 700 }" />
             </div>
         </div>
@@ -34,11 +34,11 @@
             <div class="column">
                 <label for="mobile">Telefone Celular</label>
                 <input id="mobile" type="text" ng-change="update(client)" ng-model="client.mobile"
-                       ng-model-options="{ debounce: 700 }" />
+                       mask="(999) 9 9999-9999" ng-model-options="{ debounce: 700 }" />
             </div>
             <div class="column">
                 <label for="phone">Telefone Fixo</label>
-                <input id="phone" type="text" ng-change="update(client)" ng-model="client.phone"
+                <input id="phone" type="text" ng-change="update(client)" ng-model="client.phone" mask="(999) 9999-9999"
                        ng-model-options="{ debounce: 700 }" />
             </div>
         </div>
@@ -60,7 +60,7 @@
             <div class="column">
                 <label for="place">Logradouro</label>
                 <select id="place"
-                        ng-options="item.name for item in client.place_options track by item.id"
+                        ng-options="item.name for item in place_options track by item.id"
                         data-ng-change="update(client)"
                         data-ng-model="client.address.place">
                 </select>
@@ -103,7 +103,7 @@
             </div>
             <div class="column">
                 <label for="cep">CEP</label>
-                <input id="cep" type="text" ng-change="update(client)" ng-model="client.address.cep"
+                <input id="cep" type="text" ng-change="update(client)" ng-model="client.address.cep" mask="99999-999"
                        ng-model-options="{ debounce: 700 }" />
             </div>
         </div>

@@ -1,22 +1,26 @@
-<table ng-controller="EmployeeCtrl">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Cargo</th>
-            <th>E-mail</th>
-            <th>CPF</th>
-            <th>Observação</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr class="click" ng-repeat="employee in employees" ui-sref="employeeDetail(employee)">
-            <td>{{ employee.id }}</td>
-            <td>{{ employee.name }}</td>
-            <td>{{ employee.role }}</td>
-            <td>{{ employee.email }}</td>
-            <td>{{ employee.cpf }}</td>
-            <td>{{ employee.observation }}</td>
-        </tr>
-    </tbody>
-</table>
+<div ng-controller="EmployeeListCtrl as ctrl">
+    <!--suppress HtmlUnknownAttribute -->
+    <button-plus create="ctrl.createState"></button-plus>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Cargo</th>
+                <th>E-mail</th>
+                <th>CPF</th>
+                <th>Observação</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="click" ng-repeat="employee in employees" ui-sref="employeeDetail(employee)">
+                <td>{{ employee.id }}</td>
+                <td>{{ employee.name }}</td>
+                <td>{{ employee.role }}</td>
+                <td>{{ employee.email }}</td>
+                <td>{{ employee.cpf }}</td>
+                <td>{{ employee.observation }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

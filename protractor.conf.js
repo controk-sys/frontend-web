@@ -1,4 +1,4 @@
-var PORT = process.env.PORT;
+let PORT = process.env.PORT;
 PORT = typeof(PORT) != "undefined" && PORT != "" ? PORT : 8888;
 
 exports.config = {

@@ -8,7 +8,6 @@ angular.module("controk")
              * }}
              */
             $scope.client = {};
-            $scope.debounce = 1000;
 
             $scope.update = function (client) {
                 var clientData = angular.copy(client);
@@ -27,11 +26,16 @@ angular.module("controk")
                 else $scope.client = prepareClient(Object.assign(infoResponse.data, $stateParams));
 
                 function prepareClient(client) {
+                    // Put the "place_options" on the scope
+                    $scope.place_options = client.place_options;
+                    delete client.place_options;
                     // Build the "place" attribute to resolve default selected
                     // It must come to the single value at update
-                    for (var i = 0; i < client.place_options.length; i++)
-                        if (client.place_options[i].id == client.address.place)
-                            client.address.place = client.place_options[i];
+                    for (var i = 0; i < $scope.place_options.length; i++) {
+                        if ($scope.place_options[i].id == client.address.place) {
+                            client.address.place = $scope.place_options[i];
+                        }
+                    }
 
                     return client;
                 }
