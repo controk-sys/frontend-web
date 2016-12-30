@@ -44,6 +44,7 @@
     "start": "gulp",
     "test": "gulp test",
     "build": "gulp build",
+    "compile": "gulp compile",
     "standalone": "gulp standalone"
   }
 }

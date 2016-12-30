@@ -58,8 +58,7 @@ gulp.task("compile", function() {
         // Define path (and name if ".src")
         .pipe(rename((path) => { path.basename = path.basename.replace(".src", "") }))
         // Performs the operations for each file
-        .pipe(gulpIf("*.js", replace("***apiURL***", apiURL)))
-        .pipe(gulpIf("*.json", replace("***apiURL***", apiURL)))
+        .pipe(gulpIf(/\.js(on)?/, replace("***apiURL***", apiURL)))
         .pipe(gulpIf("*.js", replace("***socketHost***", socketHost)))
         .pipe(gulpIf("*.js", replace("***codeCoverage***", testing.toString())))
         .pipe(gulpIf("*.scss", sass.sync().on("error", sass.logError)))
