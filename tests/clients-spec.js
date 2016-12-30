@@ -1,9 +1,9 @@
 require("./coverage");
 
-describe("The user", function() {
+describe("The user", function () {
     afterEach(uploadCoverage);
 
-    it("should be able to open the list of clients", function() {
+    it("should be able to open the list of clients", function () {
         browser.get("");
 
         element(by.css(".navigation-link")).click(); // Open the modal
@@ -18,7 +18,7 @@ describe("The user", function() {
         )).toBe(0);
     });
 
-    it("should be able to open the details of a client", function() {
+    it("should be able to open the details of a client", function () {
         browser.get("#!/clients");
 
         element.all(by.css("table tbody tr td.ng-binding")).first().click();
@@ -37,7 +37,7 @@ describe("The user", function() {
         expect(element(by.css("#cep")).getAttribute("value")).toMatch(/\d{5}-\d{3}/);
     });
 
-    it("should be able to navigate to the details of a client", function() {
+    it("should be able to navigate to the details of a client", function () {
         // Note: this client id is specified in the file "tests/webservice/database.json"
         browser.get("#!/clients/1");
 
@@ -54,7 +54,7 @@ describe("The user", function() {
         expect(element(by.css("#cep")).getAttribute("value")).toMatch(/\d{5}-\d{3}/);
     });
 
-    it("should be able to see the view for client creation", function() {
+    it("should be able to see the view for client creation", function () {
         browser.get("#!/clients");
 
         expect(element.all(by.css("button-plus button")).count()).toBe(1);
