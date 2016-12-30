@@ -1,5 +1,7 @@
+require("./coverage");
+
 describe("The user", function() {
-    afterEach(element(by.css("#code-coverage")).click);
+    afterEach(uploadCoverage);
 
     it("should be able to open the list of products", function() {
         browser.get("");
@@ -17,7 +19,7 @@ describe("The user", function() {
     });
 
     it("should be able to open the details of a product", function() {
-        browser.get("#/products");
+        browser.get("#!/products");
 
         element.all(by.css("table tbody tr td.ng-binding")).first().click();
         expect(element.all(by.css("table")).count()).toBe(0); // Check if the table is gone
@@ -29,7 +31,7 @@ describe("The user", function() {
     });
 
     it("should be able to see the view for product creation", function() {
-        browser.get("#/products");
+        browser.get("#!/products");
 
         expect(element.all(by.css("button-plus button")).count()).toBe(1);
         element(by.css("button-plus button")).click();

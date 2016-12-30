@@ -1,5 +1,7 @@
+require("./coverage");
+
 describe("menu list", function() {
-    afterEach(element(by.css("#code-coverage")).click);
+    afterEach(uploadCoverage);
 
     it("should open the popover", function() {
         browser.get("");
