@@ -26,19 +26,17 @@ if (fs.existsSync(".env")) {
 let gulp = require("gulp"),
     gulpIf = require("gulp-if");
 
+// Environment Variables
 let testing = process.argv.indexOf("test") >= 0,
+    debug = process.env.DEBUG == "1",
     port = process.env.PORT || "8888";
 
-// Environment Variables
-if (testing) { // Execute tests without debug
-    process.env.DEBUG = "0";
-}
-else {
+if (!(testing && debug)) {
+    // Turn coverage off if not testing AND debugging
     process.env.COVERAGE = "0";
 }
 
-let debug = process.env.DEBUG == "1",
-    apiURL = process.env.API_URL || "",
+let apiURL = process.env.API_URL || "",
     socketHost = process.env.SOCKET_HOST || "",
     coverage = process.env.COVERAGE == "1";
 
@@ -88,7 +86,7 @@ gulp.task("build", ["compile"], function() {
         .pipe(gulp.dest("dist"));
 });
 
-let fileHandlerTask = ((debug || testing) ? "compile" : "build");
+let fileHandlerTask = (debug ? "compile" : "build");
 
 gulp.task("connect", function() {
     let express = require('express'),
@@ -101,7 +99,7 @@ gulp.task("connect", function() {
         app.use(im.createClientHandler(__dirname));
     }
 
-    app.use(express.static(`${__dirname}/${debug || testing ? "" : "dist"}`));
+    app.use(express.static(`${__dirname}/${debug ? "" : "dist"}`));
 
     app.listen(port, function () {
         emitMessage(`Server started at "http://0.0.0.0:${port}/".`);
@@ -148,15 +146,21 @@ gulp.task("test", ["standalone"], function() {
         let protractor = spawn("node_modules/.bin/protractor");
         protractor.stdout.on("data", (data) => { process.stdout.write(data.toString()) });
         protractor.on("close", function (code) {
-            //noinspection JSCheckFunctionSignatures
-            request(`http://localhost:${port}/coverage/download`)
-                .pipe(fs.createWriteStream("coverage.zip"))
-                .on("close", function () {
-                    let zip = new (require("adm-zip"))("./coverage.zip");
-                    //noinspection JSUnresolvedFunction
-                    zip.extractAllTo("coverage", true);
-                    process.exit(code);
-                });
+            if (coverage) {
+                //noinspection JSCheckFunctionSignatures
+                request(`http://localhost:${port}/coverage/download`)
+                    .pipe(fs.createWriteStream("coverage.zip"))
+                    .on("close", () => {
+                        let zip = new (require("adm-zip"))("./coverage.zip");
+                        //noinspection JSUnresolvedFunction
+                        zip.extractAllTo("coverage", true);
+
+                        process.exit(code)
+                    });
+            }
+            else {
+                process.exit(code);
+            }
         });
     });
 });
