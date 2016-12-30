@@ -48,7 +48,7 @@ gulp.task("jshint", function() {
         .pipe(jshint.reporter("default"));
 });
 
-gulp.task("compile", ["jshint"], function() {
+gulp.task("compile", function() {
     let rename = require("gulp-rename"),
         replace = require("gulp-replace"),
         sass = require("gulp-sass");
