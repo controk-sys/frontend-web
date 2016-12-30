@@ -109,7 +109,7 @@ gulp.task("connect", function () {
 
 gulp.task("watch", function () {
     gulp.watch(
-        ["**/*.{js,html,scss}", "!app/app.module.js", "!{assets,dist,node_modules,tests}/**",
+        ["**/*.{js,html,scss}", "!app/app.{controller,module}.js", "!{assets,dist,node_modules,tests}/**",
             "!{protractor.conf,gulpfile}.js"],
         [fileHandlerTask]
     );
