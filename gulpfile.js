@@ -26,17 +26,19 @@ if (fs.existsSync(".env")) {
 let gulp = require("gulp"),
     gulpIf = require("gulp-if");
 
+// Environment Variables
 let testing = process.argv.indexOf("test") >= 0,
+    debug = process.env.DEBUG == "1",
     port = process.env.PORT || "8888";
 
-// Environment Variables
-if (testing) { // Execute tests without debug
-    process.env["DEBUG"] = "0";
+if (!(testing && debug)) {
+    // Turn coverage off if not testing AND debugging
+    process.env.COVERAGE = "0";
 }
 
-let debug = process.env.DEBUG == "1",
-    apiURL = process.env.API_URL || "",
-    socketHost = process.env.SOCKET_HOST || "";
+let apiURL = process.env.API_URL || "",
+    socketHost = process.env.SOCKET_HOST || "",
+    coverage = process.env.COVERAGE == "1";
 
 // Tasks definitions
 
@@ -54,13 +56,13 @@ gulp.task("compile", function() {
         sass = require("gulp-sass");
 
     return gulp
-        .src(["**/*.{src.html,src.js,src.json,scss}", "!node_modules/**"])
+        .src(["**/*.{src.html,src.js,src.json,scss}", "!{dist,node_modules}/**"])
         // Define path (and name if ".src")
         .pipe(rename((path) => { path.basename = path.basename.replace(".src", "") }))
         // Performs the operations for each file
         .pipe(gulpIf(/\.js(on)?/, replace("***apiURL***", apiURL)))
         .pipe(gulpIf("*.js", replace("***socketHost***", socketHost)))
-        .pipe(gulpIf("*.js", replace("***codeCoverage***", testing.toString())))
+        .pipe(gulpIf("*.js", replace("***codeCoverage***", coverage.toString())))
         .pipe(gulpIf("*.scss", sass.sync().on("error", sass.logError)))
         .pipe(gulp.dest(""));
 });
@@ -83,20 +85,20 @@ gulp.task("build", ["compile"], function() {
         .pipe(gulp.dest("dist"));
 });
 
-let fileHandlerTask = ((debug || testing) ? "compile" : "build");
+let fileHandlerTask = (debug ? "compile" : "build");
 
 gulp.task("connect", function() {
     let express = require('express'),
         app = express(),
         im = require('istanbul-middleware');
 
-    if (testing) {
+    if (coverage) {
         im.hookLoader(".");
         app.use("/coverage", im.createHandler());
         app.use(im.createClientHandler(__dirname));
     }
 
-    app.use(express.static(`${__dirname}/${debug || testing ? "" : "dist"}`));
+    app.use(express.static(`${__dirname}/${debug ? "" : "dist"}`));
 
     app.listen(port, function () {
         emitMessage(`Server started at "http://0.0.0.0:${port}/".`);
@@ -143,15 +145,21 @@ gulp.task("test", ["standalone"], function() {
         let protractor = spawn("node_modules/.bin/protractor");
         protractor.stdout.on("data", (data) => { process.stdout.write(data.toString()) });
         protractor.on("close", function (code) {
-            //noinspection JSCheckFunctionSignatures
-            request(`http://localhost:${port}/coverage/download`)
-                .pipe(fs.createWriteStream("coverage.zip"))
-                .on("close", function () {
-                    let zip = new (require("adm-zip"))("./coverage.zip");
-                    //noinspection JSUnresolvedFunction
-                    zip.extractAllTo("coverage", true);
-                    process.exit(code);
-                });
+            if (coverage) {
+                //noinspection JSCheckFunctionSignatures
+                request(`http://localhost:${port}/coverage/download`)
+                    .pipe(fs.createWriteStream("coverage.zip"))
+                    .on("close", () => {
+                        let zip = new (require("adm-zip"))("./coverage.zip");
+                        //noinspection JSUnresolvedFunction
+                        zip.extractAllTo("coverage", true);
+
+                        process.exit(code)
+                    });
+            }
+            else {
+                process.exit(code);
+            }
         });
     });
 });

@@ -1,5 +1,7 @@
+require("./coverage");
+
 describe("The user", function() {
-    afterEach(element(by.css("#code-coverage")).click);
+    afterEach(uploadCoverage);
 
     it("should be able to see the list of employees", function() {
         browser.get("");
@@ -17,7 +19,7 @@ describe("The user", function() {
     });
 
     it("should be able to open the details of a employee", function() {
-        browser.get("#/employees");
+        browser.get("#!/employees");
 
         element.all(by.css("table tbody tr td.ng-binding")).first().click();
         expect(element.all(by.css("table")).count()).toBe(0); // Check if the table is gone
@@ -37,7 +39,7 @@ describe("The user", function() {
 
     it("should be able to navigate to the details of a employee", function() {
         // Note: this employee id is specified in the file "tests/webservice/database.json"
-        browser.get("#/employees/1");
+        browser.get("#!/employees/1");
 
         // 15 fields must exist
         expect(element.all(by.css(".column")).count()).toBe(18); // + 3 field divisions
@@ -53,7 +55,7 @@ describe("The user", function() {
     });
 
     it("should be able to see the view for employee creation", function() {
-        browser.get("#/employees");
+        browser.get("#!/employees");
 
         expect(element.all(by.css("button-plus button")).count()).toBe(1);
         element(by.css("button-plus button")).click();

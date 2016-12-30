@@ -1,5 +1,7 @@
+require("./coverage");
+
 describe("The user", function() {
-    afterEach(element(by.css("#code-coverage")).click);
+    afterEach(uploadCoverage);
 
     it("should be able to open the list of suppliers", function() {
         browser.get("");
@@ -17,7 +19,7 @@ describe("The user", function() {
     });
 
     it("should be able to open the details of a supplier", function() {
-        browser.get("#/suppliers");
+        browser.get("#!/suppliers");
 
         element.all(by.css("table tbody tr td.ng-binding")).first().click();
         expect(element.all(by.css("table")).count()).toBe(0); // Check if the table is gone
@@ -37,7 +39,7 @@ describe("The user", function() {
 
     it("should be able to navigate to the details of a supplier", function() {
         // Note: this supplier id is specified in the file "tests/webservice/database.json"
-        browser.get("#/suppliers/1");
+        browser.get("#!/suppliers/1");
 
         // 13 fields must exist
         expect(element.all(by.css(".column")).count()).toBe(16); // + 3 field divisions
@@ -53,7 +55,7 @@ describe("The user", function() {
     });
 
     it("should be able to see the view for supplier creation", function() {
-        browser.get("#/suppliers");
+        browser.get("#!/suppliers");
 
         expect(element.all(by.css("button-plus button")).count()).toBe(1);
         element(by.css("button-plus button")).click();
