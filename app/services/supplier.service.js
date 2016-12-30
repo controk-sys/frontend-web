@@ -1,24 +1,28 @@
-angular.module("controk")
-    .service("Supplier", ["$http", "urls", "socket",
-        function ($http, urls, socket) {
-            this.list = function () {
-                return $http.get(urls.suppliers);
-            };
+(function () {
+    angular
+        .module("controk")
+        .service("Supplier", Supplier);
 
-            this.retrieve = function (id) {
-                return $http.get(urls.suppliers + id + "/");
-            };
+    Supplier.$inject = ["$http", "urls", "socket"];
+    function Supplier($http, urls, socket) {
+        this.list = function () {
+            return $http.get(urls.suppliers);
+        };
 
-            this.info = function (id) {
-                return $http.get(urls.suppliers + id + "/info");
-            };
+        this.retrieve = function (id) {
+            return $http.get(urls.suppliers + id + "/");
+        };
 
-            this.create = function (supplier) {
-                socket.emit("create supplier", supplier);
-            };
+        this.info = function (id) {
+            return $http.get(urls.suppliers + id + "/info");
+        };
 
-            this.update = function (supplier) {
-                socket.emit("update supplier", supplier);
-            };
-        }
-    ]);
+        this.create = function (supplier) {
+            socket.emit("create supplier", supplier);
+        };
+
+        this.update = function (supplier) {
+            socket.emit("update supplier", supplier);
+        };
+    }
+})();

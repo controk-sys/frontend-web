@@ -1,20 +1,24 @@
-angular.module("controk")
-    .service("Product", ["$http", "urls", "socket",
-        function ($http, urls, socket) {
-            this.list = function () {
-                return $http.get(urls.products);
-            };
+(function () {
+    angular
+        .module("controk")
+        .service("Product", Product);
 
-            this.retrieve = function (id) {
-                return $http.get(urls.products + id + "/");
-            };
+    Product.$inject = ["$http", "urls", "socket"];
+    function Product($http, urls, socket) {
+        this.list = function () {
+            return $http.get(urls.products);
+        };
 
-            this.create = function (product) {
-                socket.emit("create product", product);
-            };
+        this.retrieve = function (id) {
+            return $http.get(urls.products + id + "/");
+        };
 
-            this.update = function (product) {
-                socket.emit("update product", product);
-            };
-        }
-    ]);
+        this.create = function (product) {
+            socket.emit("create product", product);
+        };
+
+        this.update = function (product) {
+            socket.emit("update product", product);
+        };
+    }
+})();
