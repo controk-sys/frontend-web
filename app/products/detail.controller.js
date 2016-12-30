@@ -1,16 +1,20 @@
-angular.module("controk")
-    .controller("ProductDetailCtrl", ["$scope", "$stateParams", "Product",
-        function($scope, $stateParams, Product) {
-            /**
-             * @type {{id, description, cost, name, sell_value}}
-             */
-            $scope.product = {};
+(function () {
+    angular
+        .module("controk")
+        .controller("ProductDetailCtrl", ProductDetailCtrl);
 
-            $scope.update = Product.update;
+    ProductDetailCtrl.$inject = ["$scope", "$stateParams", "Product"];
+    function ProductDetailCtrl($scope, $stateParams, Product) {
+        /**
+         * @type {{id, description, cost, name, sell_value}}
+         */
+        $scope.product = {};
 
-            // Load product info
-            Product.retrieve($stateParams.id).then(function(response) {
-                $scope.product = response.data;
-            });
-        }
-    ]);
+        $scope.update = Product.update;
+
+        // Load product info
+        Product.retrieve($stateParams.id).then(function (response) {
+            $scope.product = response.data;
+        });
+    }
+})();

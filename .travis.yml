@@ -18,6 +18,9 @@ env:
     - API_PORT=8000
     - API_URL=http://localhost:8000/api/v1/
     - SOCKET_HOST=http://localhost:3000/
+  matrix:
+    - DEBUG=0
+    - DEBUG=1 COVERAGE=1
 
 install: npm install
 

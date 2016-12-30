@@ -1,10 +1,14 @@
-angular.module("controk")
-    .controller("ProductCreateCtrl", ["$scope", "$stateParams", "Product",
-        function($scope, $stateParams, Product) {
-            /**
-             * @type {{name, description, sell_value, cost}}
-             */
-            $scope.product = {};
-            $scope.create = Product.create;
-        }
-    ]);
+(function () {
+    angular
+        .module("controk")
+        .controller("ProductCreateCtrl", ProductCreateCtrl);
+
+    ProductCreateCtrl.$inject = ["$scope", "Product"];
+    function ProductCreateCtrl($scope, Product) {
+        /**
+         * @type {{name, description, sell_value, cost}}
+         */
+        $scope.product = {};
+        $scope.create = Product.create;
+    }
+})();
