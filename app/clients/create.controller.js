@@ -1,6 +1,6 @@
 angular.module("controk")
     .controller("ClientCreateCtrl", ["$scope", "$stateParams", "Client", "Assets",
-        function($scope, $stateParams, Client, Assets) {
+        function ($scope, $stateParams, Client, Assets) {
             /**
              * @type {{
              * name, observation, cpf, email, mobile, phone, place_options: [{id, name}],
@@ -16,7 +16,7 @@ angular.module("controk")
             };
 
             // Load place options
-            Assets.getPlaceOptions().then(function(response) {
+            Assets.getPlaceOptions().then(function (response) {
                 $scope.place_options = response.data;
                 // Set a default value for it
                 $scope.client.address.place = $scope.place_options[0];

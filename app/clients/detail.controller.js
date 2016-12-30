@@ -1,6 +1,6 @@
 angular.module("controk")
     .controller("ClientDetailCtrl", ["$scope", "$stateParams", "Client",
-        function($scope, $stateParams, Client) {
+        function ($scope, $stateParams, Client) {
             /**
              * @type {{
              * id, name, observation, cpf, email, mobile, phone, place_options: [{id, name}],
@@ -16,10 +16,10 @@ angular.module("controk")
             };
 
             // Load client info
-            Client.info($stateParams.id).then(function(infoResponse) {
+            Client.info($stateParams.id).then(function (infoResponse) {
                 // The existence of an email will define if the data is already in the $stateParams
                 if (!$stateParams.email)
-                    Client.retrieve($stateParams.id).then(function(retrieveResponse) {
+                    Client.retrieve($stateParams.id).then(function (retrieveResponse) {
                         $scope.client = prepareClient(Object.assign(infoResponse.data, retrieveResponse.data));
                     });
 

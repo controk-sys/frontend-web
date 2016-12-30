@@ -1,9 +1,9 @@
 require("./coverage");
 
-describe("menu list", function() {
+describe("menu list", function () {
     afterEach(uploadCoverage);
 
-    it("should open the popover", function() {
+    it("should open the popover", function () {
         browser.get("");
 
         expect(element.all(by.css(".popover-item")).count()).toBe(6);

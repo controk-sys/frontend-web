@@ -4,14 +4,22 @@ $button_color: #67AA3E;
 $shape_active_color: #DDD;
 $shape_color: #EEE;
 
-@mixin keyframes ($animationName) {
-  @-webkit-keyframes #{$animationName} { @content; }
-  @-moz-keyframes #{$animationName} { @content; }
-  @-o-keyframes #{$animationName} { @content; }
-  @keyframes #{$animationName} { @content; }
+@mixin keyframes($animationName) {
+  @-webkit-keyframes #{$animationName} {
+    @content;
+  }
+  @-moz-keyframes #{$animationName} {
+    @content;
+  }
+  @-o-keyframes #{$animationName} {
+    @content;
+  }
+  @keyframes #{$animationName} {
+    @content;
+  }
 }
 
-@mixin animation ($value) {
+@mixin animation($value) {
   -webkit-animation: $value;
   -o-animation: $value;
   animation: $value;
@@ -120,7 +128,6 @@ body {
     }
   }
 
-
   // Disable Milliagram's button properties
   border: medium none #000;
   color: #FFF;
@@ -144,7 +151,7 @@ body {
   }
 }
 
-.logo{
+.logo {
   height: 5rem;
 }
 

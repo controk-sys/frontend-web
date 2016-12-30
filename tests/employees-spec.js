@@ -1,9 +1,9 @@
 require("./coverage");
 
-describe("The user", function() {
+describe("The user", function () {
     afterEach(uploadCoverage);
 
-    it("should be able to see the list of employees", function() {
+    it("should be able to see the list of employees", function () {
         browser.get("");
 
         element(by.css(".navigation-link")).click(); // Open the modal
@@ -18,7 +18,7 @@ describe("The user", function() {
         )).toBe(0);
     });
 
-    it("should be able to open the details of a employee", function() {
+    it("should be able to open the details of a employee", function () {
         browser.get("#!/employees");
 
         element.all(by.css("table tbody tr td.ng-binding")).first().click();
@@ -37,7 +37,7 @@ describe("The user", function() {
         expect(element(by.css("#cep")).getAttribute("value")).toMatch(/\d{5}-\d{3}/);
     });
 
-    it("should be able to navigate to the details of a employee", function() {
+    it("should be able to navigate to the details of a employee", function () {
         // Note: this employee id is specified in the file "tests/webservice/database.json"
         browser.get("#!/employees/1");
 
@@ -54,7 +54,7 @@ describe("The user", function() {
         expect(element(by.css("#cep")).getAttribute("value")).toMatch(/\d{5}-\d{3}/);
     });
 
-    it("should be able to see the view for employee creation", function() {
+    it("should be able to see the view for employee creation", function () {
         browser.get("#!/employees");
 
         expect(element.all(by.css("button-plus button")).count()).toBe(1);

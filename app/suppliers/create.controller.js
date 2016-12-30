@@ -1,6 +1,6 @@
 angular.module("controk")
     .controller("SupplierCreateCtrl", ["$scope", "$stateParams", "Supplier", "Assets",
-        function($scope, $stateParams, Supplier, Assets) {
+        function ($scope, $stateParams, Supplier, Assets) {
             /**
              * @type {{
              * trading_name, email, cnpj, place_options: [{id, name}],
@@ -16,7 +16,7 @@ angular.module("controk")
             };
 
             // Load place options
-            Assets.getPlaceOptions().then(function(response) {
+            Assets.getPlaceOptions().then(function (response) {
                 $scope.place_options = response.data;
                 // Set a default value for it
                 $scope.supplier.address.place = $scope.place_options[0];

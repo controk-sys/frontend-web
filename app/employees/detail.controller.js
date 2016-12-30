@@ -1,6 +1,6 @@
 angular.module("controk")
     .controller("EmployeeDetailCtrl", ["$scope", "$stateParams", "Employee",
-        function($scope, $stateParams, Employee) {
+        function ($scope, $stateParams, Employee) {
             /**
              * @type {{
              * id, name, observation, role, cpf, email, mobile, phone, place_options: [{id, name}],
@@ -16,10 +16,10 @@ angular.module("controk")
             };
 
             // Load employee info
-            Employee.info($stateParams.id).then(function(infoResponse) {
+            Employee.info($stateParams.id).then(function (infoResponse) {
                 // The existence of an email will define if the data is already in the $stateParams
                 if (!$stateParams.email)
-                    Employee.retrieve($stateParams.id).then(function(retrieveResponse) {
+                    Employee.retrieve($stateParams.id).then(function (retrieveResponse) {
                         $scope.employee = prepareEmployee(Object.assign(infoResponse.data, retrieveResponse.data));
                     });
 

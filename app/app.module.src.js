@@ -1,4 +1,4 @@
-(function() {
+(function () {
     var app = angular.module("controk", ["ngAnimate", "ui.router", "toastr", "ngMask"]);
 
     try {
@@ -23,7 +23,8 @@
         $scope.buttonCoverage = eval("***codeCoverage***");
         $scope.uploadCoverageReport = function () {
             if ($scope.buttonCoverage) {
-                $http.post("/coverage/client", window.__coverage__).then(function (response) {})
+                $http.post("/coverage/client", window.__coverage__).then(function () {
+                })
             } else {
                 toastr.warning("Don't try to do anything stupid...");
             }
@@ -32,18 +33,18 @@
 
     // Set socket listeners
     app.run(["socket", "toastr",
-        function(socket, toastr) {
+        function (socket, toastr) {
             // Socket events
-            socket.on("create ok", function(message) {
+            socket.on("create ok", function (message) {
                 toastr.success(message);
             });
-            socket.on("create failed", function(message) {
+            socket.on("create failed", function (message) {
                 toastr.error(message);
             });
-            socket.on("update ok", function(message) {
+            socket.on("update ok", function (message) {
                 toastr.success(message);
             });
-            socket.on("update failed", function(message) {
+            socket.on("update failed", function (message) {
                 toastr.error(message);
             });
         }

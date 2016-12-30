@@ -1,6 +1,6 @@
 angular.module("controk")
     .controller("SupplierDetailCtrl", ["$scope", "$stateParams", "Supplier",
-        function($scope, $stateParams, Supplier) {
+        function ($scope, $stateParams, Supplier) {
             /**
              * @type {{
              * id, trading_name, email, cnpj, place_options: [{id, name}],
@@ -15,10 +15,10 @@ angular.module("controk")
                 Supplier.update(supplierData);
             };
 
-            Supplier.info($stateParams.id).then(function(infoResponse) {
+            Supplier.info($stateParams.id).then(function (infoResponse) {
                 // The existence of an email will define if the data is already in the $stateParams
                 if (!$stateParams.email)
-                    Supplier.retrieve($stateParams.id).then(function(retrieveResponse) {
+                    Supplier.retrieve($stateParams.id).then(function (retrieveResponse) {
                         $scope.supplier = prepareSupplier(Object.assign(infoResponse.data, retrieveResponse.data));
                     });
 
