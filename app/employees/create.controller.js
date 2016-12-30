@@ -3,8 +3,8 @@
         .module("controk")
         .controller("EmployeeCreateCtrl", EmployeeCreateCtrl);
 
-    EmployeeCreateCtrl.$inject = ["$scope", "$stateParams", "Employee", "Assets"];
-    function EmployeeCreateCtrl($scope, $stateParams, Employee, Assets) {
+    EmployeeCreateCtrl.$inject = ["$scope", "Employee", "Assets"];
+    function EmployeeCreateCtrl($scope, Employee, Assets) {
         /**
          * @type {{
          * name, observation, cpf, email, role, mobile, phone, place_options: [{id, name}],

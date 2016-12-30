@@ -3,8 +3,8 @@
         .module("controk")
         .controller("ClientCreateCtrl", ClientCreateCtrl);
 
-    ClientCreateCtrl.$inject = ["$scope", "$stateParams", "Client", "Assets"];
-    function ClientCreateCtrl($scope, $stateParams, Client, Assets) {
+    ClientCreateCtrl.$inject = ["$scope", "Client", "Assets"];
+    function ClientCreateCtrl($scope, Client, Assets) {
         /**
          * @type {{
          * name, observation, cpf, email, mobile, phone, place_options: [{id, name}],

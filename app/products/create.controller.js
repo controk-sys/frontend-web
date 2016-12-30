@@ -3,8 +3,8 @@
         .module("controk")
         .controller("ProductCreateCtrl", ProductCreateCtrl);
 
-    ProductCreateCtrl.$inject = ["$scope", "$stateParams", "Product"];
-    function ProductCreateCtrl($scope, $stateParams, Product) {
+    ProductCreateCtrl.$inject = ["$scope", "Product"];
+    function ProductCreateCtrl($scope, Product) {
         /**
          * @type {{name, description, sell_value, cost}}
          */

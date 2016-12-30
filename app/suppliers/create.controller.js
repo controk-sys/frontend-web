@@ -3,8 +3,8 @@
         .module("controk")
         .controller("SupplierCreateCtrl", SupplierCreateCtrl);
 
-    SupplierCreateCtrl.$inject = ["$scope", "$stateParams", "Supplier", "Assets"];
-    function SupplierCreateCtrl($scope, $stateParams, Supplier, Assets) {
+    SupplierCreateCtrl.$inject = ["$scope", "Supplier", "Assets"];
+    function SupplierCreateCtrl($scope, Supplier, Assets) {
         /**
          * @type {{
          * trading_name, email, cnpj, place_options: [{id, name}],
