@@ -31,12 +31,16 @@ let testing = process.argv.indexOf("test") >= 0,
 
 // Environment Variables
 if (testing) { // Execute tests without debug
-    process.env["DEBUG"] = "0";
+    process.env.DEBUG = "0";
+}
+else {
+    process.env.COVERAGE = "0";
 }
 
 let debug = process.env.DEBUG == "1",
     apiURL = process.env.API_URL || "",
-    socketHost = process.env.SOCKET_HOST || "";
+    socketHost = process.env.SOCKET_HOST || "",
+    coverage = process.env.COVERAGE == "1";
 
 // Tasks definitions
 
@@ -54,14 +58,14 @@ gulp.task("compile", ["jshint"], function() {
         sass = require("gulp-sass");
 
     return gulp
-        .src(["**/*.{src.html,src.js,src.json,scss}", "!node_modules/**"])
+        .src(["**/*.{src.html,src.js,src.json,scss}", "!{dist,node_modules}/**"])
         // Define path (and name if ".src")
         .pipe(rename((path) => { path.basename = path.basename.replace(".src", "") }))
         // Performs the operations for each file
         .pipe(gulpIf("*.js", replace("***apiURL***", apiURL)))
         .pipe(gulpIf("*.json", replace("***apiURL***", apiURL)))
         .pipe(gulpIf("*.js", replace("***socketHost***", socketHost)))
-        .pipe(gulpIf("*.js", replace("***codeCoverage***", testing.toString())))
+        .pipe(gulpIf("*.js", replace("***codeCoverage***", coverage.toString())))
         .pipe(gulpIf("*.scss", sass.sync().on("error", sass.logError)))
         .pipe(gulp.dest(""));
 });
@@ -91,7 +95,7 @@ gulp.task("connect", function() {
         app = express(),
         im = require('istanbul-middleware');
 
-    if (testing) {
+    if (coverage) {
         im.hookLoader(".");
         app.use("/coverage", im.createHandler());
         app.use(im.createClientHandler(__dirname));
