@@ -63,12 +63,13 @@ gulp.task("compile:js", () => {
     .pipe(gulp.dest("app"))
 })
 
-gulp.task("compile:json", () => gulp
-  .src("tests/**/*.src.json")
+gulp.task("compile:tests", () => gulp
+  .src("tests/**/*.src.{js,json}")
   .pipe(rename((path) => {
     path.basename = path.basename.replace(".src", "")
   }))
   .pipe(replace("***apiURL***", apiURL))
+  .pipe(replace("***codeCoverage***", coverage.toString()))
   .pipe(gulp.dest("tests"))
 )
 
@@ -81,7 +82,7 @@ gulp.task("compile:css", () => {
     .pipe(gulp.dest("css"))
 })
 
-gulp.task("compile", ["compile:js", "compile:json", "compile:css"])
+gulp.task("compile", ["compile:js", "compile:tests", "compile:css"])
 
 // Last task before connection
 gulp.task("build", ["compile"], function () {
