@@ -124,14 +124,13 @@ gulp.task("connect", () => {
 
 gulp.task("watch", () => {
   if (debug) {
-    gulp.watch("app/**/*.src.js", ["compile:js"])
-    gulp.watch("tests/**/*.src.json", ["compile:json"])
     gulp.watch("css/**/*.scss", ["compile:css"])
+    gulp.watch("app/**/*.src.js", ["compile:js"])
+    gulp.watch("tests/**/*.src.{js,json}", ["compile:tests"])
   }
   else {
     gulp.watch(
-      ["**/*.{js,html,scss}", "!app/app.{controller,module}.js", "!{assets,dist,node_modules,tests}/**",
-        "!{protractor.conf,gulpfile}.js"],
+      ["app/**/*.{src.js,html}", "css/**/*.scss", "tests/**/*.{js,json}", "!tests/**/{coverage.js,database.json}"],
       ["build"]
     )
   }
@@ -145,13 +144,11 @@ if (!testing) {
 
 gulp.task("standalone", standaloneTaskDependencies, function () {
   let webservicePath = "tests/webservice/"
-    , jsonServer = spawn(
-    "node_modules/.bin/json-server", [
-      `${webservicePath}database.json`,
-      "--routes", `${webservicePath}routes.json`,
-      "--port", process.env.API_PORT
-    ]
-  )
+    , jsonServer = spawn("node_modules/.bin/json-server", [
+    `${webservicePath}database.json`,
+    "--routes", `${webservicePath}routes.json`,
+    "--port", process.env.API_PORT
+  ])
   jsonServer.stderr.on("data", (data) => {
     process.stderr.write(data.toString())
   })
