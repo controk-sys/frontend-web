@@ -1,18 +1,18 @@
 <table ng-controller="ShipmentCtrl">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Data da entrega</th>
-            <th>Data do pagamento</th>
-            <th>Data do pedido</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="shipment in shipments">
-            <td>{{ shipment.id }}</td>
-            <td>{{ shipment.delivery_date }}</td>
-            <td>{{ shipment.payment_date }}</td>
-            <td>{{ shipment.order_date }}</td>
-        </tr>
-    </tbody>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Data da entrega</th>
+    <th>Data do pagamento</th>
+    <th>Data do pedido</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="shipment in shipments">
+    <td>{{ shipment.id }}</td>
+    <td>{{ shipment.delivery_date }}</td>
+    <td>{{ shipment.payment_date }}</td>
+    <td>{{ shipment.order_date }}</td>
+  </tr>
+  </tbody>
 </table>

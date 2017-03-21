@@ -1,95 +1,95 @@
 <!DOCTYPE html>
 <html lang="en-us">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="shortcut icon" href="favicon.ico"/>
-        <title>Controk</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico"/>
+  <title>Controk</title>
 
-        <!-- build:css app.min.css -->
-        <link rel="stylesheet" href="node_modules/milligram/dist/milligram.min.css">
-        <link rel="stylesheet" href="node_modules/angular-toastr/dist/angular-toastr.min.css">
-        <link rel="stylesheet" href="assets/css/milligram.main.min.css">
-        <link rel="stylesheet" href="css/main.css">
-        <!-- endbuild -->
+  <!-- build:css app.min.css -->
+  <link rel="stylesheet" href="node_modules/milligram/dist/milligram.min.css">
+  <link rel="stylesheet" href="node_modules/angular-toastr/dist/angular-toastr.min.css">
+  <link rel="stylesheet" href="assets/css/milligram.main.min.css">
+  <link rel="stylesheet" href="css/main.css">
+  <!-- endbuild -->
 
-    </head>
-    <body>
-        <div ng-app="controk" class="controk" ng-controller="MainCtrl">
-            <nav class="navigation">
-                <section class="container">
-                    <a ui-sref="home" class="navigation-title">
-                        <img class="logo" src="images/logo.png" alt="Controk Logo"/>
-                    </a>
-                    <ul class="navigation-list float-right">
-                        <li class="navigation-item">
-                            <a class="navigation-link" href="#popover-grid" data-popover>Menu</a>
-                            <div class="popover" id="popover-grid">
-                                <ul class="popover-list">
-                                    <li class="popover-item">
-                                        <a ui-sref="employees" class="popover-link click">Funcionário</a>
-                                    </li>
-                                    <li class="popover-item">
-                                        <a ui-sref="suppliers" class="popover-link click">Fornecedor</a>
-                                    </li>
-                                    <li class="popover-item">
-                                        <a ui-sref="clients" class="popover-link click">Cliente</a>
-                                    </li>
-                                    <li class="popover-item">
-                                        <a ui-sref="shipments" class="popover-link click">Remessa</a>
-                                    </li>
-                                    <li class="popover-item">
-                                        <a ui-sref="products" class="popover-link click">Produto</a>
-                                    </li>
-                                    <li class="popover-item">
-                                        <a class="popover-link click">Estoque</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </section>
-            </nav>
-            <div class="ui-view"></div>
-            <button id="code-coverage" ng-click="uploadCoverageReport()" style="opacity: 0"
-                    ng-style="{display: buttonCoverage ? 'block' : 'none'}"></button>
-        </div>
+</head>
+<body>
+<div ng-app="controk" class="controk" ng-controller="MainCtrl">
+  <nav class="navigation">
+    <section class="container">
+      <a ui-sref="home" class="navigation-title">
+        <img class="logo" src="images/logo.png" alt="Controk Logo"/>
+      </a>
+      <ul class="navigation-list float-right">
+        <li class="navigation-item">
+          <a class="navigation-link" href="#popover-grid" data-popover>Menu</a>
+          <div class="popover" id="popover-grid">
+            <ul class="popover-list">
+              <li class="popover-item">
+                <a ui-sref="employees" class="popover-link click">Funcionário</a>
+              </li>
+              <li class="popover-item">
+                <a ui-sref="suppliers" class="popover-link click">Fornecedor</a>
+              </li>
+              <li class="popover-item">
+                <a ui-sref="clients" class="popover-link click">Cliente</a>
+              </li>
+              <li class="popover-item">
+                <a ui-sref="shipments" class="popover-link click">Remessa</a>
+              </li>
+              <li class="popover-item">
+                <a ui-sref="products" class="popover-link click">Produto</a>
+              </li>
+              <li class="popover-item">
+                <a class="popover-link click">Estoque</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </nav>
+  <div class="ui-view"></div>
+  <button id="code-coverage" ng-click="uploadCoverageReport()" style="opacity: 0"
+          ng-style="{display: buttonCoverage ? 'block' : 'none'}"></button>
+</div>
 
-        <!-- build:js app.min.js -->
-        <script src="node_modules/socket.io-client/dist/socket.io.js"></script>
-        <script src="node_modules/angular/angular.min.js"></script>
-        <script src="node_modules/angular-animate/angular-animate.min.js"></script>
-        <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
-        <script src="node_modules/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
-        <script src="assets/js/ngMask.min.js"></script>
-        <script src="assets/js/milligram.main.min.js"></script>
-        <!-- Main -->
-        <script src="app/app.module.js"></script>
-        <script src="app/app.variables.js"></script>
-        <script src="app/app.config.js"></script>
-        <script src="app/app.components.js"></script>
-        <!-- Services -->
-        <script src="app/general.service.js"></script>
-        <script src="app/clients/client.service.js"></script>
-        <script src="app/employees/employee.service.js"></script>
-        <script src="app/products/product.service.js"></script>
-        <script src="app/shipments/shipment.service.js"></script>
-        <script src="app/suppliers/supplier.service.js"></script>
-        <!-- Controllers -->
-        <script src="app/app.controller.js"></script>
-        <script src="app/clients/create.controller.js"></script>
-        <script src="app/clients/detail.controller.js"></script>
-        <script src="app/clients/list.controller.js"></script>
-        <script src="app/employees/create.controller.js"></script>
-        <script src="app/employees/detail.controller.js"></script>
-        <script src="app/employees/list.controller.js"></script>
-        <script src="app/products/create.controller.js"></script>
-        <script src="app/products/detail.controller.js"></script>
-        <script src="app/products/list.controller.js"></script>
-        <script src="app/shipments/list.controller.js"></script>
-        <script src="app/suppliers/create.controller.js"></script>
-        <script src="app/suppliers/detail.controller.js"></script>
-        <script src="app/suppliers/list.controller.js"></script>
-        <!-- endbuild -->
-    </body>
+<!-- build:js app.min.js -->
+<script src="node_modules/socket.io-client/dist/socket.io.js"></script>
+<script src="node_modules/angular/angular.min.js"></script>
+<script src="node_modules/angular-animate/angular-animate.min.js"></script>
+<script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="node_modules/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
+<script src="assets/js/ngMask.min.js"></script>
+<script src="assets/js/milligram.main.min.js"></script>
+<!-- Main -->
+<script src="app/app.module.js"></script>
+<script src="app/app.variables.js"></script>
+<script src="app/app.config.js"></script>
+<script src="app/app.components.js"></script>
+<!-- Services -->
+<script src="app/general.service.js"></script>
+<script src="app/clients/client.service.js"></script>
+<script src="app/employees/employee.service.js"></script>
+<script src="app/products/product.service.js"></script>
+<script src="app/shipments/shipment.service.js"></script>
+<script src="app/suppliers/supplier.service.js"></script>
+<!-- Controllers -->
+<script src="app/app.controller.js"></script>
+<script src="app/clients/create.controller.js"></script>
+<script src="app/clients/detail.controller.js"></script>
+<script src="app/clients/list.controller.js"></script>
+<script src="app/employees/create.controller.js"></script>
+<script src="app/employees/detail.controller.js"></script>
+<script src="app/employees/list.controller.js"></script>
+<script src="app/products/create.controller.js"></script>
+<script src="app/products/detail.controller.js"></script>
+<script src="app/products/list.controller.js"></script>
+<script src="app/shipments/list.controller.js"></script>
+<script src="app/suppliers/create.controller.js"></script>
+<script src="app/suppliers/detail.controller.js"></script>
+<script src="app/suppliers/list.controller.js"></script>
+<!-- endbuild -->
+</body>
 </html>

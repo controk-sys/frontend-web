@@ -1,29 +1,29 @@
 <form ng-submit="create(product)" ng-controller="ProductCreateCtrl" class="container">
-    <button-v></button-v>
-    <!-- Main info -->
-    <div>
-        <div class="row">
-            <div class="column"><h4>Cadastro de produto</h4></div>
-        </div>
-        <div class="row">
-            <div class="column">
-                <label for="name">Nome</label>
-                <input id="name" type="text" ng-model="product.name" required/>
-            </div>
-            <div class="column">
-                <label for="description">Descrição</label>
-                <input id="description" type="text" ng-model="product.description" required/>
-            </div>
-        </div>
-        <div class="row">
-            <div class="column">
-                <label for="sellValue">Valor de venda (R$)</label>
-                <input id="sellValue" type="number" ng-model="product.sell_value"/>
-            </div>
-            <div class="column">
-                <label for="cost">Custo (R$)</label>
-                <input id="cost" type="number" ng-model="product.cost"/>
-            </div>
-        </div>
+  <button-v></button-v>
+  <!-- Main info -->
+  <div>
+    <div class="row">
+      <div class="column"><h4>Cadastro de produto</h4></div>
     </div>
+    <div class="row">
+      <div class="column">
+        <label for="name">Nome</label>
+        <input id="name" type="text" ng-model="product.name" required/>
+      </div>
+      <div class="column">
+        <label for="description">Descrição</label>
+        <input id="description" type="text" ng-model="product.description" required/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <label for="sellValue">Valor de venda (R$)</label>
+        <input id="sellValue" type="number" ng-model="product.sell_value"/>
+      </div>
+      <div class="column">
+        <label for="cost">Custo (R$)</label>
+        <input id="cost" type="number" ng-model="product.cost"/>
+      </div>
+    </div>
+  </div>
 </form>

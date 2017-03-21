@@ -1,20 +1,20 @@
 (function () {
-    angular
-        .module("controk")
-        .controller("ProductDetailCtrl", ProductDetailCtrl);
+  angular
+    .module("controk")
+    .controller("ProductDetailCtrl", ProductDetailCtrl);
 
-    ProductDetailCtrl.$inject = ["$scope", "$stateParams", "Product"];
-    function ProductDetailCtrl($scope, $stateParams, Product) {
-        /**
-         * @type {{id, description, cost, name, sell_value}}
-         */
-        $scope.product = {};
+  ProductDetailCtrl.$inject = ["$scope", "$stateParams", "Product"];
+  function ProductDetailCtrl($scope, $stateParams, Product) {
+    /**
+     * @type {{id, description, cost, name, sell_value}}
+     */
+    $scope.product = {};
 
-        $scope.update = Product.update;
+    $scope.update = Product.update;
 
-        // Load product info
-        Product.retrieve($stateParams.id).then(function (response) {
-            $scope.product = response.data;
-        });
-    }
+    // Load product info
+    Product.retrieve($stateParams.id).then(function (response) {
+      $scope.product = response.data;
+    });
+  }
 })();
