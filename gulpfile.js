@@ -40,34 +40,48 @@ let apiURL = process.env.API_URL || ""
   , socketHost = process.env.SOCKET_HOST || ""
   , coverage = process.env.COVERAGE === "1"
 
+// Common requirements
+let rename = require("gulp-rename")
+  , replace = require("gulp-replace")
+
 // Tasks definitions
 
-gulp.task("jshint", function () {
-  let jshint = require("gulp-jshint")
-
-  return gulp.src(["**/*.js", "!{assets,dist,node_modules,coverage}/**", "!app/app.module.js"])
-    .pipe(jshint())
-    .pipe(jshint.reporter("default"))
-})
-
-gulp.task("compile", function () {
-  let rename = require("gulp-rename")
-    , replace = require("gulp-replace")
-    , sass = require("gulp-sass")
+gulp.task("compile:js", () => {
+  let babel = require("gulp-babel")
 
   return gulp
-    .src(["**/*.{src.html,src.js,src.json,scss}", "!{dist,node_modules}/**"])
-    // Define path (and name if ".src")
+    .src("app/**/*.src.js")
     .pipe(rename((path) => {
       path.basename = path.basename.replace(".src", "")
     }))
-    // Performs the operations for each file
-    .pipe(gulpIf(/\.js(on)?/, replace("***apiURL***", apiURL)))
-    .pipe(gulpIf("*.js", replace("***socketHost***", socketHost)))
-    .pipe(gulpIf("*.js", replace("***codeCoverage***", coverage.toString())))
-    .pipe(gulpIf("*.scss", sass.sync().on("error", sass.logError)))
-    .pipe(gulp.dest(""))
+    .pipe(replace("***apiURL***", apiURL))
+    .pipe(replace("***socketHost***", socketHost))
+    .pipe(replace("***codeCoverage***", coverage.toString()))
+    .pipe(babel({
+      presets: ["es2015"]
+    }))
+    .pipe(gulp.dest("app"))
 })
+
+gulp.task("compile:json", () => gulp
+  .src("tests/**/*.src.json")
+  .pipe(rename((path) => {
+    path.basename = path.basename.replace(".src", "")
+  }))
+  .pipe(replace("***apiURL***", apiURL))
+  .pipe(gulp.dest("tests"))
+)
+
+gulp.task("compile:css", () => {
+  let sass = require("gulp-sass")
+
+  return gulp
+    .src("css/**/*.scss")
+    .pipe(sass.sync().on("error", sass.logError))
+    .pipe(gulp.dest("css"))
+})
+
+gulp.task("compile", ["compile:js", "compile:json", "compile:css"])
 
 // Last task before connection
 gulp.task("build", ["compile"], function () {
@@ -87,9 +101,9 @@ gulp.task("build", ["compile"], function () {
     .pipe(gulp.dest("dist"))
 })
 
-let fileHandlerTask = (debug ? "compile" : "build")
+let fileHandlerTask = debug ? "compile" : "build"
 
-gulp.task("connect", function () {
+gulp.task("connect", () => {
   let express = require('express')
     , app = express()
     , im = require('istanbul-middleware')
@@ -102,17 +116,24 @@ gulp.task("connect", function () {
 
   app.use(express.static(`${__dirname}/${debug ? "" : "dist"}`))
 
-  app.listen(port, function () {
+  app.listen(port, () => {
     emitMessage(`Server started at "http://0.0.0.0:${port}/".`)
   })
 })
 
-gulp.task("watch", function () {
-  gulp.watch(
-    ["**/*.{js,html,scss}", "!app/app.{controller,module}.js", "!{assets,dist,node_modules,tests}/**",
-      "!{protractor.conf,gulpfile}.js"],
-    [fileHandlerTask]
-  )
+gulp.task("watch", () => {
+  if (debug) {
+    gulp.watch("app/**/*.src.js", ["compile:js"])
+    gulp.watch("tests/**/*.src.json", ["compile:json"])
+    gulp.watch("css/**/*.scss", ["compile:css"])
+  }
+  else {
+    gulp.watch(
+      ["**/*.{js,html,scss}", "!app/app.{controller,module}.js", "!{assets,dist,node_modules,tests}/**",
+        "!{protractor.conf,gulpfile}.js"],
+      ["build"]
+    )
+  }
 })
 
 // Standalone mode
