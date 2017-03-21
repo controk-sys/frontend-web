@@ -1,9 +1,10 @@
-(function () {
+(() => {
   angular
     .module("controk")
-    .config(config);
+    .config(config)
 
-  config.$inject = ["$stateProvider", "$urlRouterProvider"];
+  config.$inject = ["$stateProvider", "$urlRouterProvider"]
+
   function config($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state("home", {url: "/"})
@@ -81,7 +82,7 @@
           cnpj: null
         },
         templateUrl: "app/suppliers/detail.html"
-      });
-    $urlRouterProvider.otherwise("/");
+      })
+    $urlRouterProvider.otherwise("/")
   }
-})();
+})()

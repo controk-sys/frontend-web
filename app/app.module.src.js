@@ -1,22 +1,21 @@
-(function () {
-  var app = angular.module("controk", ["ngAnimate", "ui.router", "toastr", "ngMask"]);
+(() => {
+  angular
+    .module("controk", [
+      "ngAnimate",
+      "ui.router",
+      "toastr",
+      "ngMask"
+    ])
+    // Set socket listeners
+    .run(run)
 
-  // Set socket listeners
-  app.run(["socket", "toastr",
-    function (socket, toastr) {
-      // Socket events
-      socket.on("create ok", function (message) {
-        toastr.success(message);
-      });
-      socket.on("create failed", function (message) {
-        toastr.error(message);
-      });
-      socket.on("update ok", function (message) {
-        toastr.success(message);
-      });
-      socket.on("update failed", function (message) {
-        toastr.error(message);
-      });
-    }
-  ]);
-})();
+  run.$inject = ["socket", "toastr"]
+
+  function run(socket, toastr) {
+    // Socket events
+    socket.on("create ok", toastr.success)
+    socket.on("create failed", toastr.error)
+    socket.on("update ok", toastr.success)
+    socket.on("update failed", toastr.error)
+  }
+})()

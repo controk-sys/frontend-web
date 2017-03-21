@@ -3,9 +3,8 @@
 npm-debug.log
 
 # Generated files
-app/app.controller.js
-app/app.module.js
-app/app.variables.js
+app/**/*.js
+!app/**/*.src.js
 coverage.zip
 css/main.css
 dist/

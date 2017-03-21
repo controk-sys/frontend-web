@@ -3,4 +3,4 @@ exports.config = {
   rootElement: ".controk", // http://stackoverflow.com/a/22518925
   directConnect: true,
   specs: ["tests/*-spec.js"]
-};
+}

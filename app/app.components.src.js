@@ -1,4 +1,4 @@
-(function () {
+(() => {
   angular
     .module("controk")
     .component("buttonPlus", {
@@ -9,5 +9,5 @@
     })
     .component("buttonV", {
       templateUrl: "app/components/buttonV.html"
-    });
-})();
+    })
+})()
