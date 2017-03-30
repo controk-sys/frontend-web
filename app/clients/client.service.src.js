@@ -3,8 +3,8 @@
     .module("controk")
     .service("Client", Client)
 
-  Client.$inject = ["$http", "urls", "socket"]
   function Client($http, urls, socket) {
+    "ngInject"
     this.list = () => $http.get(urls.clients)
     this.retrieve = (id) => $http.get(urls.clients + id + "/")
     this.info = (id) => $http.get(urls.clients + id + "/info/")

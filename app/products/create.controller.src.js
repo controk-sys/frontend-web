@@ -3,9 +3,8 @@
     .module("controk")
     .controller("ProductCreateCtrl", ProductCreateCtrl)
 
-  ProductCreateCtrl.$inject = ["$scope", "Product"]
-
   function ProductCreateCtrl($scope, Product) {
+    "ngInject"
     /**
      * @type {{name, description, sell_value, cost}}
      */

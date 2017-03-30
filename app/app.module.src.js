@@ -9,9 +9,8 @@
     // Set socket listeners
     .run(run)
 
-  run.$inject = ["socket", "toastr"]
-
   function run(socket, toastr) {
+    "ngInject"
     // Socket events
     socket.on("create ok", toastr.success)
     socket.on("create failed", toastr.error)

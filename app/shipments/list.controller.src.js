@@ -3,9 +3,8 @@
     .module("controk")
     .controller("ShipmentCtrl", ShipmentCtrl)
 
-  ShipmentCtrl.$inject = ["$scope", "Shipment"]
-
   function ShipmentCtrl($scope, Shipment) {
+    "ngInject"
     Shipment.list()
       .then((response) => {
         /**

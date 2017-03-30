@@ -3,9 +3,8 @@
     .module("controk")
     .controller("EmployeeDetailCtrl", EmployeeDetailCtrl)
 
-  EmployeeDetailCtrl.$inject = ["$scope", "$stateParams", "Employee"]
-
   function EmployeeDetailCtrl($scope, $stateParams, Employee) {
+    "ngInject"
     /**
      * @type {{
      * id, name, observation, role, cpf, email, mobile, phone, place_options: [{id, name}],

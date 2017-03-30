@@ -37,6 +37,7 @@ let gulp = require("gulp")
   , im = require('istanbul-middleware')
   , rename = require("gulp-rename")
   , replace = require("gulp-replace")
+  , annotate = require("gulp-ng-annotate")
 
 // Environment Variables
 let testing = process.argv.indexOf("test") >= 0
@@ -65,6 +66,7 @@ gulp.task("compile:js", () => gulp
   .pipe(babel({
     presets: ["es2015"]
   }))
+  .pipe(annotate({single_quotes: true}))
   .pipe(gulp.dest("app"))
 )
 

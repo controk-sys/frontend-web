@@ -3,9 +3,8 @@
     .module("controk")
     .config(config)
 
-  config.$inject = ["$stateProvider", "$urlRouterProvider"]
-
   function config($stateProvider, $urlRouterProvider) {
+    "ngInject"
     $stateProvider
       .state("home", {url: "/"})
       // Clients

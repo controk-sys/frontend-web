@@ -3,9 +3,8 @@
     .module("controk")
     .controller("SupplierDetailCtrl", SupplierDetailCtrl)
 
-  SupplierDetailCtrl.$inject = ["$scope", "$stateParams", "Supplier"]
-
   function SupplierDetailCtrl($scope, $stateParams, Supplier) {
+    "ngInject"
     /**
      * @type {{
      * id, trading_name, email, cnpj, place_options: [{id, name}],

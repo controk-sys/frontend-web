@@ -3,9 +3,8 @@
     .module("controk")
     .controller("ClientCreateCtrl", ClientCreateCtrl)
 
-  ClientCreateCtrl.$inject = ["$scope", "Client", "Assets"]
-
   function ClientCreateCtrl($scope, Client, Assets) {
+    "ngInject"
     /**
      * @type {{
      * name, observation, cpf, email, mobile, phone, place_options: [{id, name}],

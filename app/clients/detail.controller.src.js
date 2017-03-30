@@ -3,9 +3,8 @@
     .module("controk")
     .controller("ClientDetailCtrl", ClientDetailCtrl)
 
-  ClientDetailCtrl.$inject = ["$scope", "$stateParams", "Client"]
-
   function ClientDetailCtrl($scope, $stateParams, Client) {
+    "ngInject"
     /**
      * @type {{
      * id, name, observation, cpf, email, mobile, phone, place_options: [{id, name}],

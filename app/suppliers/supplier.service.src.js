@@ -3,8 +3,8 @@
     .module("controk")
     .service("Supplier", Supplier);
 
-  Supplier.$inject = ["$http", "urls", "socket"];
   function Supplier($http, urls, socket) {
+    "ngInject"
     this.list = function () {
       return $http.get(urls.suppliers);
     };

@@ -3,9 +3,8 @@
     .module("controk")
     .controller("ProductListCtrl", ProductListCtrl)
 
-  ProductListCtrl.$inject = ["$scope", "Product"]
-
   function ProductListCtrl($scope, Product) {
+    "ngInject"
     this.createState = "productCreation"
     Product.list()
       .then((response) => {
