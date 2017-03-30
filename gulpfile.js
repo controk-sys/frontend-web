@@ -25,6 +25,18 @@ if (fs.existsSync(".env")) {
 // Imports
 let gulp = require("gulp")
   , gulpIf = require("gulp-if")
+  , babel = require("gulp-babel")
+  , sass = require("gulp-sass")
+  , useref = require("gulp-useref")
+  , uglify = require("gulp-uglify")
+  , cleanCss = require("gulp-clean-css")
+  , htmlMin = require("gulp-htmlmin")
+  , img64 = require("gulp-img64")
+  , express = require('express')
+  , app = express()
+  , im = require('istanbul-middleware')
+  , rename = require("gulp-rename")
+  , replace = require("gulp-replace")
 
 // Environment Variables
 let testing = process.argv.indexOf("test") >= 0
@@ -32,7 +44,7 @@ let testing = process.argv.indexOf("test") >= 0
   , port = process.env.PORT || "8888"
 
 if (!(testing && debug)) {
-  // Turn coverage off if not testing AND debugging
+  // Turn coverage off if not testing OR debugging
   process.env.COVERAGE = "0"
 }
 
@@ -40,28 +52,21 @@ let apiURL = process.env.API_URL || ""
   , socketHost = process.env.SOCKET_HOST || ""
   , coverage = process.env.COVERAGE === "1"
 
-// Common requirements
-let rename = require("gulp-rename")
-  , replace = require("gulp-replace")
-
 // Tasks definitions
 
-gulp.task("compile:js", () => {
-  let babel = require("gulp-babel")
-
-  return gulp
-    .src("app/**/*.src.js")
-    .pipe(rename((path) => {
-      path.basename = path.basename.replace(".src", "")
-    }))
-    .pipe(replace("***apiURL***", apiURL))
-    .pipe(replace("***socketHost***", socketHost))
-    .pipe(replace("***codeCoverage***", coverage.toString()))
-    .pipe(babel({
-      presets: ["es2015"]
-    }))
-    .pipe(gulp.dest("app"))
-})
+gulp.task("compile:js", () => gulp
+  .src("app/**/*.src.js")
+  .pipe(rename((path) => {
+    path.basename = path.basename.replace(".src", "")
+  }))
+  .pipe(replace("***apiURL***", apiURL))
+  .pipe(replace("***socketHost***", socketHost))
+  .pipe(replace("***codeCoverage***", coverage.toString()))
+  .pipe(babel({
+    presets: ["es2015"]
+  }))
+  .pipe(gulp.dest("app"))
+)
 
 gulp.task("compile:tests", () => gulp
   .src("tests/**/*.src.{js,json}")
@@ -73,42 +78,28 @@ gulp.task("compile:tests", () => gulp
   .pipe(gulp.dest("tests"))
 )
 
-gulp.task("compile:css", () => {
-  let sass = require("gulp-sass")
-
-  return gulp
-    .src("css/**/*.scss")
-    .pipe(sass.sync().on("error", sass.logError))
-    .pipe(gulp.dest("css"))
-})
+gulp.task("compile:css", () => gulp
+  .src("css/**/*.scss")
+  .pipe(sass.sync().on("error", sass.logError))
+  .pipe(gulp.dest("css"))
+)
 
 gulp.task("compile", ["compile:js", "compile:tests", "compile:css"])
 
 // Last task before connection
-gulp.task("build", ["compile"], function () {
-  let useref = require("gulp-useref")
-    , uglify = require("gulp-uglify")
-    , cleanCss = require("gulp-clean-css")
-    , htmlMin = require("gulp-htmlmin")
-    , img64 = require("gulp-img64")
-
-  return gulp
-    .src(["**/*.{html,ico}", "!{coverage,dist,node_modules}/**"])
-    .pipe(gulpIf("index.html", useref()))
-    .pipe(gulpIf("*.js", uglify()))
-    .pipe(gulpIf("*.css", cleanCss({removeComments: true})))
-    .pipe(gulpIf("*.html", htmlMin({collapseWhitespace: true})))
-    .pipe(gulpIf("*.html", img64()))
-    .pipe(gulp.dest("dist"))
-})
+gulp.task("build", ["compile"], () => gulp
+  .src(["**/*.{html,ico}", "!{coverage,dist,node_modules}/**"])
+  .pipe(gulpIf("index.html", useref()))
+  .pipe(gulpIf("*.js", uglify()))
+  .pipe(gulpIf("*.css", cleanCss({removeComments: true})))
+  .pipe(gulpIf("*.html", htmlMin({collapseWhitespace: true})))
+  .pipe(gulpIf("*.html", img64()))
+  .pipe(gulp.dest("dist"))
+)
 
 let fileHandlerTask = debug ? "compile" : "build"
 
 gulp.task("connect", () => {
-  let express = require('express')
-    , app = express()
-    , im = require('istanbul-middleware')
-
   if (coverage) {
     im.hookLoader(".")
     app.use("/coverage", im.createHandler())
