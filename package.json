@@ -1,53 +1,18 @@
 {
-  "name": "controk-frontend-web",
-  "version": "0.2.0",
-  "author": {
-    "name": "Jourdan Rodrigues",
-    "email": "thiagojourdan@gmail.com"
-  },
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/jourdanrodrigues/controk-frontend-web"
+  "name": "app",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "react-scripts": "0.8.5"
   },
   "dependencies": {
-    "angular": "^1.5.8",
-    "angular-animate": "^1.5.8",
-    "angular-toastr": "^2.1.1",
-    "angular-ui-router": "^0.3.1",
-    "express": "^4.14.0",
-    "milligram": "^1.1.0",
-    "ng-mask": "^3.1.1",
-    "socket.io-client": "^1.5.1"
-  },
-  "devDependencies": {
-    "adm-zip": "^0.4.7",
-    "babel-preset-es2015": "^6.24.0",
-    "dotenv": "^2.0.0",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^6.1.2",
-    "gulp-clean-css": "^2.0.13",
-    "gulp-htmlmin": "^3.0.0",
-    "gulp-if": "^2.0.1",
-    "gulp-img64": "^0.0.6",
-    "gulp-jshint": "^2.0.4",
-    "gulp-ng-annotate": "^2.0.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-replace": "^0.5.4",
-    "gulp-sass": "^2.3.2",
-    "gulp-uglify": "^2.0.0",
-    "gulp-useref": "^3.1.2",
-    "istanbul-middleware": "^0.2.2",
-    "json-server": "^0.9.0",
-    "lodash": "^4.16.4",
-    "protractor": "^4.0.11",
-    "request": "^2.78.0"
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
   },
   "scripts": {
-    "start": "gulp",
-    "test": "gulp test",
-    "build": "gulp build",
-    "compile": "gulp compile",
-    "standalone": "gulp standalone"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   }
 }

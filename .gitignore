@@ -1,17 +1,10 @@
 # Files
+*.DS_Store
 .env
 npm-debug.log
 
-# Generated files
-app/**/*.js
-!app/**/*.src.js
-coverage.zip
-css/main.css
-dist/
-tests/coverage.js
-tests/webservice/database.json
-
 # Directories
-.idea/
-coverage/
-node_modules/
+/build/
+/coverage/
+/.idea/
+/node_modules/
