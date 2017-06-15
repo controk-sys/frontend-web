@@ -1,6 +1,0 @@
-{
-  "/api/v1/:resource/:id/info/": "/info/",
-  "/api/v1/:resource/:id/": "/:resource/:id/",
-  "/api/v1/:resource/": "/:resource/",
-  "/api/v1/": "/endpoints/"
-}
