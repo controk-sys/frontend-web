@@ -1,23 +1,22 @@
-var autoprefixer = require('autoprefixer');
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
-var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
-var WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
-var getClientEnvironment = require('./env');
-var paths = require('./paths');
-
+var autoprefixer = require('autoprefixer')
+var webpack = require('webpack')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+var CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
+var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin')
+var WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin')
+var getClientEnvironment = require('./env')
+var paths = require('./paths')
 
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
-var publicPath = '/';
+var publicPath = '/'
 // `publicUrl` is just like `publicPath`, but we will provide it to our app
 // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
 // Omit trailing slash as %PUBLIC_PATH%/xyz looks better than %PUBLIC_PATH%xyz.
-var publicUrl = '';
+var publicUrl = ''
 // Get environment variables to inject into our app.
-var env = getClientEnvironment(publicUrl);
+var env = getClientEnvironment(publicUrl)
 
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
@@ -79,7 +78,7 @@ module.exports = {
       'react-native': 'react-native-web'
     }
   },
-  
+
   module: {
     // First, run the linter.
     // It's important to do this before Babel processes the JS.
@@ -125,7 +124,6 @@ module.exports = {
         include: paths.appSrc,
         loader: 'babel',
         query: {
-          
           // This is a feature of `babel-loader` for webpack (not Babel itself).
           // It enables caching results in ./node_modules/.cache/babel-loader/
           // directory for faster rebuilds.
@@ -157,9 +155,9 @@ module.exports = {
       }
     ]
   },
-  
+
   // We use PostCSS for autoprefixing only.
-  postcss: function() {
+  postcss: function () {
     return [
       autoprefixer({
         browsers: [
@@ -169,7 +167,7 @@ module.exports = {
           'not ie < 9', // React doesn't support IE8 anyway
         ]
       }),
-    ];
+    ]
   },
   plugins: [
     // Makes the public URL available as %PUBLIC_URL% in index.html, e.g.:
@@ -205,4 +203,4 @@ module.exports = {
     net: 'empty',
     tls: 'empty'
   }
-};
+}
