@@ -1,12 +1,17 @@
 import React from 'react' // eslint-disable-line no-unused-vars
 import { render } from 'react-dom'
 import { Route, HashRouter, Link } from 'react-router-dom' // eslint-disable-line no-unused-vars
+
+import './handlers/docReady'
+import './handlers/mdl'
+
 import ClientList from './clients/list'
 import SupplierList from './suppliers/list'
 import EmployeeList from './employees/list'
+
+import 'material-design-lite'
 import './index.css'
 import '../node_modules/material-design-lite/dist/material.min.css'
-import 'material-design-lite'
 
 render(
   <HashRouter>
@@ -35,5 +40,5 @@ render(
       </main>
     </div>
   </HashRouter>,
-  document.getElementById('root') // eslint-disable-line no-undef
+  document.getElementById('root')
 )
