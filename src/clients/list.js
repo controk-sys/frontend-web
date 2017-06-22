@@ -1,15 +1,15 @@
 import React, { Component } from 'react' // eslint-disable-line no-unused-vars
-import './App.css'
+import './list.css'
 
-class App extends Component {
+class ClientList extends Component {
   //noinspection JSMethodCanBeStatic
   render () {
     return (
-      <div className="App">
-        <span>Content test.</span>
+      <div className="clients-list">
+        <span>Client list.</span>
       </div>
     )
   }
 }
 
-export default App
+export default ClientList
