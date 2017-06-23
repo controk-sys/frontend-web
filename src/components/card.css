@@ -1,3 +1,5 @@
 .mdl-card {
-  margin: auto auto 1em auto
+  margin: auto auto 1em auto;
+  width: 30em !important;
+  min-height: 8.5em !important;
 }
