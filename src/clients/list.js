@@ -14,7 +14,9 @@ class ClientList extends Component {
     return (
       <div className="clients-list">
         <Loader isActive={this.state.isLoading}/>
-        {this.state.clients.map((item, i) => <Card key={i} title={item.name} body={`${item.cpf} ${item.email}`}/>)}
+        {this.state.clients.map(
+          (item, i) => <Card key={i} title={item.name} body={`CPF: ${item.cpf}\nEmail: ${item.email}`}/>
+        )}
       </div>
     )
   }

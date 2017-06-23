@@ -14,7 +14,9 @@ class EmployeeList extends Component {
     return (
       <div className="employees-list">
         <Loader isActive={this.state.isLoading}/>
-        {this.state.employees.map((item, i) => <Card key={i} title={item.name} body={`${item.cpf} ${item.email}`}/>)}
+        {this.state.employees.map(
+          (item, i) => <Card key={i} title={item.name} body={`CPF: ${item.cpf}\nEmail: ${item.email}`}/>
+        )}
       </div>
     )
   }

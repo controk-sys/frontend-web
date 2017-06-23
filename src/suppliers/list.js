@@ -15,7 +15,7 @@ class SupplierList extends Component {
       <div className="suppliers-list">
         <Loader isActive={this.state.isLoading}/>
         {this.state.suppliers.map(
-          (item, i) => <Card key={i} title={item.trading_name} body={`${item.cnpj} ${item.email}`}/>
+          (item, i) => <Card key={i} title={item.trading_name} body={`CNPJ: ${item.cnpj}\nEmail: ${item.email}`}/>
         )}
       </div>
     )
