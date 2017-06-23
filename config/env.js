@@ -1,10 +1,10 @@
 // Grab NODE_ENV and REACT_APP_* environment variables and prepare them to be
 // injected into the application via DefinePlugin in Webpack configuration.
 
-var REACT_APP = /^REACT_APP_/i
+let REACT_APP = /^REACT_APP_/i
 
 function getClientEnvironment(publicUrl) {
-  var processEnv = Object
+  let processEnv = Object
     .keys(process.env)
     .filter(key => REACT_APP.test(key))
     .reduce((env, key) => {
@@ -16,6 +16,8 @@ function getClientEnvironment(publicUrl) {
       'NODE_ENV': JSON.stringify(
         process.env.NODE_ENV || 'development'
       ),
+      // Defines the API URL to interact with
+      'API_URL': JSON.stringify(process.env.API_URL),
       // Useful for resolving the correct path to static assets in `public`.
       // For example, <img src={process.env.PUBLIC_URL + '/img/logo.png'} />.
       // This should only be used as an escape hatch. Normally you would put
