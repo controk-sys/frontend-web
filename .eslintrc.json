@@ -15,6 +15,9 @@
   "plugins": [
     "react"
   ],
+  "globals": {
+    "componentHandler": true
+  },
   "rules": {
     "indent": [
       "error",
