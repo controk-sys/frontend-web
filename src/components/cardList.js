@@ -31,7 +31,9 @@ class CardList extends React.Component {
 }
 
 CardList.propTypes = {
-  endpoint: PropTypes.string.isRequired
+  endpoint: PropTypes.string.isRequired,
+  title: PropTypes.func.isRequired,
+  body: PropTypes.func.isRequired
 }
 
 export default CardList
