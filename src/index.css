@@ -5,11 +5,6 @@ body {
   background: #E7E7E7;
 }
 
-.card-list {
-  text-align: center;
-  padding-top: 1em;
-}
-
 /* fallback */
 @font-face {
   font-family: 'Material Icons';

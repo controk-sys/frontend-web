@@ -1,30 +1,13 @@
 import React, { Component } from 'react' // eslint-disable-line no-unused-vars
-import axios from 'axios'
-import Card from '../components/card' // eslint-disable-line no-unused-vars
-import Loader from '../components/loader' // eslint-disable-line no-unused-vars
+import CardList from '../components/cardList' // eslint-disable-line no-unused-vars
 
 class EmployeeList extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {employees: [], isLoading: true}
-  }
-
+  //noinspection JSMethodCanBeStatic
   render () {
-    return (
-      <div className="card-list">
-        <Loader isActive={this.state.isLoading}/>
-        {this.state.employees.map(
-          (item, i) => <Card key={i} title={item.name} body={`CPF: ${item.cpf}\nEmail: ${item.email}`}/>
-        )}
-      </div>
-    )
-  }
-
-  componentDidMount () {
-    axios.get(process.env.API_URL + 'employees/')
-      .then((response) => {
-        this.setState({employees: response.data, isLoading: false})
-      })
+    return <CardList endpoint="employees/"
+      title={(item) => item.name}
+      body={(item) => `CPF: ${item.cpf}\nEmail: ${item.email}`}
+    />
   }
 }
 
