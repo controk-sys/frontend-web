@@ -51,6 +51,7 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "hammerjs": "^2.0.8",
     "material-design-lite": "^1.3.0",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",

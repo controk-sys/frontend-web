@@ -1,5 +1,6 @@
 import React from 'react' // eslint-disable-line no-unused-vars
 import { Link } from 'react-router-dom' // eslint-disable-line no-unused-vars
+import Hammer from 'hammerjs'
 
 import MDLComponent from './mdl'
 
@@ -32,16 +33,24 @@ class NavigationDrawer extends MDLComponent {
   }
 
   componentDidMount () {
-    /**
-     * Add click listeners to drawer items to close it
-     */
-    let closeDrawer = () => {
-      let obfuscator = document.querySelector('.mdl-layout__obfuscator')
-      let drawer = document.querySelector('.mdl-layout__drawer')
-
-      obfuscator.className = obfuscator.className.replace(/\s?is-visible/, '')
-      drawer.className = drawer.className.replace(/\s?is-visible/, '')
+    let iterateDrawerElements = (callback) => {
+      let elements = [document.querySelector('.mdl-layout__obfuscator'), document.querySelector('.mdl-layout__drawer')]
+      elements.forEach(callback)
     }
+
+    let closeDrawer = () => {
+      iterateDrawerElements((item) => item.className = item.className.replace(/\s?is-visible/, ''))
+    }
+
+    //noinspection JSUnresolvedFunction
+    requestIdleCallback(() => {
+      iterateDrawerElements((item) => {
+        let manager = new Hammer.Manager(item, {
+          recognizers: [[Hammer.Swipe, {direction: Hammer.DIRECTION_LEFT}]]
+        })
+        manager.on('swipeleft', closeDrawer)
+      })
+    })
 
     document.querySelectorAll('.mdl-navigation__link').forEach((item) => {
       item.addEventListener('click', closeDrawer)
