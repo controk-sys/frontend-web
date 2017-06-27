@@ -1,11 +1,10 @@
-import React from 'react'
+import React from 'react' // eslint-disable-line no-unused-vars
 import { Route, Link } from 'react-router-dom' // eslint-disable-line no-unused-vars
 import PropTypes from 'prop-types'
 
-import 'material-design-lite'
-import '../../node_modules/material-design-lite/dist/material.min.css'
+import MDLComponent from './mdl'
 
-class NavigationDrawer extends React.Component {
+class NavigationDrawer extends MDLComponent {
   render () {
     return (
       <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">

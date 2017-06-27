@@ -1,7 +1,9 @@
 import React from 'react' // eslint-disable-line no-unused-vars
+
+import MDLComponent from './mdl'
 import './card.css'
 
-class Card extends React.Component {
+class Card extends MDLComponent {
   //noinspection JSMethodCanBeStatic
   render () {
     let body = this.props.body, lines = body.split('\n')
