@@ -1,7 +1,7 @@
-import React, { Component } from 'react' // eslint-disable-line no-unused-vars
+import React from 'react'
 import CardList from '../components/cardList' // eslint-disable-line no-unused-vars
 
-class SupplierList extends Component {
+class SupplierList extends React.Component {
   //noinspection JSMethodCanBeStatic
   render () {
     return <CardList endpoint="suppliers/"

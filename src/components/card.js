@@ -1,7 +1,7 @@
-import React, { Component } from 'react' // eslint-disable-line no-unused-vars
+import React from 'react' // eslint-disable-line no-unused-vars
 import './card.css'
 
-class Card extends Component {
+class Card extends React.Component {
   //noinspection JSMethodCanBeStatic
   render () {
     let body = this.props.body, lines = body.split('\n')

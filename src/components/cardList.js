@@ -1,11 +1,11 @@
-import React, { Component } from 'react' // eslint-disable-line no-unused-vars
+import React from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 import Loader from '../components/loader' // eslint-disable-line no-unused-vars
 import Card from '../components/card' // eslint-disable-line no-unused-vars
 import './cardList.css'
 
-class CardList extends Component {
+class CardList extends React.Component {
   constructor (props) {
     super(props)
     this.state = {objects: [], isLoading: true}
