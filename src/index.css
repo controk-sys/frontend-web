@@ -1,3 +1,9 @@
+* {
+  outline: none;
+  /* http://danbarnett.net/how-to-hide-android-webview-highlight-border-or-change-its-color-142.html */
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
 body {
   margin: 0;
   padding: 0;
