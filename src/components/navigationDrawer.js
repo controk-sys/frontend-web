@@ -1,6 +1,5 @@
 import React from 'react' // eslint-disable-line no-unused-vars
-import { Route, Link } from 'react-router-dom' // eslint-disable-line no-unused-vars
-import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom' // eslint-disable-line no-unused-vars
 
 import MDLComponent from './mdl'
 
@@ -48,10 +47,6 @@ class NavigationDrawer extends MDLComponent {
       item.addEventListener('click', closeDrawer)
     })
   }
-}
-
-NavigationDrawer.propTypes = {
-  children: PropTypes.instanceOf(Route)
 }
 
 export default NavigationDrawer
