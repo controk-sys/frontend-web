@@ -31,7 +31,7 @@ class NavigationDrawer extends MDLComponent {
     )
   }
 
-  componentDidMount() {
+  componentDidMount () {
     /**
      * Add click listeners to drawer items to close it
      */
