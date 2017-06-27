@@ -1,5 +1,12 @@
 .mdl-card {
   margin: auto auto 1em auto;
-  width: 30em !important;
+  width: 90%;
   min-height: 8.5em !important;
+}
+
+/* For devices bigger than phones */
+@media (min-width: 768px) {
+  .mdl-card {
+    width: 25em;
+  }
 }
