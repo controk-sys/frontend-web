@@ -3,7 +3,7 @@
  * Solution source: https://github.com/jfriend00/docReady/
  * The public function name defaults to "window.docReady"
  */
-(function () {
+(() => {
   'use strict'
 
   let readyList = []
@@ -12,33 +12,32 @@
 
   // This is the one public interface
   // docReady(fn, context);
-  // the context argument is optional - if present, it will be passed
-  // as an argument to the callback
+  // the context argument is optional - if present, it will be passed as an argument to the callback
   window['docReady'] = (callback, context) => {
     if (typeof callback !== 'function') {
       throw new TypeError('callback for docReady(fn) must be a function')
     }
-    // if ready has already fired, then just schedule the callback
+    // If ready has already fired, then just schedule the callback
     // to fire asynchronously, but right away
     if (readyFired) {
-      setTimeout(() => { callback(context) }, 1)
+      setImmediate(() => { callback(context) })
       return
     }
 
-    // add the function and context to the list
+    // Add the function and context to the list
     readyList.push({fn: callback, ctx: context})
 
-    // if document already ready to go, schedule the ready function to run
+    // If document already ready to go, schedule the ready function to run
     // IE only safe when readyState is "complete", others safe when readyState is "interactive"
     if (document.readyState === 'complete' || (!document.attachEvent && document.readyState === 'interactive')) {
-      setTimeout(ready, 1)
+      setImmediate(ready)
     } else if (!readyEventHandlersInstalled) {
-      // otherwise if we don't have event handlers installed, install them
+      // Otherwise if we don't have event handlers installed, install them
       if (document.addEventListener) {
         document.addEventListener('DOMContentLoaded', ready, false) // first choice is DOMContentLoaded event
         window.addEventListener('load', ready, false) // backup is window load event
       } else {
-        // must be IE
+        // Must be IE
         document.attachEvent('onreadystatechange', readyStateChange)
         window.attachEvent('onload', ready)
       }
@@ -52,14 +51,13 @@
     }
   }
 
-  // call this when the document is ready
-  // this function protects itself against being called more than once
+  // Call this when the document is ready this function protects itself against being called more than once
   function ready () {
     if (!readyFired) {
-      // this must be set to true before we start calling callbacks
+      // This must be set to true before we start calling callbacks
       readyFired = true
       readyList.forEach((item) => {
-        // if a callback here happens to add new ready handlers,
+        // If a callback here happens to add new ready handlers,
         // the docReady() function will see that it already fired
         // and will schedule the callback to run right after
         // this event loop finishes so all handlers will still execute
@@ -67,10 +65,10 @@
         // while we are processing the list
         item.fn.call(window, item.ctx)
       })
-      // allow any closures held by these functions to free
+      // Allow any closures held by these functions to free
       readyList = []
     }
   }
 })()
-// modify this previous line to pass in your own method name
+// Modify this previous line to pass in your own method name
 // and object for the method to be attached to
