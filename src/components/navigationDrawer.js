@@ -6,6 +6,14 @@ import MDLComponent from './mdl'
 
 class NavigationDrawer extends MDLComponent {
   render () {
+    let linkList = [
+      {endpoint: '/employees', label: 'Employees'},
+      {endpoint: '/suppliers', label: 'Suppliers'},
+      {endpoint: '/clients', label: 'Clients'},
+      {endpoint: '/shipments', label: 'Shipments'},
+      {endpoint: '/products', label: 'Products'},
+      {endpoint: '/stock', label: 'Stock'},
+    ]
     return (
       <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <header className="mdl-layout__header">
@@ -15,12 +23,9 @@ class NavigationDrawer extends MDLComponent {
         </header>
         <div className="mdl-layout__drawer">
           <nav className="mdl-navigation">
-            <Link className="mdl-navigation__link" to="/employees">Employees</Link>
-            <Link className="mdl-navigation__link" to="/suppliers">Suppliers</Link>
-            <Link className="mdl-navigation__link" to="/clients">Clients</Link>
-            <Link className="mdl-navigation__link" to="/shipments">Shipments</Link>
-            <Link className="mdl-navigation__link" to="/products">Products</Link>
-            <Link className="mdl-navigation__link" to="/stock">Stock</Link>
+            {linkList.map(
+              (item, i) => <Link key={i} className="mdl-navigation__link" to={item.endpoint}>{item.label}</Link>
+            )}
           </nav>
         </div>
         <main className="mdl-layout__content">
