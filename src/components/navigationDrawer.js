@@ -15,7 +15,7 @@ class NavigationDrawer extends MDLComponent {
       {endpoint: '/stock', label: 'Stock'},
     ]
     return (
-      <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header" ref={(node) => {this.layoutNode = node}}>
         <header className="mdl-layout__header">
           <div className="mdl-layout__header-row">
             <span className="mdl-layout-title">Controk</span>
@@ -44,7 +44,8 @@ class NavigationDrawer extends MDLComponent {
     }
 
     let closeDrawer = () => {
-      iterateDrawerElements((item) => item.className = item.className.replace(/\s?is-visible/, ''))
+      //noinspection JSUnresolvedFunction
+      this.layoutNode.MaterialLayout.toggleDrawer()
     }
 
     //noinspection JSUnresolvedFunction
