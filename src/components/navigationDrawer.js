@@ -1,4 +1,5 @@
 import React from 'react' // eslint-disable-line no-unused-vars
+import {findDOMNode} from 'react-dom'
 import { Link } from 'react-router-dom' // eslint-disable-line no-unused-vars
 import Hammer from 'hammerjs'
 
@@ -21,14 +22,14 @@ class NavigationDrawer extends MDLComponent {
             <span className="mdl-layout-title">Controk</span>
           </div>
         </header>
-        <div className="mdl-layout__drawer">
+        <div className="mdl-layout__drawer" ref={(node) => {this.drawerNode = node}}>
           <nav className="mdl-navigation">
             {linkList.map(
               (item, i) => <Link key={i} className="mdl-navigation__link" to={item.endpoint}>{item.label}</Link>
             )}
           </nav>
         </div>
-        <main className="mdl-layout__content">
+        <main className="mdl-layout__content" ref={(node) => {this.contentNode = node}}>
           <div className="page-content">
             {this.props.children}
           </div>
@@ -38,28 +39,25 @@ class NavigationDrawer extends MDLComponent {
   }
 
   componentDidMount () {
-    let iterateDrawerElements = (callback) => {
-      let elements = [document.querySelector('.mdl-layout__obfuscator'), document.querySelector('.mdl-layout__drawer')]
-      elements.forEach(callback)
-    }
-
-    let closeDrawer = () => {
+    let toggleDrawer = () => {
       //noinspection JSUnresolvedFunction
       this.layoutNode.MaterialLayout.toggleDrawer()
     }
 
-    //noinspection JSUnresolvedFunction
-    requestIdleCallback(() => {
-      iterateDrawerElements((item) => {
-        let manager = new Hammer.Manager(item, {
-          recognizers: [[Hammer.Swipe, {direction: Hammer.DIRECTION_LEFT}]]
-        })
-        manager.on('swipeleft', closeDrawer)
+    let hammerDefinitions = [
+      {node: this.drawerNode, direction: Hammer.DIRECTION_LEFT, event: 'swipeleft'},
+      {node: this.contentNode, direction: Hammer.DIRECTION_RIGHT, event: 'swiperight'}
+    ]
+    hammerDefinitions.forEach((definition) => {
+      let drawerManager = new Hammer.Manager(definition.node, {
+        recognizers: [[Hammer.Swipe, {direction: definition.direction}]]
       })
+      drawerManager.on(definition.event, toggleDrawer)
     })
 
-    document.querySelectorAll('.mdl-navigation__link').forEach((item) => {
-      item.addEventListener('click', closeDrawer)
+    //noinspection JSCheckFunctionSignatures
+    findDOMNode(this).querySelectorAll('.mdl-navigation__link').forEach((item) => {
+      item.addEventListener('click', toggleDrawer)
     })
   }
 }
