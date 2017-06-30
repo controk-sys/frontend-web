@@ -47,15 +47,10 @@ class NavigationDrawer extends MDLComponent {
     }
 
     let hammerDefinitions = [
-      {node: this.drawerNode, direction: Hammer.DIRECTION_LEFT, event: 'swipeleft'},
-      {node: this.contentNode, direction: Hammer.DIRECTION_RIGHT, event: 'swiperight'}
+      {node: this.drawerNode, event: 'swipeleft'},
+      {node: this.contentNode, event: 'swiperight'}
     ]
-    hammerDefinitions.forEach((definition) => {
-      let drawerManager = new Hammer.Manager(definition.node, {
-        recognizers: [[Hammer.Swipe, {direction: definition.direction}]]
-      })
-      drawerManager.on(definition.event, toggleDrawer)
-    })
+    hammerDefinitions.forEach((definition) => {Hammer(definition.node).on(definition.event, toggleDrawer)})
 
     //noinspection JSCheckFunctionSignatures
     findDOMNode(this).querySelectorAll('.mdl-navigation__link').forEach((item) => {
