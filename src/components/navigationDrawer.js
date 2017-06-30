@@ -1,6 +1,8 @@
 import React from 'react' // eslint-disable-line no-unused-vars
 import {findDOMNode} from 'react-dom'
 import { Link } from 'react-router-dom' // eslint-disable-line no-unused-vars
+import PropTypes from 'prop-types'
+
 import Hammer from 'hammerjs'
 
 import MDLComponent from './mdl'
@@ -60,6 +62,10 @@ class NavigationDrawer extends MDLComponent {
       item.addEventListener('click', toggleDrawer)
     })
   }
+}
+
+NavigationDrawer.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired
 }
 
 export default NavigationDrawer
