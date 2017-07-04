@@ -22,11 +22,26 @@ class CardList extends React.Component {
     )
   }
 
-  componentDidMount () {
+  getObjects () {
+    this.setState({isLoading: true})
     axios.get(process.env.API_URL + this.props.endpoint)
-      .then((response) => {
-        this.setState({objects: response.data, isLoading: false})
+      .then(({ data }) => {
+        this.setState({objects: data})
+      }, ({ message }) => {
+        //noinspection JSUnresolvedFunction
+        global.snackbarNode.MaterialSnackbar.showSnackbar({
+          message: `Something happened with the ${this.props.endpoint.replace(/\W/g, '')}: ${message}`,
+          actionHandler: this.getObjects.bind(this),
+          actionText: 'Try again'
+        })
       })
+      .then(() => {
+        this.setState({isLoading: false})
+      })
+  }
+
+  componentDidMount () {
+    this.getObjects()
   }
 }
 

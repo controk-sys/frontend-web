@@ -1,5 +1,5 @@
 import React from 'react' // eslint-disable-line no-unused-vars
-import {findDOMNode} from 'react-dom'
+import { findDOMNode } from 'react-dom'
 import { Link } from 'react-router-dom' // eslint-disable-line no-unused-vars
 import PropTypes from 'prop-types'
 
@@ -36,6 +36,10 @@ class NavigationDrawer extends MDLComponent {
             {this.props.children}
           </div>
         </main>
+        <div className="mdl-js-snackbar mdl-snackbar" ref={(node) => {global.snackbarNode = node}}>
+          <div className="mdl-snackbar__text"/>
+          <button className="mdl-snackbar__action" type="button"/>
+        </div>
       </div>
     )
   }
@@ -56,6 +60,11 @@ class NavigationDrawer extends MDLComponent {
     findDOMNode(this).querySelectorAll('.mdl-navigation__link').forEach((item) => {
       item.addEventListener('click', toggleDrawer)
     })
+  }
+
+  //noinspection JSMethodCanBeStatic
+  componentWillUnmount () {
+    delete global.snackbarNode
   }
 }
 
